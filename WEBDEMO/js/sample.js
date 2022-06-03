@@ -1,6 +1,6 @@
 
 class Sample {
-    constructor(path, orientation) {
+    constructor(path,isLooping, orientation) {
         this.audio = new (AudioContext || webkitAudioContext || mozAudioContext)(),
             this.binauralFIRNode = null,
             this.path = path;
@@ -8,6 +8,7 @@ class Sample {
         this.sampleBuffer;
         this.sourceNode;
         this.onRoad = false;
+        this.isLooping= isLooping;
         this.rack = {
             filter: {
                 varFreq: 40,
@@ -56,7 +57,6 @@ class Sample {
     playSample(decay, e, sampleRate) {
         if (sampleRate === undefined) sampleRate = 1;
         this.hrtf(sampleRate);
-
         //  -----------------------------------------               //INIT
         this.binauralFIRNode = new BinauralFIR({ audioContext: this.audio });
         this.binauralFIRNode.HRTFDataset = this.hrtfs;
@@ -70,7 +70,7 @@ class Sample {
         this.binauralFIRNode.connect(this.rack.filter.audioNode);
         this.rack.filter.audioNode.connect(this.audio.destination);
         // this.binauralFIRNode.connect(this.audio.destination);  //SOURCE  
-        this.sourceNode.loop = true;
+        this.sourceNode.loop = this.isLooping;
         this.sourceNode.start(0, decay);
     }
     initEffect(bufferSrc) {
@@ -84,7 +84,6 @@ class Sample {
         // filter.type = "bandpass";
         // filter.frequency.value = 1000;
         // filter.Q.value = 40;
-
         // audioNode.type = "lowshelf";
         audioNode.frequency.value = this.rack.filter.varFreq;
         // audioNode.frequency.setValueAtTime(1000, this.audio.currentTime);
@@ -96,26 +95,27 @@ class Sample {
         return audioNode;
         // audioNode.gain.setValueAtTime(10, this.audio.currentTime);
     }
-    initSpeed(speed) { 
+    initSpeed(speed) {
         this.sourceNode.playbackRate.value = speed;
-        // console.log( this.sourceNode);
     }
-
     softValue(fxTarget, fxTemp, fxType, index = 0) {
-        // console.log(fxTemp);
         new Promise(resolve => {
             const draw = () => {
                 // console.log(fxTarget, fxTemp, fxType);
                 if (index >= 0.99) {
                     fxType.value = fxTarget
                     this.rack.filter.actual = fxTarget;
-                    // resolve("the new value " + effect);
+                    resolve("the new value ");
                 } else {
                     index += this.thresholdLerp;
                     this.rack.filter.actual = fxTemp;
-                    fxTemp = Math.round(myLerp(fxTemp, fxTarget, index));
+                    // fxTemp =myLerp(fxTemp, fxTarget, index);
                     // fxType.value =fxTemp
-                    fxType.value = fxTemp
+                    // fxType.value = fxTemp
+                    // fxType
+                    console.log(fxTemp);
+                    // fxType.linearRampToValueAtTime(fxTemp, this.audio.currentTime);
+                    fxType.setValueAtTime(fxTemp, this.audio.currentTime);
                     // console.log(fxTemp);
                     requestAnimationFrame(() => draw());
                 }
@@ -126,8 +126,23 @@ class Sample {
     async render(eFilter, eVolume) {
         // fxTarget fxTemp                  fxType  
         // console.log(this.rack.volume.audioNode.);
-        const filterRender = await this.softValue(eFilter, this.rack.filter.actual, this.rack.filter.audioNode.frequency);
-        // const fvolumeRender = await this.softValue(eVolume, this.rack.volume.actual, this.rack.volume.audioNode.gain);
+        // const filterRender = await this.softValue(eFilter, this.rack.filter.actual, this.rack.filter.audioNode.frequency);
+        // http://alemangui.github.io/ramp-to-value
+
+        const node = this.rack.filter.audioNode.frequency
+        node.value=eFilter;
+        console.log(eFilter);
+        node.setValueAtTime(node.value+ 0.0001, this.audio.currentTime+ 10);
+        // linearRampToValueAtTime
+        // node.linearRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 10);
+
+
+        // node.exponentialRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 1);
+        // node.cancelScheduledValues(this.audio.currentTime)
+        // node.linearRampToValueAtTime(eFilter, this.audio.currentTime + 2);
+        // console.log(this.rack.filter.audioNode.frequency);
+
+        // const fvolumeRender = await this.softValue(node, this.rack.volume.actual, this.rack.volume.audioNode.gain);
         // const render1 = await this.softValue(eVolume,this.rack.volume.actual);
         // console.log('Message:', render);
     }

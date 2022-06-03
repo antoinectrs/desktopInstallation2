@@ -1,6 +1,6 @@
 // ---------------- MOBILE -----------------    
 class MOBILE {
-    constructor(myMap, point, noPoint) {
+    constructor(myMap, point, noPoint, vocalPoint) {
         this.myMap = myMap;
         // this.mapDom = searchHtml("#map .leaflet-pane");
         // hideBlur(this.mapDom, "add");
@@ -8,13 +8,15 @@ class MOBILE {
 
         this.point = point;
         this.noPoint = noPoint;
+        this.vocalPoint = vocalPoint;
         this.preset;
         this.myCompass;
         this.myPosition();
         this.autorisePlay = false;
         // this.myConsole();
-        this.spaceRadius = 4500;
-        this.createMap = false;
+        this.spaceRadius = 20;
+        this.createMap = false; 
+        this.inPath = false;
         this.partition = {
             title: {
                 element: searchHtml("#title"),
@@ -25,10 +27,14 @@ class MOBILE {
                 content: null,
             },
         }
+        this.iteration = 0;
 
     }
 
-    checkRoad() { this.autorisePlay = true }
+    checkRoad() {
+        this.autorisePlay = true ; 
+        // this.myMove();
+    }
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
@@ -36,30 +42,40 @@ class MOBILE {
     }
     manager(pos) {
         if (this.createMap == false) {
-            this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
-            this.myMap.boxTest();
-            this.myCompass = new myCompass();
-            this.listenMyCompass(pos);
-            this.createMap = true;
+            this.initMap(pos);
         }
         this.getAltittude(pos);
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
         const catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
 
-        if (catchCloserPoint != "tofar") {
-            console.log("inside");
-            this.renderPoint(catchCloserPoint.index);
-            this.setTitlePartition(catchCloserPoint.index);
-            this.setVersePartition(catchCloserPoint.index);
-            this.listenMyCompass(catchCloserPoint.hitBoxNear);
-            // hideBlur(this.mapDom, "remove");
-        }
-        else {
-            this.releasePoint();
-            // this.myDebug("range", "tofar");
-            // hideBlur(this.mapDom, "add");
-        }
+        if (catchCloserPoint != "tofar")
+            this.inPathAction(catchCloserPoint)
+        else
+            this.outPathAction()
+
+        // myDebug("path", this.inPath);
+    }
+    initMap(pos) {
+        this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
+        this.myMap.boxTest();
+        // this.myCompass = new myCompass();
+        // this.listenMyCompass(pos);
+        this.createMap = true;
+    }
+    inPathAction(catchCloserPoint) {
+        this.inPath = true;
+        this.renderPoint(catchCloserPoint.index);
+        this.setTitlePartition(catchCloserPoint.index);
+        this.setVersePartition(catchCloserPoint.index);
+        // this.listenMyCompass(catchCloserPoint.hitBoxNear);
+        // hideBlur(this.mapDom, "remove");
+    }
+    outPathAction() {
+        console.log("outside");
+        this.inPath = false;
+        this.releasePoint();
+        // hideBlur(this.mapDom, "add")
     }
     getAltittude(pos) {
         // console.log(pos.coords.accuracy);
@@ -74,14 +90,6 @@ class MOBILE {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         }
-        console.log("new");
-        // this.myMap.map.setView(convertPos, this.myMap.map.getZoom(), {
-        //     "animate": true,
-        //     "pan": {
-        //         "duration": 10
-        //     }
-        // });
-        // this.myMap.map.setBearing(90);
         this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
             duration: 1.5
@@ -111,7 +119,6 @@ class MOBILE {
             };
         })
         if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0, 1);
-        // this.idRoute = boxIndex;
     }
     releasePoint() {
         if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(5000, 1);
@@ -135,11 +142,10 @@ class MOBILE {
     listenMyCompass(hitBoxNear) {
         const search = () => {
             setTimeout(() => {
-
                 const orientation = this.myCompass.compassLoad()
                 if (orientation != undefined) {
                     this.myMap.changeOrientation(orientation);
-                    this.compassPoint(hitBoxNear);
+                    // this.compassPoint(hitBoxNear);                                //DESACTIVER LA TARGET TITRE 
                 };
                 requestAnimationFrame(search)
             }, 1000 / 15);
@@ -150,9 +156,12 @@ class MOBILE {
         const comp = this.myCompass.myCompass;
         const compassP = comp.position.coords
         const currentPosition = { lat: compassP.latitude, lng: compassP.longitude };
-
-        const targetAngle = comp.getBearingToDestination(currentPosition, { lat: hitBoxNear.lat, lng: hitBoxNear.lng })
-        myRotate(this.partition.title.element, targetAngle); // default remplacer par "orientation" 
+        let targetAngle = 0;
+        if (this.inPath == false) {
+            targetAngle = comp.getBearingToDestination(currentPosition, { lat: hitBoxNear.lat, lng: hitBoxNear.lng });
+            console.log(targetAngle);
+        }
+        myRotate(this.partition.title.element, targetAngle);
     }
     myConsole() {
         const myButton = document.querySelector("#myConsole");
@@ -168,31 +177,62 @@ class MOBILE {
             this.manager(pos);
         })
     }
-    myDebug(target, value) {
-        searchHtml("#" + target).innerHTML = value;
-        // document.getElementById(target).innerHTML = value;
-    }
-
     //  ----------- DOM --------------------
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
         this.partition.title.element.innerHTML = changeDom;
     };
-    setVersePartition(indexZone) {
-        // const changeDom = this.preset[indexZone].verse;
-        // this.partition.verse.element[indexZone].innerHTML = changeDom;
-        const target = this.partition.verse.element[indexZone];
-        const debugT = document.getElementById("myEnd");
-        const toScroll = document.querySelector(".dynamic");
-        SmoothVerticalScrolling(debugT,toScroll, 4000, "top")
-        this.preset.forEach((e, index) => {
-            const myString = String(e.verse);
-            const htmlString = this.partition.verse.element[index].textContent;
-            //REMPLACE TEXT 
-            if(myString!=htmlString){
-                this.partition.verse.element[index].innerHTML=e.verse;
-            }
-        });
-        
+    checkContentText(e, index) {
+        const myString = String(e.verse);
+        const pointHtml = this.partition.verse.element[index];
+        const htmlString = pointHtml.textContent;
+        if (myString != htmlString)      //REMPLACE TEXT 
+            pointHtml.innerHTML = e.verse;
     };
+    setVersePartition(indexZone) {
+        this.preset.forEach((e, index) => { this.checkContentText(e, index) });
+
+        const target = this.partition.verse.element[indexZone];
+        // myDebug("range", target);
+        // const debugT = document.getElementById("myEnd");
+        const toScroll = document.querySelector(".dynamic");
+        SmoothVerticalScrolling(target, toScroll, 10000, "top")
+    };
+
+    myMove() {
+        let id = null;
+        const elem = document.getElementById("content");
+        const pElement = document.querySelector("#target p");
+        let pos = -10;
+        // const testBinau = [0, 70, 180, 280]
+        clearInterval(this.id);
+        id = setInterval(frame.bind(this), 25);
+   
+        function frame() {
+            if (pos == 100) {
+                if (this.iteration < this.vocalPoint.length - 1) this.iteration++;
+                else this.iteration = 0;
+
+                const myRot = mapRange(this.iteration, 0, 4, 0, 360)
+
+                elem.style.justifyContent=this.preset[0].voice[this.iteration].position;
+                pElement.textContent =this.preset[0].voice[this.iteration].content
+                
+                // this.noPoint.sample.render(5000, 1);
+                this.vocalPoint[this.iteration].sample.playSample(0);  
+                this.vocalPoint[this.iteration].sample.initOrientation(myRot);
+                this.vocalPoint[this.iteration].sample.render(5000, 1);
+            
+                clearInterval(id);
+                this.myMove()
+            } else {
+                pos += 0.5;
+                // posX= Math.cos(Math.PI*(pos/50))*30
+                // console.log(M );
+                // elem.style.transform = "translateY(" + pos + "vh)";
+                elem.style.transform = "translate(" + 0 + "vh," + pos + "vh)";
+                // elem.style.left = pos +  "px"; 
+            }
+        }
+    }
 }
