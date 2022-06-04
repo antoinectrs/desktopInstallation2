@@ -27,7 +27,7 @@ class APP {
             console.log("clic");
             if (this.startListening == false) this.activeApp()
 
-            this.startListening=true;
+            this.startListening = true;
         });
     }
     activeApp() {
@@ -72,8 +72,9 @@ class APP {
 
 
     loadData() {
-        fetch('./DATA/data.JSON')
-            // fetch('./DATA/prelaz.JSON')
+        // fetch('./DATA/data.JSON')
+        // fetch('./DATA/prelaz.JSON')
+        fetch('./DATA/lemont.JSON')
             .then(response => response.json())
             .then(data => {
                 const JSdata = data;

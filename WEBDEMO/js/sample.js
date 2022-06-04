@@ -113,7 +113,7 @@ class Sample {
                     // fxType.value =fxTemp
                     // fxType.value = fxTemp
                     // fxType
-                    console.log(fxTemp);
+                    // console.log(fxTemp);
                     // fxType.linearRampToValueAtTime(fxTemp, this.audio.currentTime);
                     fxType.setValueAtTime(fxTemp, this.audio.currentTime);
                     // console.log(fxTemp);

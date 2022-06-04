@@ -20,6 +20,7 @@ class MOBILE {
         this.partition = {
             title: {
                 element: searchHtml("#title"),
+                rotateDiv: searchHtml("#rotateDiv"),
                 content: null,
             },
             verse: {
@@ -28,10 +29,11 @@ class MOBILE {
             },
         }
         this.iteration = 0;
+        this.myCompass = new myCompass();
 
     }
 
-    checkRoad() {
+    checkRoad() { 
         this.autorisePlay = true ; 
         // this.myMove();
     }
@@ -60,7 +62,7 @@ class MOBILE {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
         this.myMap.boxTest();
         // this.myCompass = new myCompass();
-        // this.listenMyCompass(pos);
+        this.listenMyCompass(pos);
         this.createMap = true;
     }
     inPathAction(catchCloserPoint) {
@@ -68,7 +70,7 @@ class MOBILE {
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
-        // this.listenMyCompass(catchCloserPoint.hitBoxNear);
+        this.listenMyCompass(catchCloserPoint.hitBoxNear);
         // hideBlur(this.mapDom, "remove");
     }
     outPathAction() {
@@ -145,10 +147,11 @@ class MOBILE {
                 const orientation = this.myCompass.compassLoad()
                 if (orientation != undefined) {
                     this.myMap.changeOrientation(orientation);
-                    // this.compassPoint(hitBoxNear);                                //DESACTIVER LA TARGET TITRE 
+            
+                    this.compassPoint(hitBoxNear); 
                 };
                 requestAnimationFrame(search)
-            }, 1000 / 15);
+            }, 1000 / 55);
         }
         search();
     }
@@ -158,10 +161,9 @@ class MOBILE {
         const currentPosition = { lat: compassP.latitude, lng: compassP.longitude };
         let targetAngle = 0;
         if (this.inPath == false) {
-            targetAngle = comp.getBearingToDestination(currentPosition, { lat: hitBoxNear.lat, lng: hitBoxNear.lng });
-            console.log(targetAngle);
+            targetAngle = comp.getBearingToDestination(currentPosition, { lat: hitBoxNear.coords.latitude, lng: hitBoxNear.coords.longitude });
         }
-        myRotate(this.partition.title.element, targetAngle);
+        myRotate(this.partition.title.rotateDiv, targetAngle);
     }
     myConsole() {
         const myButton = document.querySelector("#myConsole");

@@ -18,7 +18,7 @@ class DEMO {
         console.log(boxIndex);
         this.point.forEach((element, index) => {
             if (element.sample.audio.state != "suspended")
-                this.asignPreset(index, boxIndex, element)
+                this.asignPreset(index, boxIndex, element);
         })
         if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0, 1);
         // this.idRoute = boxIndex;
