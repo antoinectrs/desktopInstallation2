@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: monument-regular;
     src: url(./font/Mregular.otf);
 }
@@ -6,7 +6,7 @@
 @font-face {
     font-family: monument-bold;
     src: url(./font/Multrabold.otf);
-}
+} */
 
 @font-face {
     font-family: selfMo;
@@ -99,7 +99,7 @@ input[type=range][orient=vertical] {
 
 .parent .case p {
     font-size: 3em;
-    font-family: monument-regular;
+    font-family:selfMo;
     text-align: center;
     text-transform: capitalize;
     position: absolute;
@@ -132,8 +132,9 @@ input[type=range][orient=vertical] {
     width: 100%;
     justify-content: center;
     /* grid-area: 1 / 3 / 2 / 4; */
-    /* pointer-events: none; */
+    pointer-events: none;
     font-family: selfMo;
+    opacity: 0.1;
 }
 
 .description .content {
@@ -344,7 +345,7 @@ path.leaflet-interactive:last-child {
     border: 1px solid;
     bottom: 0%;
     right: 0%;
-    height: 20%;
+    height: 50%;
     width: 100%;
     -webkit-backdrop-filter: blur(20px);
     position: fixed;
@@ -353,7 +354,7 @@ path.leaflet-interactive:last-child {
 .console input {
     width: 85%;
     height: 30%;
-    margin: 5%;
+    /* margin: 5%; */
 }
 
 #range, #alt {
@@ -401,7 +402,7 @@ path.leaflet-interactive:last-child {
         /* transition: 2s ease; */
     }
     .simu{
-        display: none;
+        /* display: none; */
     }
     #range, #alt {
         margin-right: 0;

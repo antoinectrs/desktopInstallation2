@@ -145,7 +145,7 @@ class MOBILE {
         const search = () => {
             setTimeout(() => {
                 if (this.myCompass.compassLoad() != undefined) {
-                    this.myMap.changeOrientation(orientation);
+                    this.myMap.changeOrientation(this.myCompass.compassLoad());
                     // console.log(this.inPath);
                     if (this.inPath == false) this.inPathOrientation(hitBoxNear);
                 };
