@@ -14,8 +14,8 @@ class MOBILE {
         this.myPosition();
         this.autorisePlay = false;
         // this.myConsole();
-        this.spaceRadius = 20;
-        this.createMap = false; 
+        this.spaceRadius = 4;
+        this.createMap = false;
         this.inPath = false;
         this.partition = {
             title: {
@@ -33,8 +33,8 @@ class MOBILE {
 
     }
 
-    checkRoad() { 
-        this.autorisePlay = true ; 
+    checkRoad() {
+        this.autorisePlay = true;
         // this.myMove();
     }
     myPosition() {
@@ -54,7 +54,7 @@ class MOBILE {
         if (catchCloserPoint != "tofar")
             this.inPathAction(catchCloserPoint)
         else
-            this.outPathAction()
+            this.outPathAction(catchCloserPoint)
 
         // myDebug("path", this.inPath);
     }
@@ -63,6 +63,7 @@ class MOBILE {
         this.myMap.boxTest();
         // this.myCompass = new myCompass();
         this.listenMyCompass(pos);
+        console.log("initMaps");
         this.createMap = true;
     }
     inPathAction(catchCloserPoint) {
@@ -70,11 +71,10 @@ class MOBILE {
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
-        this.listenMyCompass(catchCloserPoint.hitBoxNear);
+        // this.listenMyCompass(catchCloserPoint.hitBoxNear);
         // hideBlur(this.mapDom, "remove");
     }
-    outPathAction() {
-        console.log("outside");
+    outPathAction(catchCloserPoint) {
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
@@ -144,26 +144,31 @@ class MOBILE {
     listenMyCompass(hitBoxNear) {
         const search = () => {
             setTimeout(() => {
-                const orientation = this.myCompass.compassLoad()
-                if (orientation != undefined) {
+                if (this.myCompass.compassLoad() != undefined) {
                     this.myMap.changeOrientation(orientation);
-            
-                    this.compassPoint(hitBoxNear); 
+                    // console.log(this.inPath);
+                    if (this.inPath == false) this.inPathOrientation(hitBoxNear);
                 };
                 requestAnimationFrame(search)
-            }, 1000 / 55);
+            }, 1000 / 25);
         }
         search();
     }
-    compassPoint(hitBoxNear) {
-        const comp = this.myCompass.myCompass;
-        const compassP = comp.position.coords
+    inPathOrientation(hitBoxNear) {
+        const targetAngle = this.rotValue(hitBoxNear);
+        myRotate(this.partition.title.rotateDiv, targetAngle); //DOM
+         this.noPoint.sample.setOrientation(targetAngle)
+    }
+    rotValue(hitBoxNear) {
+        const compassP = this.myCompass.myCompass.position.coords
         const currentPosition = { lat: compassP.latitude, lng: compassP.longitude };
-        let targetAngle = 0;
-        if (this.inPath == false) {
-            targetAngle = comp.getBearingToDestination(currentPosition, { lat: hitBoxNear.coords.latitude, lng: hitBoxNear.coords.longitude });
-        }
-        myRotate(this.partition.title.rotateDiv, targetAngle);
+        return this.myCompass.myCompass.getBearingToDestination(currentPosition, { lat: hitBoxNear.coords.latitude, lng: hitBoxNear.coords.longitude });
+    }
+    rotateTitle(hitBoxNear) {
+
+        //CHECK THE ORIENTATION POINT
+
+
     }
     myConsole() {
         const myButton = document.querySelector("#myConsole");
@@ -209,7 +214,7 @@ class MOBILE {
         // const testBinau = [0, 70, 180, 280]
         clearInterval(this.id);
         id = setInterval(frame.bind(this), 25);
-   
+
         function frame() {
             if (pos == 100) {
                 if (this.iteration < this.vocalPoint.length - 1) this.iteration++;
@@ -217,14 +222,14 @@ class MOBILE {
 
                 const myRot = mapRange(this.iteration, 0, 4, 0, 360)
 
-                elem.style.justifyContent=this.preset[0].voice[this.iteration].position;
-                pElement.textContent =this.preset[0].voice[this.iteration].content
-                
+                elem.style.justifyContent = this.preset[0].voice[this.iteration].position;
+                pElement.textContent = this.preset[0].voice[this.iteration].content
+
                 // this.noPoint.sample.render(5000, 1);
-                this.vocalPoint[this.iteration].sample.playSample(0);  
+                this.vocalPoint[this.iteration].sample.playSample(0);
                 this.vocalPoint[this.iteration].sample.initOrientation(myRot);
                 this.vocalPoint[this.iteration].sample.render(5000, 1);
-            
+
                 clearInterval(id);
                 this.myMove()
             } else {

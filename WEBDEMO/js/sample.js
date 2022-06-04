@@ -38,6 +38,11 @@ class Sample {
     initOrientation(value) {
         this.rack.binaural.orientation = value;
         this.binauralFIRNode.setPosition(this.rack.binaural.orientation, 10, 1);
+    
+    }
+    setOrientation(value) {
+        this.binauralFIRNode.setPosition(value, 10, 1);
+        this.binauralFIRNode.setCrossfadeDuration(4);
     }
 
     // Decode the raw sample data into a AudioBuffer

@@ -370,6 +370,9 @@ path.leaflet-interactive:last-child {
 }
 
 @media only screen and (hover: none) and (pointer: coarse) {
+    #rotateDiv{
+        /* transition: 1s; */
+    }
     /* a{
         font-size: 3em;
         font-weight: normal;
