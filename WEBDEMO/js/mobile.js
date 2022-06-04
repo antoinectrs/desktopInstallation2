@@ -14,7 +14,7 @@ class MOBILE {
         this.myPosition();
         this.autorisePlay = false;
         // this.myConsole();
-        this.spaceRadius = 4;
+        this.spaceRadius = 100;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -56,7 +56,7 @@ class MOBILE {
         else
             this.outPathAction(catchCloserPoint)
 
-        // myDebug("path", this.inPath);
+   
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
@@ -68,6 +68,7 @@ class MOBILE {
     }
     inPathAction(catchCloserPoint) {
         this.inPath = true;
+        myDebug("path", this.inPath);
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
@@ -200,7 +201,7 @@ class MOBILE {
         this.preset.forEach((e, index) => { this.checkContentText(e, index) });
 
         const target = this.partition.verse.element[indexZone];
-        // myDebug("range", target);
+        myDebug("range", target);
         // const debugT = document.getElementById("myEnd");
         const toScroll = document.querySelector(".dynamic");
         SmoothVerticalScrolling(target, toScroll, 10000, "top")
