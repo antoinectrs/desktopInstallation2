@@ -84,8 +84,8 @@ class MapDebug {
         }).addTo(this.map);
         // L.Rotate.debug(this.map);
         this.convertToPointPath();
-
         this.layer();
+        this.pattern();
     }
     layer() {
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -99,6 +99,15 @@ class MapDebug {
             accessToken: 'pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNsMGprazdncDAxYzYzZWxhbzRlcWk2NDkifQ.JM4Xgke091LLntRvk9UbrA'
         }).addTo(this.map);
         this.control();
+    }
+    pattern(){
+        var poly1 = [
+            [46.5, 6],
+            [46.6, 6],
+            [46.6,6.7],
+            [46.5, 6.7]
+        ];
+        L.polygon(poly1, {stroke:"false",fill:'url(../img/checkerboad.png)'}).addTo(this.map);
     }
     control() {
         this.route = L.Routing.control({
