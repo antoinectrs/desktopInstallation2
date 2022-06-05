@@ -248,7 +248,13 @@ class MOBILE {
         if( this.autorisePlay){
             if(this.partition.verse.activeTop){
                 console.log("in");
+                this.partition.verse.moveElement.classList.add("long-transition");
+                this.partition.verse.moveElement.style.transform = "translateY(110vh)";
+                   // elem.style.transform = "translateY(" + pos + "vh)";
+
             }else{
+                this.partition.verse.moveElement.classList.remove("long-transition");
+                this.partition.verse.moveElement.style.transform = "translateY(0vh)";
                 console.log("out");
                 const i = this.wordAnimation();
                 console.log(this.iteration);

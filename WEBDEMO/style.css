@@ -429,4 +429,9 @@ path.leaflet-interactive:last-child {
         /* stroke-width: 77%;  */
         stroke-width: 17%;
     }
+    .long-transition {
+        /* transition-property: transform; */
+        transition: 1.5s;
+        transition-timing-function: linear;
+    }
 }
