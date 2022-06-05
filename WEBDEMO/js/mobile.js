@@ -78,6 +78,9 @@ class MOBILE {
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
+        
+        myRotate(this.partition.title.rotateDiv, 0)
+        searchHtml(".description .content img").style.height = "0px";
         // this.myMove();
 
         // this.listenMyCompass(catchCloserPoint.hitBoxNear);
@@ -157,15 +160,15 @@ class MOBILE {
                     this.myMap.changeOrientation(this.myCompass.compassLoad());
                     // console.log(this.inPath);
                     if (this.inPath == false) this.outPathOrientation(hitBoxNear);
-                    else
-                        this.inPathOrientation();
+                    // else
+                    //     this.inPathOrientation();
                 };
                 requestAnimationFrame(search)
             }, 1000 / 25);
         }
         search();
     }
-    inPathOrientation() { myRotate(this.partition.title.rotateDiv, 0) } // rest to 0 DOM
+    // inPathOrientation() { myRotate(this.partition.title.rotateDiv, 0) } // rest to 0 DOM
     outPathOrientation(hitBoxNear) {
         const targetAngle = this.rotValue(hitBoxNear);
         myRotate(this.partition.title.rotateDiv, targetAngle); //DOM

@@ -137,7 +137,6 @@ input[type=range][orient=vertical] {
     /* opacity: 0.1; */
 }
 
-
 #content {
     width: 100%;
     display: flex;
@@ -146,17 +145,17 @@ input[type=range][orient=vertical] {
 }
 
 .description .content .static {
-    border-radius: 451px;
+    /* border-radius: 451px;
     padding-right: 3%;
     padding-left: 3%;
     text-align: center;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.3); */
     /* backdrop-filter: blur(20px); */
     /* -webkit-backdrop-filter: blur(20px); */
     width: fit-content;
     height: fit-content;
     /* transform: rotate(45deg); */
-    transition: 1s;
+    /* transition: 1s; */
 }
 
 .dynamic {
@@ -363,10 +362,9 @@ path.leaflet-interactive:last-child {
 @media only screen and (hover: none) and (pointer: coarse) {
     .description .content {
         align-self: center;
-position: absolute;
-width: 100%;
+        position: absolute;
+        width: 100%;
     }
-    
     .description .content h1 {
         font-size: 6vh;
         font-weight: initial;
@@ -376,9 +374,17 @@ width: 100%;
     .description .content img {
         width: 90%;
         height: 160px;
+        transition: 1s;
+        transition-property: height;
     }
     .hideMobile {
         display: none;
+    }
+    #background {
+        filter: blur(51px);
+        height: 100%;
+        width: 100%;
+        position: absolute;
     }
     #rotateDiv {
         display: flex;
@@ -387,9 +393,14 @@ width: 100%;
         align-items: center;
         width: 100%;
     }
-    #rotateDiv div{
+    #back-inside {
+        -webkit-backdrop-filter: blur(20px);
+        width: 100%;
+        height: 100%;
+    }
+    #rotateDiv div {
         align-items: center;
-        background: red;
+        /* -webkit-backdrop-filter: blur(20px); */
         width: 70%;
         display: flex;
         flex-direction: column;
