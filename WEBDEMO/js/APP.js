@@ -53,11 +53,10 @@ class APP {
         });
         this.noPoint = { "sample": new Sample(this.noise, true) };
         this.noPoint.sample.requestTrack();
-        // if (this.statut == "mobile") this.initVocals();
+        if (this.statut == "mobile") this.initVocals();
     }
     initVocals() {
         setTimeout(() => {
-
             this.vocalPoint = this.preset[0].voice.map(e => {
                 return { "sample": new Sample(e.content, false) }
             })
@@ -96,7 +95,6 @@ class APP {
         if (statut == "mobile") {
             // this.myMap.init();
             // this.myMap.boxTest();
-
             this.demo = new MOBILE(this.myMap, this.point, this.noPoint);
         } else {
             console.log(this.myMap);

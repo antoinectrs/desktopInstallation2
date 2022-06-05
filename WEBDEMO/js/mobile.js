@@ -26,10 +26,15 @@ class MOBILE {
             verse: {
                 element: searchHtmlArray(".dynamic p"),
                 content: null,
+                moveElement: searchHtml("#content"),
+                contentElement: searchHtml("#target p"),
+                activeTop:false,
+                interval: setInterval(this.secondeFrame.bind(this), 1000),
             },
         }
         this.iteration = 0;
         this.myCompass = new myCompass();
+
 
     }
 
@@ -61,6 +66,7 @@ class MOBILE {
         this.listenMyCompass(pos);
         console.log("initMaps");
         this.createMap = true;
+        this.verseAnimation();
     }
     inPathAction(catchCloserPoint) {
         this.inPath = true;
@@ -69,7 +75,8 @@ class MOBILE {
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
-        this.myMove();
+        // this.myMove();
+
         // this.listenMyCompass(catchCloserPoint.hitBoxNear);
         // hideBlur(this.mapDom, "remove");
     }
@@ -204,7 +211,64 @@ class MOBILE {
         // const toScroll = document.querySelector(".dynamic");
         // SmoothVerticalScrolling(target, toScroll, 10000, "top")
     };
+    verseAnimation() {
+        let id = null;
+        const elem = document.getElementById("content");
+        const pElement = document.querySelector("#target p");
+        let pos = -10;
+        let activeTop = false;
+        // clearInterval(this.id);
+        // id = setInterval(frame.bind(this), 100);
+        // this.interval = setInterval(this.secondeFrame.bind(this), 1000);
+        // function frame() {
 
+        //     if (activeTop == true) {
+        //         const i = this.wordAnimation()
+        //         console.log(i);
+        //         // const myRot = mapRange(i, 0, 4, 0, 360);
+        //         // elem.style.justifyContent = this.preset[0].voice[i].position;
+        //         // pElement.textContent = this.preset[0].voice[i].content
+
+        //         // this.vocalPoint[this.iteration].sample.playSample(0);
+        //         // this.vocalPoint[this.iteration].sample.initOrientation(myRot);
+        //         // this.vocalPoint[this.iteration].sample.render(5000, 1);
+
+        //         // clearInterval(id);
+        //         // this.myMove()
+        //         // console.log(i);
+        //     } else {
+        //         // pos++;
+        //         // elem.style.transform = "translate(" + 0 + "vh," + pos + "vh)";
+        //     }
+        //     activeTop=!activeTop;
+        //     console.log(activeTop);
+        // }
+    }
+    secondeFrame() {
+        console.log(this.vocalPoint);
+        if( this.autorisePlay){
+            if(this.partition.verse.activeTop){
+                console.log("in");
+            }else{
+                console.log("out");
+                const i = this.wordAnimation();
+                // console.log(i);
+                // const myRot = mapRange(i, 0, 4, 0, 360);
+                // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                // this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
+    
+            }
+            this.partition.verse.activeTop=!this.partition.verse.activeTop;
+            // console.log(  this.partition.verse.moveElement, this.partition.verse.contentElement);
+        }
+
+    }
+    wordAnimation() {
+        if (this.iteration < this.vocalPoint.length - 1)
+            return this.iteration++;
+        else
+            return this.iteration = 0;
+    }
     myMove() {
         let id = null;
         const elem = document.getElementById("content");
@@ -212,7 +276,7 @@ class MOBILE {
         let pos = -10;
         // const testBinau = [0, 70, 180, 280]
         clearInterval(this.id);
-        id = setInterval(frame.bind(this), 120);
+        id = setInterval(frame.bind(this), 200);
         function frame() {
             if (pos == 100) {
                 console.log("zizi");
@@ -227,19 +291,19 @@ class MOBILE {
                 this.vocalPoint[this.iteration].sample.playSample(0);
                 this.vocalPoint[this.iteration].sample.initOrientation(myRot);
                 this.vocalPoint[this.iteration].sample.render(5000, 1);
-               
+
 
                 clearInterval(id);
                 this.myMove()
             } else {
-                pos ++;
+                pos++;
                 // posX= Math.cos(Math.PI*(pos/50))*30
                 // console.log(M );
                 // elem.style.transform = "translateY(" + pos + "vh)";
                 elem.style.transform = "translate(" + 0 + "vh," + pos + "vh)";
                 // elem.style.left = pos +  "px"; 
             }
-     
+
         }
     }
 }

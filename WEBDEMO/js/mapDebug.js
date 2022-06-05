@@ -30,7 +30,7 @@ class MapDebug {
             const content = [element.lat, element.lng]
             this.pointRoadBox.push(content);
         });
-        console.log(e.route);
+        // console.log(e.route);
         this.drawHitBox(this.pointRoadBox)
     }
     drawHitBox(array) {
@@ -60,8 +60,6 @@ class MapDebug {
         // }, 10000)
 
 
-
-        console.log(polyline);
         // var distance = this.distance; // Distance in km
         // var boxes = L.RouteBoxer.box(route, this.distance / 10);
         var boxes = L.RouteBoxer.box(route, this.distance /10);
