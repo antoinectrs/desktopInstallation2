@@ -29,7 +29,7 @@ class MOBILE {
                 moveElement: searchHtml("#content"),
                 contentElement: searchHtml("#target p"),
                 activeTop: false,
-                interval: setInterval(this.secondeFrame.bind(this), 3500),
+                interval: setInterval(this.secFrame.bind(this), 3500),
             },
         }
         this.iteration = 0;
@@ -38,10 +38,10 @@ class MOBILE {
 
     }
 
-    checkRoad() { 
+    checkRoad() {
         this.autorisePlay = true;
         this.loading();
-     }
+    }
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
@@ -156,14 +156,17 @@ class MOBILE {
                 if (this.myCompass.compassLoad() != undefined) {
                     this.myMap.changeOrientation(this.myCompass.compassLoad());
                     // console.log(this.inPath);
-                    if (this.inPath == false) this.inPathOrientation(hitBoxNear);
+                    if (this.inPath == false) this.outPathOrientation(hitBoxNear);
+                    else
+                        this.inPathOrientation();
                 };
                 requestAnimationFrame(search)
             }, 1000 / 25);
         }
         search();
     }
-    inPathOrientation(hitBoxNear) {
+    inPathOrientation() { myRotate(this.partition.title.rotateDiv, 0) } // rest to 0 DOM
+    outPathOrientation(hitBoxNear) {
         const targetAngle = this.rotValue(hitBoxNear);
         myRotate(this.partition.title.rotateDiv, targetAngle); //DOM
         this.noPoint.sample.setOrientation(targetAngle)
@@ -216,7 +219,7 @@ class MOBILE {
         let activeTop = false;
         // clearInterval(this.id);
         // id = setInterval(frame.bind(this), 100);
-        // this.interval = setInterval(this.secondeFrame.bind(this), 1000);
+        // this.interval = setInterval(this.secFrame.bind(this), 1000);
         // function frame() {
 
         //     if (activeTop == true) {
@@ -241,14 +244,12 @@ class MOBILE {
         //     console.log(activeTop);
         // }
     }
-    secondeFrame() {
+    secFrame() {
         if (this.autorisePlay) {
             const i = this.wordAnimation();
             if (this.partition.verse.activeTop) {
                 this.partition.verse.moveElement.classList.add("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(110vh)";
-                // elem.style.transform = "translateY(" + pos + "vh)";
-                console.log(this.preset[0].voice[i].content,  this.vocalPoint[i].sample.path);
                 const myRot = mapRange(i, 0, 4, 0, 360);
                 this.vocalPoint[i].sample.playSample(0);
                 this.vocalPoint[i].sample.initOrientation(myRot);
@@ -258,7 +259,7 @@ class MOBILE {
             } else {
                 this.partition.verse.moveElement.classList.remove("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
-               
+
                 this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
             }
             this.partition.verse.activeTop = !this.partition.verse.activeTop;
@@ -270,9 +271,9 @@ class MOBILE {
         else
             return this.iteration = 0;
     }
-    loading(){
-       searchHtml("#playTrack").style.display="none";
-       searchHtml(".description").style.display="flex";
+    loading() {
+        searchHtml("#playTrack").style.display = "none";
+        searchHtml(".description").style.display = "flex";
     }
-   
+
 }
