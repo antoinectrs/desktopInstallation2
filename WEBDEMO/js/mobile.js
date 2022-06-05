@@ -254,7 +254,7 @@ class MOBILE {
 
             }else{
                 this.partition.verse.moveElement.classList.remove("long-transition");
-                this.partition.verse.moveElement.style.transform = "translateY(0vh)";
+                this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
                 console.log("out");
                 const i = this.wordAnimation();
                 console.log(this.iteration);
