@@ -29,7 +29,7 @@ class MOBILE {
                 moveElement: searchHtml("#content"),
                 contentElement: searchHtml("#target p"),
                 activeTop:false,
-                interval: setInterval(this.secondeFrame.bind(this), 1500),
+                interval: setInterval(this.secondeFrame.bind(this), 3500),
             },
         }
         this.iteration = 0;
@@ -247,7 +247,6 @@ class MOBILE {
     secondeFrame() {
         if( this.autorisePlay){
             if(this.partition.verse.activeTop){
-                console.log("in");
                 this.partition.verse.moveElement.classList.add("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                    // elem.style.transform = "translateY(" + pos + "vh)";
@@ -255,16 +254,16 @@ class MOBILE {
             }else{
                 this.partition.verse.moveElement.classList.remove("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
-                console.log("out");
                 const i = this.wordAnimation();
-                console.log(this.iteration);
-                const myRot = mapRange(i, 0, 4, 0, 360);
                 this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
                 this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
-    
+                
+                const myRot = mapRange(i, 0, 4, 0, 360);
+                this.vocalPoint[i].sample.playSample(0);
+                this.vocalPoint[i].sample.initOrientation(myRot);
+                this.vocalPoint[i].sample.render(5000, 1);
             }
             this.partition.verse.activeTop=!this.partition.verse.activeTop;
-            // console.log(  this.partition.verse.moveElement, this.partition.verse.contentElement);
         }
 
     }

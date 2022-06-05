@@ -31,9 +31,9 @@ class APP {
         });
     }
     activeApp() {
-        // this.vocalPoint.forEach((element, index) => {
-        //     element.sample.playSample(0);
-        // });
+        this.vocalPoint.forEach((element, index) => {
+            element.sample.playSample(0);
+        });
         this.point.forEach((element, index) => {
             element.sample.playSample(0);
             element.sample.initOrientation(this.preset[index].binaural);
