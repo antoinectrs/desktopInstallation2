@@ -371,6 +371,9 @@ path.leaflet-interactive:last-child {
 }
 
 @media only screen and (hover: none) and (pointer: coarse) {
+   .hideMobile {
+        display: none;
+    }
     #rotateDiv{
         /* transition: 1s; */
     }
@@ -397,6 +400,7 @@ path.leaflet-interactive:last-child {
         border-radius: 100px;
         font-size: 4em;
     }
+    
     .leaflet-pane {
         /* filter:  blur(48.1px) contrast(1.34);   */
         /* transition: 2s ease; */
@@ -433,5 +437,18 @@ path.leaflet-interactive:last-child {
         transition-property: transform;
         transition: 3.5s;
         transition-timing-function: linear;
+    }
+    .description {
+        display: none;
+        position: absolute;
+        height: 100%;
+        z-index: 900000;
+        /* background: red; */
+        width: 100%;
+        justify-content: center;
+        /* grid-area: 1 / 3 / 2 / 4; */
+        pointer-events: none;
+        font-family: selfMo;
+        /* opacity: 0.1; */
     }
 }

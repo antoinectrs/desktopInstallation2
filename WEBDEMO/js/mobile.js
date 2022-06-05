@@ -38,7 +38,10 @@ class MOBILE {
 
     }
 
-    checkRoad() { this.autorisePlay = true }
+    checkRoad() { 
+        this.autorisePlay = true;
+        this.loading();
+     }
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
@@ -203,13 +206,7 @@ class MOBILE {
             pointHtml.innerHTML = e.verse;
     };
     setVersePartition(indexZone) {
-        // this.preset.forEach((e, index) => { this.checkContentText(e, index) }); //ancien scroll
-        // const target = this.partition.verse.element[indexZone];
-        // console.log(target);
 
-        // const debugT = document.getElementById("myEnd");
-        // const toScroll = document.querySelector(".dynamic");
-        // SmoothVerticalScrolling(target, toScroll, 10000, "top")
     };
     verseAnimation() {
         let id = null;
@@ -263,61 +260,19 @@ class MOBILE {
                 this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
                
                 this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
-               
-
-                // setTimeout(playVocal().bind(this), 500);
-                // setTimeout(function () {
-                //     console.log("Welcome to GeeksforGeeks!");
-                // }, 500);
-                // function playVocal() {
-              
-                // }
             }
             this.partition.verse.activeTop = !this.partition.verse.activeTop;
         }
     }
-
     wordAnimation() {
         if (this.iteration < this.vocalPoint.length - 1)
             return this.iteration++;
         else
             return this.iteration = 0;
     }
-    myMove() {
-        let id = null;
-        const elem = document.getElementById("content");
-        const pElement = document.querySelector("#target p");
-        let pos = -10;
-        // const testBinau = [0, 70, 180, 280]
-        clearInterval(this.id);
-        id = setInterval(frame.bind(this), 200);
-        function frame() {
-            if (pos == 100) {
-                console.log("zizi");
-                if (this.iteration < this.vocalPoint.length - 1) this.iteration++;
-                else this.iteration = 0;
-                const myRot = mapRange(this.iteration, 0, 4, 0, 360)
-                elem.style.justifyContent = this.preset[0].voice[this.iteration].position;
-                pElement.textContent = this.preset[0].voice[this.iteration].content
-                console.log(this.preset[0].voice[this.iteration].content);
-
-                // this.noPoint.sample.render(5000, 1);
-                this.vocalPoint[this.iteration].sample.playSample(0);
-                this.vocalPoint[this.iteration].sample.initOrientation(myRot);
-                this.vocalPoint[this.iteration].sample.render(5000, 1);
-
-
-                clearInterval(id);
-                this.myMove()
-            } else {
-                pos++;
-                // posX= Math.cos(Math.PI*(pos/50))*30
-                // console.log(M );
-                // elem.style.transform = "translateY(" + pos + "vh)";
-                elem.style.transform = "translate(" + 0 + "vh," + pos + "vh)";
-                // elem.style.left = pos +  "px"; 
-            }
-
-        }
+    loading(){
+       searchHtml("#playTrack").style.display="none";
+       searchHtml(".description").style.display="flex";
     }
+   
 }
