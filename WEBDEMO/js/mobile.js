@@ -14,7 +14,7 @@ class MOBILE {
         this.myPosition();
         this.autorisePlay = false;
         // this.myConsole();
-        this.spaceRadius = 100;
+        this.spaceRadius = 40;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -33,10 +33,7 @@ class MOBILE {
 
     }
 
-    checkRoad() {
-        this.autorisePlay = true;
-        // this.myMove();
-    }
+    checkRoad() { this.autorisePlay = true }
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
@@ -56,12 +53,11 @@ class MOBILE {
         else
             this.outPathAction(catchCloserPoint)
 
-   
+
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
         this.myMap.boxTest();
-        // this.myCompass = new myCompass();
         this.listenMyCompass(pos);
         console.log("initMaps");
         this.createMap = true;
@@ -69,9 +65,11 @@ class MOBILE {
     inPathAction(catchCloserPoint) {
         this.inPath = true;
         myDebug("path", this.inPath);
+        myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
+        this.myMove();
         // this.listenMyCompass(catchCloserPoint.hitBoxNear);
         // hideBlur(this.mapDom, "remove");
     }
@@ -158,7 +156,7 @@ class MOBILE {
     inPathOrientation(hitBoxNear) {
         const targetAngle = this.rotValue(hitBoxNear);
         myRotate(this.partition.title.rotateDiv, targetAngle); //DOM
-         this.noPoint.sample.setOrientation(targetAngle)
+        this.noPoint.sample.setOrientation(targetAngle)
     }
     rotValue(hitBoxNear) {
         const compassP = this.myCompass.myCompass.position.coords
@@ -198,13 +196,13 @@ class MOBILE {
             pointHtml.innerHTML = e.verse;
     };
     setVersePartition(indexZone) {
-        this.preset.forEach((e, index) => { this.checkContentText(e, index) });
+        // this.preset.forEach((e, index) => { this.checkContentText(e, index) }); //ancien scroll
+        // const target = this.partition.verse.element[indexZone];
+        // console.log(target);
 
-        const target = this.partition.verse.element[indexZone];
-        myDebug("range", target);
         // const debugT = document.getElementById("myEnd");
-        const toScroll = document.querySelector(".dynamic");
-        SmoothVerticalScrolling(target, toScroll, 10000, "top")
+        // const toScroll = document.querySelector(".dynamic");
+        // SmoothVerticalScrolling(target, toScroll, 10000, "top")
     };
 
     myMove() {
@@ -214,33 +212,34 @@ class MOBILE {
         let pos = -10;
         // const testBinau = [0, 70, 180, 280]
         clearInterval(this.id);
-        id = setInterval(frame.bind(this), 25);
-
+        id = setInterval(frame.bind(this), 120);
         function frame() {
             if (pos == 100) {
+                console.log("zizi");
                 if (this.iteration < this.vocalPoint.length - 1) this.iteration++;
                 else this.iteration = 0;
-
                 const myRot = mapRange(this.iteration, 0, 4, 0, 360)
-
                 elem.style.justifyContent = this.preset[0].voice[this.iteration].position;
                 pElement.textContent = this.preset[0].voice[this.iteration].content
+                console.log(this.preset[0].voice[this.iteration].content);
 
                 // this.noPoint.sample.render(5000, 1);
                 this.vocalPoint[this.iteration].sample.playSample(0);
                 this.vocalPoint[this.iteration].sample.initOrientation(myRot);
                 this.vocalPoint[this.iteration].sample.render(5000, 1);
+               
 
                 clearInterval(id);
                 this.myMove()
             } else {
-                pos += 0.5;
+                pos ++;
                 // posX= Math.cos(Math.PI*(pos/50))*30
                 // console.log(M );
                 // elem.style.transform = "translateY(" + pos + "vh)";
                 elem.style.transform = "translate(" + 0 + "vh," + pos + "vh)";
                 // elem.style.left = pos +  "px"; 
             }
+     
         }
     }
 }

@@ -64,7 +64,7 @@ class MapDebug {
         console.log(polyline);
         // var distance = this.distance; // Distance in km
         // var boxes = L.RouteBoxer.box(route, this.distance / 10);
-        var boxes = L.RouteBoxer.box(route, this.distance );
+        var boxes = L.RouteBoxer.box(route, this.distance /10);
         boxes.forEach(element => {
             this.hitBox.push(L.rectangle(element, { color: "#ff7800", opacity: 0, weight: 1 }).addTo(this.map));
         });
