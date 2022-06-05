@@ -29,7 +29,7 @@ class MOBILE {
                 moveElement: searchHtml("#content"),
                 contentElement: searchHtml("#target p"),
                 activeTop:false,
-                interval: setInterval(this.secondeFrame.bind(this), 1000),
+                interval: setInterval(this.secondeFrame.bind(this), 1500),
             },
         }
         this.iteration = 0;
@@ -245,17 +245,16 @@ class MOBILE {
         // }
     }
     secondeFrame() {
-        console.log(this.vocalPoint);
         if( this.autorisePlay){
             if(this.partition.verse.activeTop){
                 console.log("in");
             }else{
                 console.log("out");
                 const i = this.wordAnimation();
-                // console.log(i);
-                // const myRot = mapRange(i, 0, 4, 0, 360);
-                // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
-                // this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
+                console.log(this.iteration);
+                const myRot = mapRange(i, 0, 4, 0, 360);
+                this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
     
             }
             this.partition.verse.activeTop=!this.partition.verse.activeTop;
