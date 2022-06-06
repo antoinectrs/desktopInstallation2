@@ -11,7 +11,10 @@ class APP {
         this.musicList = ["01", "02", "03", "04"];
         this.noise = "wait";
         this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
+        this.guitarList = ["01", "02", "03"];
+
         this.noPoint;
+        this.guitarPoint;
         this.vocalPoint;
         this.preset;
         this.setUp();
@@ -45,26 +48,40 @@ class APP {
     }
     initPoint(musicList, preset) {
         this.point = musicList.map(function (music, preset) {
-            return { "sample": new Sample(music, true) }
+            return { "sample": new Sample(music, true, "track01") }
         });
         // this.loadTrack(this.point.sample);
-        this.point.forEach(element => {
-            element.sample.requestTrack()
-        });
-        this.noPoint = { "sample": new Sample(this.noise, true) };
+        this.point.forEach(element => { element.sample.requestTrack() });
+        this.noPoint = { "sample": new Sample(this.noise, true, "track01") };
         this.noPoint.sample.requestTrack();
-        if (this.statut == "mobile") this.initVocals();
+
+        if (this.statut == "mobile") {
+            this.initVocals();
+            this.guitarPoint = this.initMusic(this.guitarList, "guitar");
+        }
     }
     initVocals() {
         setTimeout(() => {
             this.vocalPoint = this.preset[0].voice.map(e => {
-                return { "sample": new Sample(e.content, false) }
+                return { "sample": new Sample(e.content, false, "track01") }
             })
             this.vocalPoint.forEach(element => {
                 element.sample.requestTrack()
             });
             this.demo.vocalPoint = this.vocalPoint;
             console.log(this.vocalPoint);
+        }, 500);
+    }
+    initMusic(presetPath, path) {
+        setTimeout(() => {
+            const musicBox = presetPath.map(e => {
+                return { "sample": new Sample(e, false, path) }
+            })
+            musicBox.forEach(element => {
+                element.sample.requestTrack()
+            });
+            console.log(musicBox);
+            return musicBox;
         }, 500);
     }
 

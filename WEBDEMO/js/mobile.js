@@ -34,10 +34,7 @@ class MOBILE {
         }
         this.iteration = 0;
         this.myCompass = new myCompass();
-
-
     }
-
     checkRoad() {
         this.autorisePlay = true;
         this.loading();
@@ -78,7 +75,7 @@ class MOBILE {
         this.renderPoint(catchCloserPoint.index);
         this.setTitlePartition(catchCloserPoint.index);
         this.setVersePartition(catchCloserPoint.index);
-        
+
         myRotate(this.partition.title.rotateDiv, 0)
         searchHtml(".description .content img").style.height = "0px";
         // this.myMove();

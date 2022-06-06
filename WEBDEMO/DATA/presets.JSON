@@ -11,7 +11,8 @@
         { "content": "quidescend", "position": "start" },
         { "content": "enface", "position": "end" },
         { "content": "quimonte", "position": "center" }
-      ]
+      ],
+      "guitar": "1"
     },
     {
       "volume": [5000, 1000, 0, 0, 0],
@@ -24,7 +25,8 @@
         { "content": "quidescend", "position": "start" },
         { "content": "enface", "position": "end" },
         { "content": "quimonte", "position": "center" }
-      ]
+      ],
+      "guitar": "none"
     },
     {
       "volume": [0, 0, 0, 1000, 5000],
@@ -37,7 +39,8 @@
         { "content": "quidescend", "position": "start" },
         { "content": "enface", "position": "end" },
         { "content": "quimonte", "position": "center" }
-      ]
+      ],
+       "guitar": "none"
     },
     {
       "volume": [0, 1000, 5000, 1000, 0],
@@ -50,7 +53,8 @@
         { "content": "quidescend", "position": "start" },
         { "content": "enface", "position": "end" },
         { "content": "quimonte", "position": "center" }
-      ]
+      ],
+       "guitar": "none"
     }
   ]
 }

@@ -1,6 +1,6 @@
 
 class Sample {
-    constructor(path,isLooping, orientation) {
+    constructor(path, isLooping, folder, orientation) {
         this.audio = new (AudioContext || webkitAudioContext || mozAudioContext)(),
             this.binauralFIRNode = null,
             this.path = path;
@@ -8,7 +8,8 @@ class Sample {
         this.sampleBuffer;
         this.sourceNode;
         this.onRoad = false;
-        this.isLooping= isLooping;
+        this.folder = folder;
+        this.isLooping = isLooping;
         this.rack = {
             filter: {
                 varFreq: 40,
@@ -38,13 +39,11 @@ class Sample {
     initOrientation(value) {
         this.rack.binaural.orientation = value;
         this.binauralFIRNode.setPosition(this.rack.binaural.orientation, 10, 1);
-    
     }
     setOrientation(value) {
         this.binauralFIRNode.setPosition(value, 10, 1);
         this.binauralFIRNode.setCrossfadeDuration(4);
     }
-
     // Decode the raw sample data into a AudioBuffer
     createBufferFromData(rawData) {
         // console.log('Got raw sample data from XHR');
@@ -135,9 +134,9 @@ class Sample {
         // http://alemangui.github.io/ramp-to-value
 
         const node = this.rack.filter.audioNode.frequency
-        node.value=eFilter;
+        node.value = eFilter;
         // console.log(eFilter);
-        node.setValueAtTime(node.value+ 0.0001, this.audio.currentTime+ 10);
+        node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
         // linearRampToValueAtTime
         // node.linearRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 10);
 
@@ -158,7 +157,7 @@ class Sample {
             this.createBufferFromData(req.response);
         });
         // req.open('GET', `../snd/parc/${this.path}.wav`, true);
-        req.open('GET', `./snd/track01/${this.path}.wav`, true);
+        req.open('GET', `./snd/track01/${this.path}.mp3`, true);
         req.send();
     }
     hrtf(sampleRate) {
