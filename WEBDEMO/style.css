@@ -278,7 +278,7 @@ input[type=range][orient=vertical] {
 }
 
 path.leaflet-interactive {
-    stroke: blue !important;
+    /* stroke: blue !important; */
     stroke-width: 12px;
     /* filter: blur(20px) contrast(9.8); */
     /* stroke-width:   332px; */
@@ -455,9 +455,9 @@ path.leaflet-interactive:last-child {
         position: fixed;
     }
     path.leaflet-interactive {
-        stroke: #e91707 !important;
+        /* stroke: #e91707 !important; */
         /* stroke-width: 77%;  */
-        stroke-width: 17%;
+        /* stroke-width: 17%; */
     }
     .long-transition {
         transition-property: transform;
@@ -476,5 +476,11 @@ path.leaflet-interactive:last-child {
         pointer-events: none;
         font-family: selfMo;
         /* opacity: 0.1; */
+    }
+    .parent{
+        position: fixed;
+    }
+    .leaflet-tile{
+         filter: blur(25px); /*image carte */
     }
 }
