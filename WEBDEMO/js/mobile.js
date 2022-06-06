@@ -73,12 +73,12 @@ class MOBILE {
         myDebug("path", this.inPath);
         myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
-        // const findArray = Math.round(mapRange(catchCloserPoint.index, 0,
-        // console.log(this.scale(catchCloserPoint.index, this.preset.length));
-        // this.setTitlePartition(catchCloserPoint.index);
-        // this.setVersePartition(catchCloserPoint.index);
 
-        myRotate(this.partition.title.rotateDiv, 0)
+        const iScale = this.scale(catchCloserPoint.index, this.preset.length);
+        this.setTitlePartition(iScale);
+        this.setVersePartition(iScale);
+
+        myRotate(this.partition.title.rotateDiv, 0);
         searchHtml(".description .content img").style.height = "0px";
         // this.myMove();
 
