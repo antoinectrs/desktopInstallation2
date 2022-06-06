@@ -73,8 +73,10 @@ class MOBILE {
         myDebug("path", this.inPath);
         myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
-        this.setTitlePartition(catchCloserPoint.index);
-        this.setVersePartition(catchCloserPoint.index);
+        // const findArray = Math.round(mapRange(catchCloserPoint.index, 0,
+        // console.log(this.scale(catchCloserPoint.index, this.preset.length));
+        // this.setTitlePartition(catchCloserPoint.index);
+        // this.setVersePartition(catchCloserPoint.index);
 
         myRotate(this.partition.title.rotateDiv, 0)
         searchHtml(".description .content img").style.height = "0px";
@@ -126,7 +128,8 @@ class MOBILE {
     renderPoint(boxIndex) {
         this.point.forEach((element, index) => {
             if (element.sample.audio.state != "suspended") {
-                this.asignPreset(index, boxIndex, element);
+                const find = this.findPreset(index, boxIndex);
+                this.asignPreset(element, find.presetVolume, find.presetSpeed);
             };
         })
         if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0, 1);
@@ -137,14 +140,19 @@ class MOBILE {
             if (element.sample.audio.state != "suspended") element.sample.render(0, 0)
         })
     }
-    asignPreset(index, boxIndex, element) {
+    findPreset(index, boxIndex) {
         const targetVolume = this.preset[index].volume;
         const scale = Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, targetVolume.length));
-        const presetVolume = targetVolume[scale];
-
+        const i = this.scale(boxIndex, targetVolume.length);
+        const presetVolume = targetVolume[i];
         const targetSpeed = this.preset[index].mySpeed;
-        const presetSpeed = targetSpeed[scale];
-
+        const presetSpeed = targetSpeed[i];
+        return { presetVolume, presetSpeed }
+    }
+    scale(boxIndex, boxes) {
+        return Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, boxes));
+    }
+    asignPreset(element, presetVolume, presetSpeed) {
         // this.myDebug("range", scale);
         element.sample.render(presetVolume, 1);
         element.sample.initSpeed(presetSpeed)
