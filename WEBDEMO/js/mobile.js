@@ -265,6 +265,13 @@ class MOBILE {
                 this.quickSample.aurorePoint[i].sample.playSample(0);
                 this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
                 this.quickSample.aurorePoint[i].sample.render(5000, 1);
+
+                // console.log(this.quickSample.guitarPoint[0].sample);
+
+                this.quickSample.guitarPoint[i].sample.playSample(0);
+                this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
+                this.quickSample.guitarPoint[i].sample.render(5000, 1);
+
                 // this.vocalPoint[i].sample.playSample(0);
                 // this.vocalPoint[i].sample.initOrientation(myRot);
                 // this.vocalPoint[i].sample.render(5000, 1);
