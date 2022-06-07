@@ -10,8 +10,8 @@ class MOBILE {
         this.noPoint = noPoint;
         this.vocalPoint;
         this.quickSample = {
-            guitarPoint:null,
-            aurorePoint:null
+            guitarPoint: null,
+            aurorePoint: null
         }
         this.preset;
         this.myCompass;
@@ -191,9 +191,9 @@ class MOBILE {
     rotateTitle(hitBoxNear) {
         //CHECK THE ORIENTATION POINT
     }
-  
-     // -------------------------- DOM --------------------------------
-     myConsole() {
+
+    // -------------------------- DOM --------------------------------
+    myConsole() {
         const myButton = document.querySelector("#myConsole");
         myButton.addEventListener("click", e => {
             const myConsol = document.querySelector(".console input");
@@ -261,13 +261,13 @@ class MOBILE {
                 this.partition.verse.moveElement.classList.add("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                 const myRot = mapRange(i, 0, 4, 0, 360);
-                console.log(this.quickSample.aurorePoint[i]);
-                this.quickSample.aurorePoint[i].sample.playSample(0);
-                this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                this.quickSample.aurorePoint[i].sample.render(5000, 1);
-
+                // console.log(this.quickSample.aurorePoint[i]);
+                setTimeout(() => {
+                    this.quickSample.aurorePoint[i].sample.playSample(0);
+                    this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
+                    this.quickSample.aurorePoint[i].sample.render(5000, 1);
+                }, 3000)
                 // console.log(this.quickSample.guitarPoint[0].sample);
-
                 this.quickSample.guitarPoint[i].sample.playSample(0);
                 this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
                 this.quickSample.guitarPoint[i].sample.render(5000, 1);

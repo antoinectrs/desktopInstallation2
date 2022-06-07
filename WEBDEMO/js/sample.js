@@ -4,6 +4,7 @@ class Sample {
         this.audio = new (AudioContext || webkitAudioContext || mozAudioContext)(),
             this.binauralFIRNode = null,
             this.path = path;
+        this.audio.createDelay(10);
         this.hrtfs = hrtfs;
         this.sampleBuffer;
         this.sourceNode;
