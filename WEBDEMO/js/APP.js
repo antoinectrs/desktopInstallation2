@@ -11,6 +11,7 @@ class APP {
         this.musicList = ["01", "02", "03", "04"];
         this.noise = "wait";
         this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
+        this.auroreList = ["continuer", "devant", "droite", "gauche", "suivre"];
         this.guitarList = ["01", "02", "03"];
 
         this.noPoint;
@@ -25,6 +26,7 @@ class APP {
         this.initPoint(this.musicList, this.preset);
         this.dom();
     }
+     // -------------------------- DOM --------------------------------
     dom(target = "#playTrack", trigger = 'click') {
         document.querySelector(target).addEventListener(trigger, (event) => {
             console.log("clic");
@@ -33,7 +35,29 @@ class APP {
             this.startListening = true;
         });
     }
+
+    // -------------------------- LOAD SOUND --------------------------------
+    initPoint(musicList, preset) {
+        this.point = musicList.map(function (music, preset) {
+            return { "sample": new Sample(music, true, "track01") }
+        });
+        // this.loadTrack(this.point.sample);
+        this.point.forEach(element => { element.sample.requestTrack() });
+        this.noPoint = { "sample": new Sample(this.noise, true, "track01") };
+        this.noPoint.sample.requestTrack();
+
+        if (this.statut == "mobile") {
+            this.initVocals();
+            this.loadSample();
+            // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
+
+            this.guitarPoint = this.initMusic(this.guitarList, "guitar");
+        }
+    }
     activeApp() {
+        this.aurorePoint.forEach((element, index) => {
+            element.sample.playSample(0);
+        });
         this.vocalPoint.forEach((element, index) => {
             element.sample.playSample(0);
         });
@@ -46,20 +70,6 @@ class APP {
         this.demo.preset = this.preset;
         this.demo.checkRoad();
     }
-    initPoint(musicList, preset) {
-        this.point = musicList.map(function (music, preset) {
-            return { "sample": new Sample(music, true, "track01") }
-        });
-        // this.loadTrack(this.point.sample);
-        this.point.forEach(element => { element.sample.requestTrack() });
-        this.noPoint = { "sample": new Sample(this.noise, true, "track01") };
-        this.noPoint.sample.requestTrack();
-
-        if (this.statut == "mobile") {
-            this.initVocals();
-            this.guitarPoint = this.initMusic(this.guitarList, "guitar");
-        }
-    }
     initVocals() {
         setTimeout(() => {
             this.vocalPoint = this.preset[0].voice.map(e => {
@@ -69,25 +79,31 @@ class APP {
                 element.sample.requestTrack()
             });
             this.demo.vocalPoint = this.vocalPoint;
-            console.log(this.vocalPoint);
         }, 500);
     }
-    initMusic(presetPath, path) {
-        setTimeout(() => {
-            const musicBox = presetPath.map(e => {
-                return { "sample": new Sample(e, false, path) }
-            })
-            musicBox.forEach(element => {
-                element.sample.requestTrack()
-            });
-            console.log(musicBox);
-            return musicBox;
-        }, 500);
+     initMusic(presetPath, path) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                const musicBox = presetPath.map(e => {
+                    return { "sample": new Sample(e, false, path) }
+                })
+                musicBox.forEach(element => {
+                    element.sample.requestTrack()
+                });
+                // console.log(musicBox);
+                resolve(musicBox);
+            }, 500);
+        });
     }
+    async loadSample(){
+        this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
+        this.guitarPoint = await this.initMusic(this.guitarList, "guitar");
 
-
-
-    loadData() {
+        this.demo.quickSample.guitarPoint =this.guitarPoint;
+        this.demo.quickSample.aurorePoint =this.aurorePoint;
+    }
+     // -------------------------- LOAD DATA --------------------------------
+     loadData() {
         // fetch('./DATA/data.JSON')
         // fetch('./DATA/prelaz.JSON')
         fetch('./DATA/lemont.JSON')
@@ -108,6 +124,7 @@ class APP {
             })
             .catch(error => console.log(error));
     }
+    // -------------------------- STATUT --------------------------------
     newStatut(statut) {
         if (statut == "mobile") {
             // this.myMap.init();
@@ -120,5 +137,6 @@ class APP {
             this.demo = new DEMO(this.myMap, this.point, this.noPoint);
         }
     }
+
 
 }

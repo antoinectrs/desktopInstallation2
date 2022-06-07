@@ -157,7 +157,7 @@ class Sample {
             this.createBufferFromData(req.response);
         });
         // req.open('GET', `../snd/parc/${this.path}.wav`, true);
-        req.open('GET', `./snd/track01/${this.path}.mp3`, true);
+        req.open('GET', `./snd/${this.folder}/${this.path}.mp3`, true);
         req.send();
     }
     hrtf(sampleRate) {

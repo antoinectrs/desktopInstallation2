@@ -1,6 +1,6 @@
 // ---------------- MOBILE -----------------    
 class MOBILE {
-    constructor(myMap, point, noPoint, vocalPoint) {
+    constructor(myMap, point, noPoint) {
         this.myMap = myMap;
         // this.mapDom = searchHtml("#map .leaflet-pane");
         // hideBlur(this.mapDom, "add");
@@ -8,7 +8,11 @@ class MOBILE {
 
         this.point = point;
         this.noPoint = noPoint;
-        this.vocalPoint = vocalPoint;
+        this.vocalPoint;
+        this.quickSample = {
+            guitarPoint:null,
+            aurorePoint:null
+        }
         this.preset;
         this.myCompass;
         this.myPosition();
@@ -74,7 +78,7 @@ class MOBILE {
         myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
 
-        const iScale = this.scale(catchCloserPoint.index, this.preset.length);
+        const iScale = this.scale(catchCloserPoint.index, this.preset.length); //map for preset
         this.setTitlePartition(iScale);
         this.setVersePartition(iScale);
 
@@ -185,12 +189,11 @@ class MOBILE {
         return this.myCompass.myCompass.getBearingToDestination(currentPosition, { lat: hitBoxNear.coords.latitude, lng: hitBoxNear.coords.longitude });
     }
     rotateTitle(hitBoxNear) {
-
         //CHECK THE ORIENTATION POINT
-
-
     }
-    myConsole() {
+  
+     // -------------------------- DOM --------------------------------
+     myConsole() {
         const myButton = document.querySelector("#myConsole");
         myButton.addEventListener("click", e => {
             const myConsol = document.querySelector(".console input");
@@ -204,7 +207,6 @@ class MOBILE {
             this.manager(pos);
         })
     }
-    //  ----------- DOM --------------------
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
         this.partition.title.element.innerHTML = changeDom;
@@ -259,9 +261,13 @@ class MOBILE {
                 this.partition.verse.moveElement.classList.add("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                 const myRot = mapRange(i, 0, 4, 0, 360);
-                this.vocalPoint[i].sample.playSample(0);
-                this.vocalPoint[i].sample.initOrientation(myRot);
-                this.vocalPoint[i].sample.render(5000, 1);
+                console.log(this.quickSample.aurorePoint[i]);
+                this.quickSample.aurorePoint[i].sample.playSample(0);
+                this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
+                this.quickSample.aurorePoint[i].sample.render(5000, 1);
+                // this.vocalPoint[i].sample.playSample(0);
+                // this.vocalPoint[i].sample.initOrientation(myRot);
+                // this.vocalPoint[i].sample.render(5000, 1);
                 this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
             } else {
