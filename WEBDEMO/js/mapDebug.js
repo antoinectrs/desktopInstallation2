@@ -107,7 +107,7 @@ class MapDebug {
             [46.6,6.7],
             [46.5, 6.7]
         ];
-        L.polygon(poly1, {stroke:"false",fill:'url(../img/checkerboad.png)'}).addTo(this.map);
+        L.polygon(poly1, {stroke:"false",fill:'url(./img/checkerboad.png)'}).addTo(this.map);
     }
     control() {
         this.route = L.Routing.control({

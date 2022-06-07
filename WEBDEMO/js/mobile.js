@@ -16,9 +16,10 @@ class MOBILE {
         this.preset;
         this.myCompass;
         this.myPosition();
+        this.catchCloserPoint = null;
         this.autorisePlay = false;
         // this.myConsole();
-        this.spaceRadius = 40;
+        this.spaceRadius = 50;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -55,18 +56,17 @@ class MOBILE {
         this.getAltittude(pos);
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
-        const catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
-
-        if (catchCloserPoint != "tofar")
-            this.inPathAction(catchCloserPoint)
+        this.catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
+        if (this.catchCloserPoint != "tofar")
+            this.inPathAction(this.catchCloserPoint)
         else
-            this.outPathAction(catchCloserPoint)
+            this.outPathAction(this.catchCloserPoint)
 
 
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
-        this.myMap.boxTest();
+        this.myMap.boxTest();   
         this.listenMyCompass(pos);
         console.log("initMaps");
         this.createMap = true;
@@ -267,11 +267,15 @@ class MOBILE {
                     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
                     this.quickSample.aurorePoint[i].sample.render(5000, 1);
                 }, 3000)
-                // console.log(this.quickSample.guitarPoint[0].sample);
-                this.quickSample.guitarPoint[i].sample.playSample(0);
-                this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
-                this.quickSample.guitarPoint[i].sample.render(5000, 1);
-
+                if (this.catchCloserPoint != null) {
+                    console.log(this.catchCloserPoint);
+                    if (this.catchCloserPoint.index <= 10) {
+                        console.log(this.catchCloserPoint.index);
+                        this.quickSample.guitarPoint[i].sample.playSample(0);
+                        this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
+                        this.quickSample.guitarPoint[i].sample.render(5000, 1);
+                    }
+                }
                 // this.vocalPoint[i].sample.playSample(0);
                 // this.vocalPoint[i].sample.initOrientation(myRot);
                 // this.vocalPoint[i].sample.render(5000, 1);

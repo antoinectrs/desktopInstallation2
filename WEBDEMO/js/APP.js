@@ -26,7 +26,7 @@ class APP {
         this.initPoint(this.musicList, this.preset);
         this.dom();
     }
-     // -------------------------- DOM --------------------------------
+    // -------------------------- DOM --------------------------------
     dom(target = "#playTrack", trigger = 'click') {
         document.querySelector(target).addEventListener(trigger, (event) => {
             console.log("clic");
@@ -51,16 +51,21 @@ class APP {
             this.loadSample();
             // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
 
-            this.guitarPoint = this.initMusic(this.guitarList, "guitar");
+            // this.guitarPoint = this.initMusic(this.guitarList, "guitar");
         }
     }
     activeApp() {
-        this.aurorePoint.forEach((element, index) => {
-            element.sample.playSample(0);
-        });
-        this.vocalPoint.forEach((element, index) => {
-            element.sample.playSample(0);
-        });
+        if (this.statut == "mobile") {
+            this.aurorePoint.forEach((element, index) => {
+                element.sample.playSample(0);
+            });
+            this.guitarPoint.forEach((element, index) => {
+                element.sample.playSample(0);
+            });
+            this.vocalPoint.forEach((element, index) => {
+                element.sample.playSample(0);
+            });
+        }
         this.point.forEach((element, index) => {
             element.sample.playSample(0);
             element.sample.initOrientation(this.preset[index].binaural);
@@ -81,7 +86,7 @@ class APP {
             this.demo.vocalPoint = this.vocalPoint;
         }, 500);
     }
-     initMusic(presetPath, path) {
+    initMusic(presetPath, path) {
         return new Promise(resolve => {
             setTimeout(() => {
                 const musicBox = presetPath.map(e => {
@@ -95,18 +100,18 @@ class APP {
             }, 500);
         });
     }
-    async loadSample(){
+    async loadSample() {
         this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
         this.guitarPoint = await this.initMusic(this.guitarList, "guitar");
 
-        this.demo.quickSample.guitarPoint =this.guitarPoint;
-        this.demo.quickSample.aurorePoint =this.aurorePoint;
+        this.demo.quickSample.guitarPoint = this.guitarPoint;
+        this.demo.quickSample.aurorePoint = this.aurorePoint;
     }
-     // -------------------------- LOAD DATA --------------------------------
-     loadData() {
-        // fetch('./DATA/data.JSON')
+    // -------------------------- LOAD DATA --------------------------------
+    loadData() {
+        fetch('./DATA/data.JSON')
         // fetch('./DATA/prelaz.JSON')
-        fetch('./DATA/lemont.JSON')
+        // fetch('./DATA/lemont.JSON')
             .then(response => response.json())
             .then(data => {
                 const JSdata = data;
