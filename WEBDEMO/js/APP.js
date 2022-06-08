@@ -1,3 +1,5 @@
+const DEFAULT_FREQUENCY = 5000
+
 class APP {
     constructor(statut) {
         this.startListening = false;

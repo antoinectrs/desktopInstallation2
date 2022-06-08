@@ -30,7 +30,7 @@ class DEMO {
         element.sample.render(preset, 1);
     }
     releasePoint() {
-        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(5000, 1);
+        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(DEFAULT_FREQUENCY, 1);
         this.point.forEach(element => {
             if (element.sample.audio.state != "suspended") element.sample.render(0, 0)
         })

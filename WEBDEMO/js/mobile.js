@@ -1,4 +1,5 @@
 // ---------------- MOBILE -----------------    
+
 class MOBILE {
     constructor(myMap, point, noPoint) {
         this.myMap = myMap;
@@ -142,7 +143,7 @@ class MOBILE {
     }
     releasePoint() {
 
-        this.noPoint.sample.render(5000, 1);
+        this.noPoint.sample.render(DEFAULT_FREQUENCY, 1);
         this.point.forEach(element => {
             element.sample.render(0, 0)
         })
@@ -245,7 +246,7 @@ class MOBILE {
 
         //         // this.vocalPoint[this.iteration].sample.playSample(0);
         //         // this.vocalPoint[this.iteration].sample.initOrientation(myRot);
-        //         // this.vocalPoint[this.iteration].sample.render(5000, 1);
+        //         // this.vocalPoint[this.iteration].sample.render(DEFAULT_FREQUENCY, 1);
 
         //         // clearInterval(id);
         //         // this.myMove()
@@ -269,7 +270,7 @@ class MOBILE {
                 setTimeout(() => {
                     this.quickSample.aurorePoint[i].sample.playSample(0);
                     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                    this.quickSample.aurorePoint[i].sample.render(5000, 1);
+                    this.quickSample.aurorePoint[i].sample.render(DEFAULT_FREQUENCY, 1);
                 }, 3000)
                 if (this.catchCloserPoint != null) {
                     console.log(this.catchCloserPoint);
@@ -277,12 +278,12 @@ class MOBILE {
                         console.log(this.catchCloserPoint.index);
                         this.quickSample.guitarPoint[i].sample.playSample(0);
                         this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
-                        this.quickSample.guitarPoint[i].sample.render(5000, 1);
+                        this.quickSample.guitarPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
                     }
                 }
                 // this.vocalPoint[i].sample.playSample(0);
                 // this.vocalPoint[i].sample.initOrientation(myRot);
-                // this.vocalPoint[i].sample.render(5000, 1);
+                // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
                 this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
             } else {
