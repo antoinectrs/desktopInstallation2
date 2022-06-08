@@ -20,6 +20,7 @@ class MOBILE {
         this.autorisePlay = false;
         // this.myConsole();
         this.spaceRadius = 50;
+        this.spaceRadius = 500;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -57,6 +58,7 @@ class MOBILE {
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
         this.catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
+        console.log(pos);
         if (this.catchCloserPoint != "tofar")
             this.inPathAction(this.catchCloserPoint)
         else
@@ -66,7 +68,7 @@ class MOBILE {
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
-        this.myMap.boxTest();   
+        this.myMap.boxTest();
         this.listenMyCompass(pos);
         console.log("initMaps");
         this.createMap = true;
@@ -139,10 +141,12 @@ class MOBILE {
         if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0, 1);
     }
     releasePoint() {
-        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(5000, 1);
+
+        this.noPoint.sample.render(5000, 1);
         this.point.forEach(element => {
-            if (element.sample.audio.state != "suspended") element.sample.render(0, 0)
+            element.sample.render(0, 0)
         })
+        // this.point[0].sample.render(0, 0)
     }
     findPreset(index, boxIndex) {
         const targetVolume = this.preset[index].volume;

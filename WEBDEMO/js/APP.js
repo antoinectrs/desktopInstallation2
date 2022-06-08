@@ -39,11 +39,23 @@ class APP {
     // -------------------------- LOAD SOUND --------------------------------
     initPoint(musicList, preset) {
         this.point = musicList.map(function (music, preset) {
-            return { "sample": new Sample(music, true, "track01") }
+            return {
+                "sample": new Sample({
+                    folder: "track01",
+                    path: music,
+                    isLooping: true,
+                })
+            }
         });
         // this.loadTrack(this.point.sample);
         this.point.forEach(element => { element.sample.requestTrack() });
-        this.noPoint = { "sample": new Sample(this.noise, true, "track01") };
+        this.noPoint = {
+            "sample": new Sample({
+                path: this.noise,
+                isLooping: true,
+                folder: "track01"
+            })
+        };
         this.noPoint.sample.requestTrack();
 
         if (this.statut == "mobile") {
@@ -78,7 +90,13 @@ class APP {
     initVocals() {
         setTimeout(() => {
             this.vocalPoint = this.preset[0].voice.map(e => {
-                return { "sample": new Sample(e.content, false, "track01") }
+                return {
+                    "sample": new Sample({
+                        path: e.content,
+                        isLooping: false,
+                        folder: "track01"
+                    })
+                }
             })
             this.vocalPoint.forEach(element => {
                 element.sample.requestTrack()
@@ -90,7 +108,13 @@ class APP {
         return new Promise(resolve => {
             setTimeout(() => {
                 const musicBox = presetPath.map(e => {
-                    return { "sample": new Sample(e, false, path) }
+                    return {
+                        "sample": new Sample({
+                            path: e,
+                            isLooping: false,
+                            folder: path
+                        })
+                    }
                 })
                 musicBox.forEach(element => {
                     element.sample.requestTrack()
@@ -110,8 +134,8 @@ class APP {
     // -------------------------- LOAD DATA --------------------------------
     loadData() {
         fetch('./DATA/data.JSON')
-        // fetch('./DATA/prelaz.JSON')
-        // fetch('./DATA/lemont.JSON')
+            // fetch('./DATA/prelaz.JSON')
+            // fetch('./DATA/lemont.JSON')
             .then(response => response.json())
             .then(data => {
                 const JSdata = data;

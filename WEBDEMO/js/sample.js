@@ -1,10 +1,10 @@
+const MAIN_AUDIO = new (AudioContext || webkitAudioContext || mozAudioContext)()
 
 class Sample {
-    constructor(path, isLooping, folder, orientation) {
-        this.audio = new (AudioContext || webkitAudioContext || mozAudioContext)(),
-            this.binauralFIRNode = null,
-            this.path = path;
-        this.audio.createDelay(10);
+    constructor({ path, isLooping, folder, orientation }) {
+        this.audio = MAIN_AUDIO
+        this.binauralFIRNode = null
+        this.path = path;
         this.hrtfs = hrtfs;
         this.sampleBuffer;
         this.sourceNode;
@@ -128,7 +128,9 @@ class Sample {
             draw()
         });
     }
-    async render(eFilter, eVolume) {
+    render(eFilter, eVolume) {
+    
+        if (this.audio.state === "suspended") return;
         // fxTarget fxTemp                  fxType  
         // console.log(this.rack.volume.audioNode.);
         // const filterRender = await this.softValue(eFilter, this.rack.filter.actual, this.rack.filter.audioNode.frequency);
@@ -136,10 +138,11 @@ class Sample {
 
         const node = this.rack.filter.audioNode.frequency
         node.value = eFilter;
+        console.log(eFilter);
         // console.log(eFilter);
-        node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
+        // node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
         // linearRampToValueAtTime
-        // node.linearRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 10);
+        // node.linearRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 1);
 
 
         // node.exponentialRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 1);
