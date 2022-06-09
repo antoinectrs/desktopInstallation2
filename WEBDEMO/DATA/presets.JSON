@@ -1,60 +1,8 @@
 {
-  "tracks": [
-    {
-      "volume": [0, 200, 600, 200, 0],
-      "mySpeed": [1, 0.8, 0.7, 0.6, 0.5],
-      "binaural": 90,
-      "title": "Fondation de l'Hermitage",
-      "verse": "first",
-      "voice": [
-        { "content": "lechemin", "position": "center" },
-        { "content": "quidescend", "position": "start" },
-        { "content": "enface", "position": "end" },
-        { "content": "quimonte", "position": "center" }
-      ],
-      "guitar": "1"
-    },
-    {
-      "volume": [600, 200, 0, 0, 0],
-      "mySpeed": [1, 0.8, 0.7, 0.6, 0.5],
-      "binaural": -90,
-      "title": "Fondation de l'Hermitage",
-      "verse": "seconde",
-      "voice": [
-        { "content": "lechemin", "position": "center" },
-        { "content": "quidescend", "position": "start" },
-        { "content": "enface", "position": "end" },
-        { "content": "quimonte", "position": "center" }
-      ],
-      "guitar": "none"
-    },
-    {
-      "volume": [0, 0, 0, 200, 600],
-      "mySpeed": [1, 0.8, 0.7, 0.6, 0.5],
-      "binaural": 0,
-      "title": "Fondation de l'Hermitage",
-      "verse": "third",
-      "voice": [
-        { "content": "lechemin", "position": "center" },
-        { "content": "quidescend", "position": "start" },
-        { "content": "enface", "position": "end" },
-        { "content": "quimonte", "position": "center" }
-      ],
-       "guitar": "none"
-    },
-    {
-      "volume": [0, 200, 600, 200, 0],
-      "mySpeed": [1, 0.8, 0.7, 0.6, 0.5],
-      "binaural": 0,
-      "title": "Fondation de l'Hermitage",
-      "verse": "fith",
-      "voice": [
-        { "content": "lechemin", "position": "center" },
-        { "content": "quidescend", "position": "start" },
-        { "content": "enface", "position": "end" },
-        { "content": "quimonte", "position": "center" }
-      ],
-       "guitar": "none"
-    }
+  "tracks": [ 
+    { "volume": [ 1500, 1500, 1000, 1000,  500,  500,  200,  200,    0,    0], "mySpeed": [0.85, 0.87, 0.89, 0.9, 0.93, 0.95, 0.97, 1, 1, 1], "binaural": 90, "title": "Fondationdel'Hermitage", "verse": "first", "voice": [ { "content": "lechemin", "position": "center" }, { "content": "quidescend", "position": "start" }, { "content": "enface", "position": "end" }, { "content": "quimonte", "position": "center" } ], "guitar": "1" },
+    { "volume": [    0,  500, 1500, 1500, 1500, 1500, 1000, 1000,  500,  500], "mySpeed": [0.85, 0.87, 0.89, 0.9, 0.93, 0.95, 0.97, 1, 1, 1], "binaural": -90, "title": "Fondationdel'Hermitage", "verse": "seconde", "voice": [ { "content": "lechemin", "position": "center" }, { "content": "quidescend", "position": "start" }, { "content": "enface", "position": "end" }, { "content": "quimonte", "position": "center" } ], "guitar": "none" },
+    { "volume": [    0,    0,  500,  500, 1500,  1500, 500,  500,  500,    0], "mySpeed": [0.85, 0.87, 0.89, 0.9, 0.93, 0.95, 0.97, 1, 1, 1], "binaural": 0, "title": "Fondationdel'Hermitage", "verse": "third", "voice": [ { "content": "lechemin", "position": "center" }, { "content": "quidescend", "position": "start" }, { "content": "enface", "position": "end" }, { "content": "quimonte", "position": "center" } ], "guitar": "none" },
+    { "volume": [    0,    0,    0,    0, 1500, 1500, 1500,  500,  500,    0], "mySpeed": [0.85, 0.87, 0.89, 0.9, 0.93, 0.95, 0.97, 1, 1, 1], "binaural": 0, "title": "Fondationdel'Hermitage", "verse": "fith", "voice": [ { "content": "lechemin", "position": "center" }, { "content": "quidescend", "position": "start" }, { "content": "enface", "position": "end" }, { "content": "quimonte", "position": "center" } ], "guitar": "none" }
   ]
 }

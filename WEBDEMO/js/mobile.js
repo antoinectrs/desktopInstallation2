@@ -20,8 +20,8 @@ class MOBILE {
         this.catchCloserPoint = null;
         this.autorisePlay = false;
         // this.myConsole();
-        this.spaceRadius = 50;
-        // this.spaceRadius = 500;
+        // this.spaceRadius = 50;
+        this.spaceRadius = 10;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -59,7 +59,6 @@ class MOBILE {
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
         this.catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
-        console.log(pos);
         if (this.catchCloserPoint != "tofar")
             this.inPathAction(this.catchCloserPoint)
         else
@@ -71,7 +70,6 @@ class MOBILE {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
         this.myMap.boxTest();
         this.listenMyCompass(pos);
-        console.log("initMaps");
         this.createMap = true;
         this.verseAnimation();
     }
@@ -139,13 +137,13 @@ class MOBILE {
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
             };
         })
-        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0, 1);
+        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0);
     }
     releasePoint() {
 
-        this.noPoint.sample.render(DEFAULT_FREQUENCY, 1);
+        this.noPoint.sample.render(DEFAULT_FREQUENCY);
         this.point.forEach(element => {
-            element.sample.render(0, 0)
+            element.sample.render(0)
         })
         // this.point[0].sample.render(0, 0)
     }
@@ -163,7 +161,7 @@ class MOBILE {
     }
     asignPreset(element, presetVolume, presetSpeed) {
         // this.myDebug("range", scale);
-        element.sample.render(presetVolume, 1);
+        element.sample.render(presetVolume);
         element.sample.initSpeed(presetSpeed)
     }
 
@@ -267,20 +265,19 @@ class MOBILE {
                 this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                 const myRot = mapRange(i, 0, 4, 0, 360);
                 // console.log(this.quickSample.aurorePoint[i]);
-             
+
                 if (this.catchCloserPoint != null) {
                     // console.log(this.catchCloserPoint);
                     if (this.catchCloserPoint.index <= 10) {
+                        console.log("inside aurore zone");
                         setTimeout(() => {
                             this.quickSample.aurorePoint[i].sample.playSample(0);
                             this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                            this.quickSample.aurorePoint[i].sample.render(DEFAULT_FREQUENCY, 1);
+                            this.quickSample.aurorePoint[i].sample.render(1,true);
                         }, 3000)
-                        console.log(this.catchCloserPoint.index);
-                        this.quickSample.guitarPoint[i].sample.playSample(0);
-                        this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
-                        console.log(object);
-                        this.quickSample.guitarPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
+                        // this.quickSample.guitarPoint[i].sample.playSample(0);
+                        // this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
+                        // this.quickSample.guitarPoint[i].sample.render(1, 1);
                     }
                 }
                 // this.vocalPoint[i].sample.playSample(0);
@@ -291,7 +288,6 @@ class MOBILE {
             } else {
                 this.partition.verse.moveElement.classList.remove("long-transition");
                 this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
-
                 this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
             }
             this.partition.verse.activeTop = !this.partition.verse.activeTop;

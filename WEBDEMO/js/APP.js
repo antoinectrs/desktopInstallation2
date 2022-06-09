@@ -1,4 +1,4 @@
-const DEFAULT_FREQUENCY = 1500
+const DEFAULT_FREQUENCY = 1;
 
 class APP {
     constructor(statut) {
@@ -10,7 +10,8 @@ class APP {
         this.myMap;
         this.point = [];
 
-        this.musicList = ["01", "02", "03", "04"];
+        // this.musicList = ["01", "02", "03", "04"];
+        this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
         this.noise = "wait";
         this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
         this.auroreList = ["continuer", "devant", "droite", "gauche", "suivre"];
@@ -43,7 +44,7 @@ class APP {
         this.point = musicList.map(function (music, preset) {
             return {
                 "sample": new Sample({
-                    folder: "track01",
+                    folder: "track02",
                     path: music,
                     isLooping: true,
                 })
@@ -121,7 +122,6 @@ class APP {
                 musicBox.forEach(element => {
                     element.sample.requestTrack()
                 });
-                // console.log(musicBox);
                 resolve(musicBox);
             }, 500);
         });

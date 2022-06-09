@@ -12,11 +12,11 @@ class Sample {
         this.folder = folder;
         this.isLooping = isLooping;
         this.rack = {
-            filter: {
-                varFreq: 40,
-                audioNode: null,
-                actual: 0,
-            },
+            // filter: {
+            //     varFreq: 0.1,
+            //     audioNode: null,
+            //     actual: 0,
+            // },
             volume: {
                 // varFreq:40,
                 audioNode: null,
@@ -67,36 +67,25 @@ class Sample {
         this.binauralFIRNode.HRTFDataset = this.hrtfs;
         this.sourceNode = this.audio.createBufferSource();
         this.initEffect(this.sourceNode);
-        //  this.rack.filter.audioNode = this.audio.createBiquadFilter();
         this.sourceNode.buffer = this.sampleBuffer;
         this.sourceNode.playbackRate.value = sampleRate;             //SAMPLE
         //  -----------------------------------------               //CONNECT
+
         this.sourceNode.connect(this.binauralFIRNode.input);        //BINAU
-        this.binauralFIRNode.connect(this.rack.filter.audioNode);
-        this.rack.filter.audioNode.connect(this.audio.destination);
+        this.binauralFIRNode.connect(this.rack.volume.audioNode);
+        this.rack.volume.audioNode.connect(this.audio.destination);
+
         // this.binauralFIRNode.connect(this.audio.destination);  //SOURCE  
         this.sourceNode.loop = this.isLooping;
         this.sourceNode.start(0, decay);
     }
     initEffect(bufferSrc) {
-        this.rack.filter.audioNode = this.initFilter();
         this.rack.volume.audioNode = this.initGain();
         this.initSpeed(this.rack.speed.actual);
     }
-    initFilter(audioNode) {
-        audioNode = this.audio.createBiquadFilter();
-        //BAND PASS
-        // filter.type = "bandpass";
-        // filter.frequency.value = 1000;
-        // filter.Q.value = 40;
-        // audioNode.type = "lowshelf";
-        audioNode.frequency.setValueAtTime(this.rack.filter.varFreq, this.audio.currentTime);
-        // audioNode.frequency.setValueAtTime(1000, this.audio.currentTime);
-        audioNode.gain.setValueAtTime(30, this.audio.currentTime);
-        return audioNode
-    }
     initGain(audioNode) {
         audioNode = this.audio.createGain();
+        audioNode.gain.setValueAtTime(0.2, this.audio.currentTime);
         return audioNode;
         // audioNode.gain.setValueAtTime(10, this.audio.currentTime);
     }
@@ -109,11 +98,11 @@ class Sample {
                 // console.log(fxTarget, fxTemp, fxType);
                 if (index >= 0.99) {
                     fxType.value = fxTarget
-                    this.rack.filter.actual = fxTarget;
+                    // this.rack.filter.actual = fxTarget;
                     resolve("the new value ");
                 } else {
                     index += this.thresholdLerp;
-                    this.rack.filter.actual = fxTemp;
+                    // this.rack.filter.actual = fxTemp;
                     // fxTemp =myLerp(fxTemp, fxTarget, index);
                     // fxType.value =fxTemp
                     // fxType.value = fxTemp
@@ -128,39 +117,20 @@ class Sample {
             draw()
         });
     }
-    render(eFilter, eVolume) {
+    render(eVolume,transition=true) {
 
         if (this.audio.state === "suspended") return;
-        // fxTarget fxTemp                  fxType  
         // console.log(this.rack.volume.audioNode.);
         // const filterRender = await this.softValue(eFilter, this.rack.filter.actual, this.rack.filter.audioNode.frequency);
         // http://alemangui.github.io/ramp-to-value
+        const node = this.rack.volume.audioNode;
+        eVolume = Math.max(0, Math.min(eVolume, 1))
+        if(transition)
+        node.gain.setValueAtTime(eVolume, this.audio.currentTime);
+        else
+        node.gain.linearRampToValueAtTime(eVolume, this.audio.currentTime + 5);
 
-        const node = this.rack.filter.audioNode.frequency
-
-        eFilter = Math.max(20, Math.min(eFilter, 1500))
-
-
-        // node.value = eFilter;
-
-
-
-        // console.log(eFilter);
         // node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
-        // linearRampToValueAtTime
-
-        console.log('render0', eFilter);
-        node.linearRampToValueAtTime(eFilter, this.audio.currentTime + 5);
-
-
-        // node.exponentialRampToValueAtTime(eFilter + 0.0001, this.audio.currentTime + 1);
-        // node.cancelScheduledValues(this.audio.currentTime)
-        // node.linearRampToValueAtTime(eFilter, this.audio.currentTime + 2);
-        // console.log(this.rack.filter.audioNode.frequency);
-
-        // const fvolumeRender = await this.softValue(node, this.rack.volume.actual, this.rack.volume.audioNode.gain);
-        // const render1 = await this.softValue(eVolume,this.rack.volume.actual);
-        // console.log('Message:', render);
     }
     requestTrack() {
         let req = new XMLHttpRequest();
