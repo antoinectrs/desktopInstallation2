@@ -21,7 +21,7 @@ class MOBILE {
         this.autorisePlay = false;
         // this.myConsole();
         this.spaceRadius = 50;
-        this.spaceRadius = 500;
+        // this.spaceRadius = 500;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -267,17 +267,19 @@ class MOBILE {
                 this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                 const myRot = mapRange(i, 0, 4, 0, 360);
                 // console.log(this.quickSample.aurorePoint[i]);
-                setTimeout(() => {
-                    this.quickSample.aurorePoint[i].sample.playSample(0);
-                    this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                    this.quickSample.aurorePoint[i].sample.render(DEFAULT_FREQUENCY, 1);
-                }, 3000)
+             
                 if (this.catchCloserPoint != null) {
-                    console.log(this.catchCloserPoint);
+                    // console.log(this.catchCloserPoint);
                     if (this.catchCloserPoint.index <= 10) {
+                        setTimeout(() => {
+                            this.quickSample.aurorePoint[i].sample.playSample(0);
+                            this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
+                            this.quickSample.aurorePoint[i].sample.render(DEFAULT_FREQUENCY, 1);
+                        }, 3000)
                         console.log(this.catchCloserPoint.index);
                         this.quickSample.guitarPoint[i].sample.playSample(0);
                         this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
+                        console.log(object);
                         this.quickSample.guitarPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
                     }
                 }

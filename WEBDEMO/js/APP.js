@@ -1,4 +1,4 @@
-const DEFAULT_FREQUENCY = 5000
+const DEFAULT_FREQUENCY = 1500
 
 class APP {
     constructor(statut) {

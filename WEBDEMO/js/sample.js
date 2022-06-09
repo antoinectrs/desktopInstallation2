@@ -138,7 +138,7 @@ class Sample {
 
         const node = this.rack.filter.audioNode.frequency
 
-        eFilter = Math.max(20, Math.min(eFilter, 350))
+        eFilter = Math.max(20, Math.min(eFilter, 1500))
 
 
         // node.value = eFilter;
@@ -149,7 +149,7 @@ class Sample {
         // node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
         // linearRampToValueAtTime
 
-        console.log('render5', eFilter);
+        console.log('render0', eFilter);
         node.linearRampToValueAtTime(eFilter, this.audio.currentTime + 5);
 
 
