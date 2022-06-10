@@ -13,6 +13,37 @@
     src: url(./font/self.otf);
 }
 
+@font-face {
+    font-family: Acumin;
+    src: url(./font/AcuminVariableConcept.otf);
+}
+
+.AcuminBold {
+    font-family: Acumin;
+    font-size: 50px;
+
+    /* font-variation-settings: 'wght' 400, 'wdth' 300; */
+    /* font-stretch: 100%; */
+}
+
+.dreamyType {
+    mix-blend-mode: overlay;
+    -webkit-backdrop-filter: blur(4px);
+    filter: blur(4px);
+}
+
+.boldType {
+    font-variation-settings: 'wght'600, 'slnt'0, 'wdth'100;
+    font-size: 12vw;
+    ;
+}
+
+.liteType {
+    font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
+    font-size: 12vw;
+    ;
+}
+
 .menu {
     height: fit-content;
     z-index: 900;
@@ -84,9 +115,9 @@ input[type=range][orient=vertical] {
 
 #emoji__compass {
     z-index: 10000;
-    width: 100%!important;
-    height: 100%!important;
-    background: radial-gradient(#005cff, white)!important;
+    width: 100% !important;
+    height: 100% !important;
+    background: white !important;
     position: fixed;
 }
 
@@ -261,6 +292,10 @@ input[type=range][orient=vertical] {
     transition: 0.9s;
 }
 
+.soft-transition {
+    transition: 3s;
+}
+
 /* canvas */
 
 #gameCanvas {
@@ -305,7 +340,7 @@ path.leaflet-interactive:last-child {
 }
 
 .leaflet-interactive {
-    cursor: none!important;
+    cursor: none !important;
     /* pointer-events: none!important; */
 }
 
@@ -324,9 +359,9 @@ path.leaflet-interactive:last-child {
 
 #emoji__compass {
     z-index: 10000;
-    width: 100%!important;
-    height: 100%!important;
-    background: radial-gradient(#005cff, white)!important;
+    width: 100% !important;
+    height: 100% !important;
+    background: white !important;
     position: fixed;
 }
 
@@ -363,41 +398,77 @@ path.leaflet-interactive:last-child {
     .description .content {
         align-self: center;
         position: absolute;
-        width: 100%;
+        display: flex;
+        width: 95%;
+        /* border: 1px solid;
+        border-radius: 110%; */
     }
+
     .description .content h1 {
-        font-size: 6vh;
+        /* font-size: 6vh;
         font-weight: initial;
         margin: 0;
-        text-align: center;
+        text-align: center; */
     }
-    .description .content img {
-        width: 90%;
+
+    #arrow {
+        width: 76%;
+        top: 26%;
         height: 160px;
         transition: 1s;
         transition-property: height;
+        margin: 0;
+        position: absolute;
     }
+
+    #ellipse {
+        width: 76%;
+        top: 28%;
+        height: 115px;
+        margin: 0;
+        position: absolute;
+        transition: 1s;
+        transition-property: height;
+    }
+
+    #shadow {
+        width: 100%;
+        top: 0;
+        height: 95vw;
+        margin: 0;
+        position: absolute;
+    }
+
     .hideMobile {
         display: none;
     }
+
     #background {
-        filter: blur(51px);
-        height: 100%;
-        width: 100%;
+        /* filter: blur(104px); */
+        height: 97%;
+        width: 98%;
+        top: 2%;
         position: absolute;
+        border-radius: 600px;
     }
+
     #rotateDiv {
+        transform: rotate(0deg);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
+        height: 95vw;
     }
+
     #back-inside {
         -webkit-backdrop-filter: blur(20px);
         width: 100%;
         height: 100%;
+        border-radius: 1100px;
     }
+
     #rotateDiv div {
         align-items: center;
         /* -webkit-backdrop-filter: blur(20px); */
@@ -405,6 +476,7 @@ path.leaflet-interactive:last-child {
         display: flex;
         flex-direction: column;
     }
+
     /* a{
         font-size: 3em;
         font-weight: normal;
@@ -412,10 +484,12 @@ path.leaflet-interactive:last-child {
     .description {
         pointer-events: none;
     }
+
     p {
         font-size: 12vw;
         font-weight: normal;
     }
+
     button[type=button] {
         z-index: 900000;
         height: 10%;
@@ -428,19 +502,23 @@ path.leaflet-interactive:last-child {
         border-radius: 100px;
         font-size: 4em;
     }
+
     .leaflet-pane {
         /* filter:  blur(48.1px) contrast(1.34);   */
         /* transition: 2s ease; */
     }
+
     .simu {
         /* display: none; */
     }
+
     #range, #alt {
         margin-right: 0;
         width: 50%;
         display: inline-block;
         position: initial;
     }
+
     .console {
         border: 1px solid;
         bottom: 0%;
@@ -454,18 +532,22 @@ path.leaflet-interactive:last-child {
         /* -webkit-backdrop-filter: blur(20px); */
         position: fixed;
     }
+
     path.leaflet-interactive {
         /* stroke: #e91707 !important; */
         /* stroke-width: 77%;  */
         /* stroke-width: 17%; */
     }
+
     .long-transition {
         transition-property: transform;
         transition: 3.5s;
         transition-timing-function: linear;
     }
+
     .description {
-        display: none;
+        transform: rotate(0deg);
+        display: flex;
         position: absolute;
         height: 100%;
         z-index: 900000;
@@ -477,10 +559,13 @@ path.leaflet-interactive:last-child {
         font-family: selfMo;
         /* opacity: 0.1; */
     }
-    .parent{
+
+    .parent {
         position: fixed;
     }
-    .leaflet-tile{
-         filter: blur(25px); /*image carte */
+
+    .leaflet-tile {
+        filter: blur(25px);
+        /*image carte */
     }
 }

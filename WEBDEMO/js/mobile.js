@@ -44,7 +44,6 @@ class MOBILE {
     }
     checkRoad() {
         this.autorisePlay = true;
-        this.loading();
     }
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
@@ -54,6 +53,7 @@ class MOBILE {
     manager(pos) {
         if (this.createMap == false) {
             this.initMap(pos);
+            this.loading();
         }
         this.getAltittude(pos);
         this.centerMap(pos);
@@ -84,7 +84,7 @@ class MOBILE {
         this.setVersePartition(iScale);
 
         myRotate(this.partition.title.rotateDiv, 0);
-        searchHtml(".description .content img").style.height = "0px";
+        // searchHtml("#arrow").style.height = "0px";
         // this.myMove();
 
         // this.listenMyCompass(catchCloserPoint.hitBoxNear);
@@ -108,7 +108,7 @@ class MOBILE {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         }
-        this.myMap.map.flyTo(convertPos, 18, {
+        this.myMap.map.flyTo(convertPos, 20, {
             animate: true,
             duration: 1.5
         });
@@ -191,9 +191,6 @@ class MOBILE {
         const currentPosition = { lat: compassP.latitude, lng: compassP.longitude };
         return this.myCompass.myCompass.getBearingToDestination(currentPosition, { lat: hitBoxNear.coords.latitude, lng: hitBoxNear.coords.longitude });
     }
-    rotateTitle(hitBoxNear) {
-        //CHECK THE ORIENTATION POINT
-    }
 
     // -------------------------- DOM --------------------------------
     myConsole() {
@@ -212,6 +209,7 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
+        console.log(changeDom);
         this.partition.title.element.innerHTML = changeDom;
     };
     checkContentText(e, index) {
@@ -275,9 +273,9 @@ class MOBILE {
                             this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
                             this.quickSample.aurorePoint[i].sample.render(1,true);
                         }, 3000)
-                        // this.quickSample.guitarPoint[i].sample.playSample(0);
-                        // this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
-                        // this.quickSample.guitarPoint[i].sample.render(1, 1);
+                        this.quickSample.guitarPoint[i].sample.playSample(0);
+                        this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
+                        this.quickSample.guitarPoint[i].sample.render(1, true);
                     }
                 }
                 // this.vocalPoint[i].sample.playSample(0);
@@ -301,7 +299,10 @@ class MOBILE {
     }
     loading() {
         searchHtml("#playTrack").style.display = "none";
-        searchHtml(".description").style.display = "flex";
+        // searchHtml(".description").style.display = "flex";
+        setTimeout(() => {
+            this.partition.title.rotateDiv.classList.remove("soft-transition");
+        }, 3000)
     }
 
 }
