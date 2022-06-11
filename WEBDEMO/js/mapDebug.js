@@ -34,7 +34,10 @@ class MapDebug {
         this.variation = this.pointRoadBox;
         this.setColorVariation(this.variation);
         this.drawHitBox(this.pointRoadBox);
-        this.hotlineLayer = this.createHotline(this.variation);
+        this.hotlineLayer = [
+            this.createHotline(this.variation, { intensity: 0, weightValue: 565, glow: 200 }),
+            this.createHotline(this.variation, { intensity: 10, weightValue: 365, glow: 0 })
+        ];
     }
     drawHitBox(array) {
         var polyline = L.polyline(array);
@@ -86,18 +89,19 @@ class MapDebug {
         }).addTo(this.map);
         this.control();
     }
-    createHotline(array){
+    createHotline(array, option) {
+
         const hotlineLayer = L.hotline(array, {
             min: 0,
             max: 1,
             palette: {
-                0.0: '#008800',
-                0.5: '#ffff00',
-                1.0: '#ff0000'
+                0.0: `hsl(151,33%,${29 - option.intensity}%)`,
+                0.5: `hsl(237,41%,${72 - option.intensity}%)`,
+                1.0: `hsl(199,100%,${90 - option.intensity}%)`,
             },
-            weight: 565,
+            weight: option.weightValue,
             outlineColor: '#FFFFFF',
-            outlineWidth: 80
+            outlineWidth: option.glow,
         }).addTo(this.map);
         return hotlineLayer
     }

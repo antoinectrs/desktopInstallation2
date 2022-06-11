@@ -305,7 +305,9 @@ input[type=range][orient=vertical] {
 }
 
 /* MAP */
-
+.leaflet-map-pane svg {
+    z-index: 0!important;
+}
 .leaflet-layer {
     /* opacity: 0.2 !important;     */
     /* display: none; */
@@ -345,7 +347,7 @@ path.leaflet-interactive:last-child {
 }
 
 .leaflet-control-container {
-    /* display: none; */
+    display: none;
 }
 
 #conteneur {
@@ -567,5 +569,8 @@ path.leaflet-interactive:last-child {
     .leaflet-tile {
         filter: blur(25px);
         /*image carte */
+    }
+    .leaflet-map-pane canvas {
+        filter: blur(22.2px) contrast(1.3);
     }
 }
