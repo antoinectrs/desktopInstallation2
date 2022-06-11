@@ -34,10 +34,32 @@ class MapDebug {
         this.variation = this.pointRoadBox;
         this.setColorVariation(this.variation);
         this.drawHitBox(this.pointRoadBox);
-        this.hotlineLayer = [
-            this.createHotline(this.variation, { intensity: 0, weightValue: 565, glow: 200 }),
-            this.createHotline(this.variation, { intensity: 10, weightValue: 365, glow: 0 })
-        ];
+        // for (let index = 0; index <4; index++) {
+        //   const data=  mapRange(index,20,0,0,900);
+        //   const color=  mapRange(index,0,20,40,100);
+        //   console.log(color);
+        //     this.createHotline(this.variation, { intensity: color, weightValue:data, glow: 0 });
+        // }
+        // this.variation.forEach(e=>{
+            // L.polyline(this.variation);
+            // L.polyline(this.variation, {color: 'red'}).addTo(this.map);
+            // L.circle([e[0], e[1]], {radius: 20}).addTo(this.map);
+        // })
+        // this.hotlineLayer = [
+        //     this.createHotline(this.variation, { intensity: 0, weightValue: 565, glow: 200 }),
+        //     this.createHotline(this.variation, { intensity: 10, weightValue: 365, glow: 0 })
+        // ].addTo(this.map);
+        var heatmap = L.heatLayer( this.variation , {
+            radius: 30,
+            max: 1.0,
+            blur: 15,
+            gradient: {
+              0.0: 'blue',
+              0.5: 'yellow',
+              1.0: 'red'
+            },
+            minOpacity: 1
+          }).addTo(this.map);
     }
     drawHitBox(array) {
         var polyline = L.polyline(array);
@@ -95,14 +117,14 @@ class MapDebug {
             min: 0,
             max: 1,
             palette: {
-                0.0: `hsl(151,33%,${29 - option.intensity}%)`,
-                0.5: `hsl(237,41%,${72 - option.intensity}%)`,
-                1.0: `hsl(199,100%,${90 - option.intensity}%)`,
+                0.0: `hsl(151,33%,${ option.intensity}%)`,
+                0.5: `hsl(237,41%,${ option.intensity}%)`,
+                1.0: `hsl(199,100%,${ option.intensity}%)`,
             },
             weight: option.weightValue,
             outlineColor: '#FFFFFF',
             outlineWidth: option.glow,
-        }).addTo(this.map);
+        })
         return hotlineLayer
     }
     pattern() {
