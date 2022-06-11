@@ -10,15 +10,16 @@ class MapDebug {
         }
         this.pointPath = [];
         this.pointRoadBox = [];
+        this.variation;
         this.hitBox = [];
         this.route;
         this.inRoute = false;
         this.idRoute = null;
         this.change = false;
         this.distance = 0.02;
+        this.hotlineLayer;
         // 
     }
-
     convertToPointPath() {
         this.myData.point.forEach(element => {
             this.pointPath.push(element.position);
@@ -30,43 +31,37 @@ class MapDebug {
             const content = [element.lat, element.lng]
             this.pointRoadBox.push(content);
         });
-        // console.log(e.route);
+        this.variation = this.pointRoadBox;
+        this.setColorVariation(this.variation);
         this.drawHitBox(this.pointRoadBox)
     }
     drawHitBox(array) {
         var polyline = L.polyline(array);
-        const data = polyline.encodePath()
-        let route = new L.Polyline(array)
-
-        // var test = L.polyline([
-        //     [46.53646, 6.58841],
-        //     [46.5366, 6.58896],
-        //     [46.53663, 6.58908],
-        //     [46.53663, 6.58908],
-        //     [46.53661, 6.5891],
-        //     [46.5366, 6.58912],
-        // ]).addTo(this.map);
-
-        // console.log(test);
-
-
-        // setTimeout(e => {
-        // var decorator = L.polylineDecorator(test, {
-        //     patterns: [
-        //         // defines a pattern of 10px-wide dashes, repeated every 20px on the line
-        //         { offset: 0, repeat: 20, symbol: L.Symbol.dash({ pixelSize: 10 }) }
-        //     ]
-        // }).addTo(this.map);
-        // }, 10000)
-
-
-        // var distance = this.distance; // Distance in km
-        // var boxes = L.RouteBoxer.box(route, this.distance / 10);
-        var boxes = L.RouteBoxer.box(route, this.distance /10);
+        const data = polyline.encodePath();
+        let route = new L.Polyline(array);
+        var boxes = L.RouteBoxer.box(route, this.distance / 10);
         boxes.forEach(element => {
             this.hitBox.push(L.rectangle(element, { color: "#ff7800", opacity: 0, weight: 1 }).addTo(this.map));
         });
-        // this.listenerArray();
+        var hotlineLayer = L.hotline(this.variation, {
+            min: 0,
+            max: 1,
+            palette: {
+                0.0: '#008800',
+                0.5: '#ffff00',
+                1.0: '#ff0000'
+            },
+            weight: 105,
+            outlineColor: '#FFFFFF',
+            outlineWidth: 80
+        }).addTo(this.map);
+    }
+    setColorVariation(array) {
+        array.map((e, index) => {
+            let value = mapRange(index, 0, array.length, 0, 1);
+            e.push(value);
+        })
+
     }
     init(lat = this.origine.lat, lng = this.origine.lng, zoom = 20) {
         const token = "pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNrMXVxemtrNzBjbTczaXBhb2I3amJ5YncifQ.EqRwzHSuwtW2sp615mvCAQ";
@@ -76,12 +71,14 @@ class MapDebug {
             rotateControl: {
                 closeOnZeroBearing: false
             },
+            // renderer: L.canvas(),
             bearing: 0,
         }).setView([lat, this.origine.lng], zoom);
-        var gl = L.mapboxGL({
-            accessToken: token,
-            style: 'mapbox://styles/antoine98/cl33nrlno000g14s9v1c2z1ew'
-        }).addTo(this.map);
+        // var gl = L.mapboxGL({
+        //     accessToken: token,
+        //     style: 'mapbox://styles/antoine98/cl33nrlno000g14s9v1c2z1ew'
+        // }).addTo(this.map);
+        // this.addHotline();
         // L.Rotate.debug(this.map);
         this.convertToPointPath();
         this.layer();
@@ -100,14 +97,14 @@ class MapDebug {
         }).addTo(this.map);
         this.control();
     }
-    pattern(){
+    pattern() {
         var poly1 = [
             [46.5, 6],
             [46.6, 6],
-            [46.6,6.7],
+            [46.6, 6.7],
             [46.5, 6.7]
         ];
-        L.polygon(poly1, {stroke:"false",fill:'url(./img/checkerboad.png)'}).addTo(this.map);
+        L.polygon(poly1, { stroke: "false", fill: 'url(./img/checkerboad.png)' }).addTo(this.map);
     }
     control() {
         this.route = L.Routing.control({

@@ -345,7 +345,7 @@ path.leaflet-interactive:last-child {
 }
 
 .leaflet-control-container {
-    display: none;
+    /* display: none; */
 }
 
 #conteneur {
