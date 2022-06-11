@@ -33,7 +33,8 @@ class MapDebug {
         });
         this.variation = this.pointRoadBox;
         this.setColorVariation(this.variation);
-        this.drawHitBox(this.pointRoadBox)
+        this.drawHitBox(this.pointRoadBox);
+        this.hotlineLayer = this.createHotline(this.variation);
     }
     drawHitBox(array) {
         var polyline = L.polyline(array);
@@ -43,18 +44,6 @@ class MapDebug {
         boxes.forEach(element => {
             this.hitBox.push(L.rectangle(element, { color: "#ff7800", opacity: 0, weight: 1 }).addTo(this.map));
         });
-        var hotlineLayer = L.hotline(this.variation, {
-            min: 0,
-            max: 1,
-            palette: {
-                0.0: '#008800',
-                0.5: '#ffff00',
-                1.0: '#ff0000'
-            },
-            weight: 105,
-            outlineColor: '#FFFFFF',
-            outlineWidth: 80
-        }).addTo(this.map);
     }
     setColorVariation(array) {
         array.map((e, index) => {
@@ -97,6 +86,21 @@ class MapDebug {
         }).addTo(this.map);
         this.control();
     }
+    createHotline(array){
+        const hotlineLayer = L.hotline(array, {
+            min: 0,
+            max: 1,
+            palette: {
+                0.0: '#008800',
+                0.5: '#ffff00',
+                1.0: '#ff0000'
+            },
+            weight: 565,
+            outlineColor: '#FFFFFF',
+            outlineWidth: 80
+        }).addTo(this.map);
+        return hotlineLayer
+    }
     pattern() {
         var poly1 = [
             [46.5, 6],
@@ -118,7 +122,7 @@ class MapDebug {
             fitSelectedRoutes: false, //desactivate zoom routing
         }).addTo(this.map);
         this.route.setWaypoints(this.pointPath);
-        this.routeListener()
+        this.routeListener();
         // route.addEventListener('routeselected', (buffer) => {
         //     this.convertToPointRoadBox(buffer)
         // });
@@ -157,6 +161,5 @@ class MapDebug {
     //     });
     // });
     // }
-
 }
 
