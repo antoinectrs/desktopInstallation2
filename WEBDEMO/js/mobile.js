@@ -168,8 +168,18 @@ class MOBILE {
     listenMyCompass(hitBoxNear) {
         const search = () => {
             setTimeout(() => {
+                const deg = this.myCompass.compassLoad();
                 if (this.myCompass.compassLoad() != undefined) {
-                    this.myMap.changeOrientation(this.myCompass.compassLoad());
+                    this.myMap.changeOrientation(deg);
+                
+                   if(   this.noPoint.sample.rack.volume.audioNode.gain.value>0.1)
+                   this.noPoint.sample.initOrientation(deg)
+                    // this.point.forEach(element => {
+                    //     const node = element.sample.rack.volume.audioNode.gain.value;
+                    //     if(node>0.1)
+                    //     element.sample.initOrientation(deg)
+                    //         console.log(deg);
+                    // })
                     // console.log(this.inPath);
                     if (this.inPath == false) this.outPathOrientation(hitBoxNear);
                     // else
@@ -177,6 +187,7 @@ class MOBILE {
                 };
                 requestAnimationFrame(search)
             }, 1000 / 25);
+            // }, 1000 );
         }
         search();
     }
