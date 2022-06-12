@@ -536,7 +536,7 @@ path.leaflet-interactive:last-child {
     }
 
     path.leaflet-interactive {
-        /* stroke: #e91707 !important; */
+        stroke: #ffffff00 !important;
         /* stroke-width: 77%;  */
         /* stroke-width: 17%; */
     }
@@ -572,5 +572,9 @@ path.leaflet-interactive:last-child {
     }
     .leaflet-map-pane canvas {
         /* filter: blur(22.2px) contrast(1.3); */
+    }
+    canvas.leaflet-heatmap-layer{
+        background: linear-gradient(162deg, rgba(130,135,204,0) 0%, rgb(1 11 143) 46%, rgba(130,135,204,0) 100%)!important;
+        /* background: radial-gradient(circle, rgb(66 76 207) 0%, rgb(65 75 207) 72%, rgba(130,135,204,0) 100%)!important; */
     }
 }

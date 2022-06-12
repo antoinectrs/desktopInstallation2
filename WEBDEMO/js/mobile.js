@@ -108,7 +108,7 @@ class MOBILE {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         }
-        this.myMap.map.flyTo(convertPos, 20, {
+        this.myMap.map.flyTo(convertPos, 24, {
             animate: true,
             duration: 1.5
         });

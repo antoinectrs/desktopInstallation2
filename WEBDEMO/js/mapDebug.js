@@ -41,25 +41,15 @@ class MapDebug {
         //     this.createHotline(this.variation, { intensity: color, weightValue:data, glow: 0 });
         // }
         // this.variation.forEach(e=>{
-            // L.polyline(this.variation);
-            // L.polyline(this.variation, {color: 'red'}).addTo(this.map);
-            // L.circle([e[0], e[1]], {radius: 20}).addTo(this.map);
+        // L.polyline(this.variation);
+        // L.polyline(this.variation, {color: 'red'}).addTo(this.map);
+        // L.circle([e[0], e[1]], {radius: 20}).addTo(this.map);
         // })
         // this.hotlineLayer = [
         //     this.createHotline(this.variation, { intensity: 0, weightValue: 565, glow: 200 }),
         //     this.createHotline(this.variation, { intensity: 10, weightValue: 365, glow: 0 })
         // ].addTo(this.map);
-        var heatmap = L.heatLayer( this.variation , {
-            radius: 30,
-            max: 1.0,
-            blur: 15,
-            gradient: {
-              0.0: 'blue',
-              0.5: 'yellow',
-              1.0: 'red'
-            },
-            minOpacity: 1
-          }).addTo(this.map);
+
     }
     drawHitBox(array) {
         var polyline = L.polyline(array);
@@ -67,17 +57,47 @@ class MapDebug {
         let route = new L.Polyline(array);
         var boxes = L.RouteBoxer.box(route, this.distance / 10);
         boxes.forEach(element => {
-            this.hitBox.push(L.rectangle(element, { color: "#ff7800", opacity: 0, weight: 1 }).addTo(this.map));
+            this.hitBox.push(L.rectangle(element, { stroke:false, fillOpacity: 0.1, weight: 1 }).addTo(this.map));
         });
+        // let copyBox = this.hitBox;
+        // let heightsPoint= this.hitBox.map(e => {
+        //     const centerBox = e.getBounds().getCenter();
+        //     return [centerBox.lat, centerBox.lng];
+        // })
+       
+        //  this.setColorVariation(heightsPoint);
+       
+        
+         var gradientLine = L.RouteBoxer.box(route, this.distance / 100);
+         let heightsPoint =[];
+         gradientLine.forEach(element => {
+            heightsPoint.push(L.rectangle(element, { color: "#ff7800", opacity: 0, weight: 1 }));
+        });
+       const coordsLine=  heightsPoint.map(e => {
+            const centerBox = e.getBounds().getCenter();
+            console.log(centerBox);
+            return [centerBox.lat, centerBox.lng, 0.9];
+        })
+        console.log(coordsLine);
+         var heatmap = L.heatLayer(coordsLine, {
+            radius: 100,
+            max: 2.0,
+            blur: 30,
+            gradient: {
+              0.0: 'blue',
+              1.0: 'white'
+            },
+            minOpacity: 0.7
+          }).addTo(this.map);
     }
     setColorVariation(array) {
         array.map((e, index) => {
-            let value = mapRange(index, 0, array.length, 0, 1);
+            let value = mapRange(index, 0, array.length, 0, 0.4);
             e.push(value);
         })
 
     }
-    init(lat = this.origine.lat, lng = this.origine.lng, zoom = 20) {
+    init(lat = this.origine.lat, lng = this.origine.lng, zoom = 23) {
         const token = "pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNrMXVxemtrNzBjbTczaXBhb2I3amJ5YncifQ.EqRwzHSuwtW2sp615mvCAQ";
         this.map = L.map('map', {
             rotate: true,
@@ -102,8 +122,8 @@ class MapDebug {
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: `Map data &copy; <a href="https://www.openstreetmap.org/copyright">
             OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
-            maxZoom: 20,
-            maxNativeZoom: 20,
+            maxZoom: 23,
+            maxNativeZoom: 23,
             id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
@@ -112,14 +132,13 @@ class MapDebug {
         this.control();
     }
     createHotline(array, option) {
-
         const hotlineLayer = L.hotline(array, {
             min: 0,
             max: 1,
             palette: {
-                0.0: `hsl(151,33%,${ option.intensity}%)`,
-                0.5: `hsl(237,41%,${ option.intensity}%)`,
-                1.0: `hsl(199,100%,${ option.intensity}%)`,
+                0.0: `hsl(151,33%,${option.intensity}%)`,
+                0.5: `hsl(237,41%,${option.intensity}%)`,
+                1.0: `hsl(199,100%,${option.intensity}%)`,
             },
             weight: option.weightValue,
             outlineColor: '#FFFFFF',
