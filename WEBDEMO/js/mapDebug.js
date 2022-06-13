@@ -75,7 +75,7 @@ class MapDebug {
         });
        const coordsLine=  heightsPoint.map(e => {
             const centerBox = e.getBounds().getCenter();
-            console.log(centerBox);
+            // console.log(centerBox);
             return [centerBox.lat, centerBox.lng, 0.9];
         })
         console.log(coordsLine);

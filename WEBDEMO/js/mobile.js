@@ -171,9 +171,9 @@ class MOBILE {
                 const deg = this.myCompass.compassLoad();
                 if (this.myCompass.compassLoad() != undefined) {
                     this.myMap.changeOrientation(deg);
-                
-                   if(   this.noPoint.sample.rack.volume.audioNode.gain.value>0.1)
-                   this.noPoint.sample.initOrientation(deg)
+                    if  (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
+                    this.noPoint.sample.setOrientation(this.convert360Value(deg+200));
+                        // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
                     // this.point.forEach(element => {
                     //     const node = element.sample.rack.volume.audioNode.gain.value;
                     //     if(node>0.1)
@@ -191,11 +191,16 @@ class MOBILE {
         }
         search();
     }
+    convert360Value(value){
+        if(value>360)
+        return value-360;
+        else return value; 
+    }
     // inPathOrientation() { myRotate(this.partition.title.rotateDiv, 0) } // rest to 0 DOM
     outPathOrientation(hitBoxNear) {
         const targetAngle = this.rotValue(hitBoxNear);
         myRotate(this.partition.title.rotateDiv, targetAngle); //DOM
-        this.noPoint.sample.setOrientation(targetAngle)
+        // this.noPoint.sample.setOrientation(targetAngle)
     }
     rotValue(hitBoxNear) {
         const compassP = this.myCompass.myCompass.position.coords
@@ -282,7 +287,7 @@ class MOBILE {
                         setTimeout(() => {
                             this.quickSample.aurorePoint[i].sample.playSample(0);
                             this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                            this.quickSample.aurorePoint[i].sample.render(1,true);
+                            this.quickSample.aurorePoint[i].sample.render(1, true);
                         }, 3000)
                         this.quickSample.guitarPoint[i].sample.playSample(0);
                         this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
