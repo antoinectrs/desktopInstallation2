@@ -570,6 +570,9 @@ path.leaflet-interactive:last-child {
         filter: blur(25px);
         /*image carte */
     }
+    .centerText{
+        text-align: center;
+    }
     .leaflet-map-pane canvas {
         /* filter: blur(22.2px) contrast(1.3); */
     }

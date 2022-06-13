@@ -162,6 +162,7 @@ class MOBILE {
     }
     asignPreset(element, presetVolume, presetSpeed) {
         // this.myDebug("range", scale);
+        console.log(presetVolume);
         element.sample.render(presetVolume);
         element.sample.initSpeed(presetSpeed)
     }
@@ -277,14 +278,15 @@ class MOBILE {
         if (this.autorisePlay) {
             const i = this.wordAnimation();
             if (this.partition.verse.activeTop) {
-                this.partition.verse.moveElement.classList.add("long-transition");
-                this.partition.verse.moveElement.style.transform = "translateY(110vh)";
-                const myRot = mapRange(i, 0, 4, 0, 360);
+              
                 // console.log(this.quickSample.aurorePoint[i]);
 
                 if (this.catchCloserPoint != null) {
                     // console.log(this.catchCloserPoint);
                     if (this.catchCloserPoint.index <= 10) {
+                        this.partition.verse.moveElement.classList.add("long-transition");
+                        this.partition.verse.moveElement.style.transform = "translateY(110vh)";
+                        const myRot = mapRange(i, 0, 4, 0, 360);
                         console.log("inside aurore zone");
                         setTimeout(() => {
                             this.quickSample.aurorePoint[i].sample.playSample(0);
