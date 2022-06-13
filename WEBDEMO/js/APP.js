@@ -12,8 +12,8 @@ class APP {
 
         // this.musicList = ["01", "02", "03", "04"];
         this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
-        // this.noise = "wait";
-        this.noise = "breakbeat";
+        this.noise = "waitLoop";
+        // this.noise = "breakbeat";
         this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
         this.auroreList = ["continuer", "devant", "droite", "gauche", "suivre"];
         this.guitarList = ["01", "02", "03"];

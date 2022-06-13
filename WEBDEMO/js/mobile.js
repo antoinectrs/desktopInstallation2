@@ -21,7 +21,7 @@ class MOBILE {
         this.autorisePlay = false;
         // this.myConsole();
         // this.spaceRadius = 50;
-        this.spaceRadius = 10;
+        this.spaceRadius = 40;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -108,7 +108,8 @@ class MOBILE {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         }
-        this.myMap.map.flyTo(convertPos, 24, {
+        this.myMap.map.flyTo(convertPos, 21, {
+        // this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
             duration: 1.5
         });
@@ -173,6 +174,7 @@ class MOBILE {
                     this.myMap.changeOrientation(deg);
                     if  (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
                     this.noPoint.sample.setOrientation(this.convert360Value(deg+200));
+                    
                         // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
                     // this.point.forEach(element => {
                     //     const node = element.sample.rack.volume.audioNode.gain.value;
