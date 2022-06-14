@@ -11,7 +11,9 @@ class APP {
         this.point = [];
 
         // this.musicList = ["01", "02", "03", "04"];
-        this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
+        this.musicList = ["00_lead", "01_low", "02_bass", "03_clap","04_galo","05_high","06_machine","07_japan","08_bass"];
+        // this.musicList = ["00_lead", "01_low", "02_bass", "03_clap"];
+        // this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
         this.noise = "waitLoop";
         // this.noise = "breakbeat";
         this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
@@ -45,7 +47,7 @@ class APP {
         this.point = musicList.map(function (music, preset) {
             return {
                 "sample": new Sample({
-                    folder: "track02",
+                    folder: "track03",
                     path: music,
                     isLooping: true,
                 })

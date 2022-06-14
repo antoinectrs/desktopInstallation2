@@ -57,7 +57,8 @@ class MapDebug {
         let route = new L.Polyline(array);
         var boxes = L.RouteBoxer.box(route, this.distance / 10);
         boxes.forEach(element => {
-            this.hitBox.push(L.rectangle(element, { stroke: false, fillOpacity: 0.1, weight: 1 }).addTo(this.map));
+            this.hitBox.push(L.rectangle(element, { stroke: false, fillOpacity: 0, weight: 1 }).addTo(this.map));
+            // this.hitBox.push(L.rectangle(element, {  fillOpacity: 0.1, weight: 1 }).addTo(this.map));
         });
         // let copyBox = this.hitBox;
         // let heightsPoint= this.hitBox.map(e => {
@@ -89,7 +90,7 @@ class MapDebug {
         //     },
         //     minOpacity: 0.7
         //   }).addTo(this.map);
-        var imageUrl = './img/gradient.png',
+        var imageUrl = './img/path.png',
         imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
     L.imageOverlay(imageUrl, imageBounds, { className: "hello" }).addTo(this.map);
 
@@ -145,6 +146,7 @@ class MapDebug {
             maxNativeZoom: 23,
             id: 'mapbox/streets-v11',
             tileSize: 512,
+            fillOpacity: 0,
             zoomOffset: -1,
             accessToken: 'pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNsMGprazdncDAxYzYzZWxhbzRlcWk2NDkifQ.JM4Xgke091LLntRvk9UbrA'
         }).addTo(this.map);
