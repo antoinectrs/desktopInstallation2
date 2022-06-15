@@ -3,7 +3,7 @@
 class MOBILE {
     constructor(myMap, point, noPoint) {
         this.myMap = myMap;
-        // this.mapDom = searchHtml("#map .leaflet-pane");
+        this.mapDom = searchHtml("#map");
         // hideBlur(this.mapDom, "add");
         this.targetMap = null;
 
@@ -48,8 +48,6 @@ class MOBILE {
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
-            this.autorisePlay = false;
-            setTimeout(() => { this.autorisePlay = true }, 1000);
         })
     }
     manager(pos) {
@@ -57,7 +55,7 @@ class MOBILE {
             this.initMap(pos);
             this.loading();
         }
-        this.getAltittude(pos);
+        // this.getAltittude(pos);
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
         this.catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
@@ -81,7 +79,6 @@ class MOBILE {
         myDebug("path", this.inPath);
         myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
-
         const iScale = this.scale(catchCloserPoint.index, this.preset.length); //map for preset
         this.setTitlePartition(iScale);
         this.setVersePartition(iScale);
@@ -327,9 +324,11 @@ class MOBILE {
     }
     loading() {
         searchHtml("#playTrack").style.display = "none";
+       console.log("loading");
         // searchHtml(".description").style.display = "flex";
         setTimeout(() => {
             this.partition.title.rotateDiv.classList.remove("soft-transition");
+            this.mapDom.classList.remove("filterActive");
         }, 3000)
     }
 

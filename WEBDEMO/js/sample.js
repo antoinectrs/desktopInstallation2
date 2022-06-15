@@ -92,8 +92,8 @@ class Sample {
     initSpeed(speed) {
         // this.renderStatut = true;
         // if(renderStatut==false){
-            // this.sourceNode.playbackRate.value = speed;
-            this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + 15);
+        // this.sourceNode.playbackRate.value = speed;
+        this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + 15);
         // }
     }
     softValue(fxTarget, fxTemp, fxType, index = 0) {
@@ -128,32 +128,34 @@ class Sample {
         // http://alemangui.github.io/ramp-to-value
         const node = this.rack.volume.audioNode;
         // eVolume = Math.max(1, Math.min(eVolume, 0.1))
-        if (transition){
+        if (transition) {
+            if (this.renderStatut) return
             console.log("transition");
             // node.gain.linearRampToValueAtTime(eVolume, this.audio.currentTime + 15);
 
             // console.log(eVolume, node.gain.value);
             // node.gain.setValueAtTime(node.gain.value, this.audio.currentTime); 
             // node.gain.setValueAtTime(node.gain.value, this.audio.currentTime); 
-
-            node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime); 
-            node.gain.exponentialRampToValueAtTime(eVolume+0.001, this.audio.currentTime + 10);
+            node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
+            node.gain.exponentialRampToValueAtTime(eVolume + 0.001, this.audio.currentTime + 10);
+            this.renderStatut = true;
+            setTimeout(() => {this.renderStatut=false;console.log("endFade"); }, 10000)
         }
         else
             node.gain.setValueAtTime(eVolume, this.audio.currentTime);
 
         // node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
     }
-    fadeIn(){
+    fadeIn() {
         console.log("in", this.rack.volume.audioNode.gain.value);
         const node = this.rack.volume.audioNode;
-        node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime); 
+        node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
         node.gain.exponentialRampToValueAtTime(1, this.audio.currentTime + 10);
     }
-    fadeOut(){
+    fadeOut() {
         // console.log("out",  this.audio);
         const node = this.rack.volume.audioNode;
-        node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime); 
+        node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
         node.gain.exponentialRampToValueAtTime(0.001, this.audio.currentTime + 10);
     }
     requestTrack() {
