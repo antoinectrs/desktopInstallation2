@@ -49,7 +49,7 @@ class MOBILE {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
             this.autorisePlay = false;
-            setTimeout(() => { this.autorisePlay = true }, 2000);
+            setTimeout(() => { this.autorisePlay = true }, 1000);
         })
     }
     manager(pos) {
@@ -137,23 +137,19 @@ class MOBILE {
     }
     renderPoint(boxIndex) {
         this.point.forEach((element, index) => {
-            // if (element.sample.audio.state != "suspended") {
-            // const find = this.findPreset(index, boxIndex);
-            // this.asignPreset(element, find.presetVolume, find.presetSpeed);
-            // };
+            if (element.sample.audio.state != "suspended") {
+                const find = this.findPreset(index, boxIndex);
+                this.asignPreset(element, find.presetVolume, find.presetSpeed);
+            };
         })
-        // const find = this.findPreset(0, boxIndex);
-        // this.asignPreset( this.point[0], find.presetVolume, find.presetSpeed);
-        // if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0);
-        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.fadeOut();
+        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0);
     }
     releasePoint() {
         console.log("outside");
-        // this.noPoint.sample.render(0.9);
-        this.noPoint.sample.fadeIn();
-        // this.point.forEach(element => {
-        //     element.sample.render(0)
-        // })
+        this.noPoint.sample.render(1);
+        this.point.forEach(element => {
+            element.sample.render(0)
+        })
         // this.point[0].sample.render(0)
     }
     findPreset(index, boxIndex) {
@@ -286,13 +282,14 @@ class MOBILE {
         if (this.autorisePlay) {
             const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
-                if (this.partition.verse.activeTop) {
+                if (this.catchCloserPoint.index <= 10) {
+                    if (this.partition.verse.activeTop) {
 
-                    // console.log(this.quickSample.aurorePoint[i]);
+                        // console.log(this.quickSample.aurorePoint[i]);
 
 
-                    // console.log(this.catchCloserPoint);
-                    if (this.catchCloserPoint.index <= 10) {
+                        // console.log(this.catchCloserPoint);
+
                         this.partition.verse.moveElement.classList.add("long-transition");
                         this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                         const myRot = mapRange(i, 0, 4, 0, 360);
@@ -306,18 +303,19 @@ class MOBILE {
                         this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
                         this.quickSample.guitarPoint[i].sample.render(1, true);
 
-                    }
-                    // this.vocalPoint[i].sample.playSample(0);
-                    // this.vocalPoint[i].sample.initOrientation(myRot);
-                    // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
-                    this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
-                } else {
-                    // this.partition.verse.moveElement.classList.remove("long-transition");
-                    // this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
-                    // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                        // this.vocalPoint[i].sample.playSample(0);
+                        // this.vocalPoint[i].sample.initOrientation(myRot);
+                        // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
+                        this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
+
+                    } else {
+                        // this.partition.verse.moveElement.classList.remove("long-transition");
+                        // this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
+                        // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                    }
+                    this.partition.verse.activeTop = !this.partition.verse.activeTop;
                 }
-                this.partition.verse.activeTop = !this.partition.verse.activeTop;
             }
         }
     }

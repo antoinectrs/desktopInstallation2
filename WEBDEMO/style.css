@@ -552,6 +552,17 @@ path.leaflet-interactive:last-child {
         transition: 3.5s;
         transition-timing-function: linear;
     }
+    .transitionFilter {
+        transition-property: filter;
+        transition: 3.5s;
+        transition-timing-function: linear;
+    }
+    .filterActive{
+        filter: blur(29px)contrast(1.5)brightness(7.5);
+    }
+    .filterSleep{
+        filter: none;
+    }
     .whiteFont{
         color:white;
         opacity: 0.7;
