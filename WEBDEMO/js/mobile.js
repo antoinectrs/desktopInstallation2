@@ -24,11 +24,13 @@ class MOBILE {
         this.spaceRadius = 20;
         this.createMap = false;
         this.inPath = false;
-        this.deZoom = {
-            arrowButton: searchHtmlArray(".arrow"),
-
+        this.dzm = {
+            bt: searchHtmlArray(".arrow"),
+            psh: false,
+            lst: null,
+            zoom: 15,
         }
-        this.deZoomListener(this.deZoom.arrowButton)
+        this.dzmListener(this.dzm)
         this.partition = {
             title: {
                 element: searchHtml("#title"),
@@ -50,11 +52,18 @@ class MOBILE {
     checkRoad() {
         this.autorisePlay = true;
     }
-    deZoomListener(arrow) {
-        console.log(arrow);
-        arrow.forEach((e) => {
+    dzmListener(dzm) {
+        dzm.bt.forEach((e) => {
             e.addEventListener('click', () => {
-                arrow[0].classList.toggle("deZoom");
+                dzm.bt[0].classList.toggle("dzm");
+                this.dzm.psh = !this.dzm.psh;
+                if (this.dzm.psh) {
+                    this.myMap.map.flyTo(this.dzm.lst, this.dzm.zoom, { animate: true, duration: 2.5 });
+                    this.releasePoint();
+                }
+                else
+                    this.myMap.map.flyTo(this.dzm.lst, 21, { animate: true, duration: 2.5 });
+                console.log(this.dzm.psh);
             })
         })
     }
@@ -69,6 +78,7 @@ class MOBILE {
             this.loading();
         }
         // this.getAltittude(pos);
+        if (this.dzm.psh) return;
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
         this.catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
@@ -122,6 +132,7 @@ class MOBILE {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         }
+        this.dzm.lst = convertPos;
         this.myMap.map.flyTo(convertPos, 21, {
             // this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
@@ -152,7 +163,7 @@ class MOBILE {
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
             };
         })
-        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0);
+        this.noPoint.sample.render(0);
     }
     releasePoint() {
         console.log("outside");

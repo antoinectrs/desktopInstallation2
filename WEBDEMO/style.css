@@ -555,7 +555,7 @@ path.leaflet-interactive:last-child {
         transition: 1s;
         height: 140px;
     }
-    .deZoom{
+    .dzm{
             transform: translate(-84vw, 90vh);
     }
 
