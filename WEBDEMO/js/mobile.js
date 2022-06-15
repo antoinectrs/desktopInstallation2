@@ -58,7 +58,8 @@ class MOBILE {
                 dzm.bt[0].classList.toggle("dzm");
                 this.dzm.psh = !this.dzm.psh;
                 if (this.dzm.psh) {
-                    this.myMap.map.flyTo(this.dzm.lst, this.dzm.zoom, { animate: true, duration: 2.5 });
+                    this.myMap.map.flyTo({ lat: 46.528, lng: 6.615 }, this.dzm.zoom, { animate: true, duration: 2.5 });
+                    this.myMap.changeOrientation(5);
                     this.releasePoint();
                 }
                 else
@@ -91,6 +92,7 @@ class MOBILE {
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
+        this.myMap.addGlobalMap(); //ajouter la carte dezoom
         this.myMap.boxTest();
         this.listenMyCompass(pos);
         this.createMap = true;
@@ -197,7 +199,9 @@ class MOBILE {
             setTimeout(() => {
                 const deg = this.myCompass.compassLoad();
                 if (this.myCompass.compassLoad() != undefined) {
-                    this.myMap.changeOrientation(deg);
+                    if (this.dzm.psh == false)
+                        this.myMap.changeOrientation(deg);
+
                     if (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
                         this.noPoint.sample.setOrientation(this.convert360Value(deg + 200));
 

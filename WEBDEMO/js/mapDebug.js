@@ -67,8 +67,6 @@ class MapDebug {
         // })
 
         //  this.setColorVariation(heightsPoint);
-
-
         var gradientLine = L.RouteBoxer.box(route, this.distance / 100);
         let heightsPoint = [];
         gradientLine.forEach(element => {
@@ -213,6 +211,11 @@ class MapDebug {
     // MOBILE 
     changeOrientation(value) {
         this.map.setBearing(value);
+    }
+    addGlobalMap(){
+        var imageUrl = './img/globalMap.png',
+        imageBounds = [[46.49, 6.64], [46.566, 6.59]];
+    L.imageOverlay(imageUrl, imageBounds, { className: "globalMap" }).addTo(this.map);
     }
     // listenerArray(array=this.hitBox) {
 

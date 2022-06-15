@@ -166,6 +166,7 @@ class APP {
             this.demo = new MOBILE(this.myMap, this.point, this.noPoint);
         } else {
             console.log(this.myMap);
+            console.log("inside");
             this.myMap.init();
             this.myMap.boxTest();
             this.demo = new DEMO(this.myMap, this.point, this.noPoint);
