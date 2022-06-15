@@ -31,6 +31,11 @@ class MOBILE {
             zoom: 15,
         }
         this.dzmListener(this.dzm)
+        this.sndBtn = {
+            bt: searchHtmlArray(".soundButton"),
+            
+        }
+        this.sndBtnListener(this.sndBtn)
         this.partition = {
             title: {
                 element: searchHtml("#title"),
@@ -68,6 +73,14 @@ class MOBILE {
             })
         })
     }
+    sndBtnListener(sndBtn){
+        sndBtn.bt.forEach((e,index) => {
+            e.addEventListener('click', () => {
+              console.log(index);
+            })
+        })
+    }
+
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);

@@ -627,8 +627,16 @@ path.leaflet-interactive:last-child {
         /* background: red; */
         width: fit-content;
         height: 100%;
-        transform: rotate(28deg);
         pointer-events: none;
+    }
+    #tierUp{
+        transform: rotate(120deg);
+    }
+    #tierR{
+        transform: rotate(120deg);
+    }
+    #tierL{
+        transform: rotate(240deg);
     }
     .soundButton:hover{
         background: red;
