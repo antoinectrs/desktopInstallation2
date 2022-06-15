@@ -137,17 +137,17 @@ class MapDebug {
         this.pattern();
     }
     layer() {
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: `Map data &copy; <a href="https://www.openstreetmap.org/copyright">
-            OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
-            maxZoom: 23,
-            maxNativeZoom: 23,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            fillOpacity: 0,
-            zoomOffset: -1,
-            accessToken: 'pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNsMGprazdncDAxYzYzZWxhbzRlcWk2NDkifQ.JM4Xgke091LLntRvk9UbrA'
-        }).addTo(this.map);
+        // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        //     attribution: `Map data &copy; <a href="https://www.openstreetmap.org/copyright">
+        //     OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
+        //     maxZoom: 23,
+        //     maxNativeZoom: 23,
+        //     id: 'mapbox/streets-v11',
+        //     tileSize: 512,
+        //     fillOpacity: 0,
+        //     zoomOffset: -1,
+        //     accessToken: 'pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNsMGprazdncDAxYzYzZWxhbzRlcWk2NDkifQ.JM4Xgke091LLntRvk9UbrA'
+        // }).addTo(this.map);
         this.control();
     }
     createHotline(array, option) {
