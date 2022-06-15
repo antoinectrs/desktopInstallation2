@@ -33,6 +33,7 @@ class Sample {
 
         this.thresholdLerp = 0.004;
         this.renderStatut = false;
+        this.speedStatut=false;
     }
     initVariationRoute(value) {
         this.variationRoute = value;
@@ -93,7 +94,12 @@ class Sample {
         // this.renderStatut = true;
         // if(renderStatut==false){
         // this.sourceNode.playbackRate.value = speed;
-        this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + 15);
+        if (this.speedStatut) return
+        console.log( this.sourceNode.playbackRate);
+        // setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
+        this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + 8);
+        this.speedStatut = true;
+        setTimeout(() => {this.speedStatut=false;console.log("endSpeed"); }, 8000)
         // }
     }
     softValue(fxTarget, fxTemp, fxType, index = 0) {
