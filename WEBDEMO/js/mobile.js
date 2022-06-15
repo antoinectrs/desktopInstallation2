@@ -24,6 +24,11 @@ class MOBILE {
         this.spaceRadius = 20;
         this.createMap = false;
         this.inPath = false;
+        this.deZoom = {
+            arrowButton: searchHtmlArray(".arrow"),
+
+        }
+        this.deZoomListener(this.deZoom.arrowButton)
         this.partition = {
             title: {
                 element: searchHtml("#title"),
@@ -44,6 +49,14 @@ class MOBILE {
     }
     checkRoad() {
         this.autorisePlay = true;
+    }
+    deZoomListener(arrow) {
+        console.log(arrow);
+        arrow.forEach((e) => {
+            e.addEventListener('click', () => {
+                arrow[0].classList.toggle("deZoom");
+            })
+        })
     }
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
@@ -324,7 +337,7 @@ class MOBILE {
     }
     loading() {
         searchHtml("#playTrack").style.display = "none";
-       console.log("loading");
+        console.log("loading");
         // searchHtml(".description").style.display = "flex";
         setTimeout(() => {
             this.partition.title.rotateDiv.classList.remove("soft-transition");
