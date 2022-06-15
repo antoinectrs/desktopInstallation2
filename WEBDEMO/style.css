@@ -555,8 +555,9 @@ path.leaflet-interactive:last-child {
         transition: 1s;
         height: 140px;
     }
-    .dzm{
-            transform: translate(-84vw, 90vh);
+
+    .dzm {
+        transform: translate(-84vw, 90vh);
     }
 
     .long-transition {
@@ -610,6 +611,38 @@ path.leaflet-interactive:last-child {
     } */
     .parent {
         position: fixed;
+    }
+
+    #board {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 95vw;
+        position: absolute;
+    }
+    .anchor{
+        position: absolute;
+        /* background: red; */
+        width: fit-content;
+        height: 100%;
+        transform: rotate(28deg);
+        pointer-events: none;
+    }
+    .soundButton:hover{
+        background: red;
+   
+    }
+    .soundButton {
+        pointer-events: initial;
+        border: black 2px solid;
+        border-radius: 114px;
+  
+        padding: 30px;
+        width: 30px;
+        height: 30px;
+        top: 0;
     }
 
     .leaflet-tile {
