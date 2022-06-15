@@ -76,10 +76,16 @@ class MOBILE {
     sndBtnListener(sndBtn){
         sndBtn.bt.forEach((e,index) => {
             e.addEventListener('click', () => {
-              console.log(index);
+            //   console.log(index*120);
+              const idx = index;
+              this.point.forEach(element => {
+               if(idx*120==element.sample.rack.binaural.orientation)
+                console.log(element.sample.rack.binaural.orientation);
+                // console.log(element.sample.rack.binaural.orientation);
             })
         })
     }
+)}
 
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
