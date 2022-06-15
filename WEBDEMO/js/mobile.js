@@ -33,7 +33,7 @@ class MOBILE {
         this.dzmListener(this.dzm)
         this.sndBtn = {
             bt: searchHtmlArray(".soundButton"),
-            
+
         }
         this.sndBtnListener(this.sndBtn)
         this.partition = {
@@ -73,19 +73,26 @@ class MOBILE {
             })
         })
     }
-    sndBtnListener(sndBtn){
-        sndBtn.bt.forEach((e,index) => {
+    sndBtnListener(sndBtn) {
+        sndBtn.bt.forEach((e, index) => {
             e.addEventListener('click', () => {
-            //   console.log(index*120);
-              const idx = index;
-              this.point.forEach(element => {
-               if(idx*120==element.sample.rack.binaural.orientation)
-                console.log(element.sample.rack.binaural.orientation);
-                // console.log(element.sample.rack.binaural.orientation);
+                e.classList.toggle("actv");
+                //   console.log(index*120);
+                const idx = index;
+                this.point.forEach(element => {
+                    if (idx * 120 == element.sample.rack.binaural.orientation) {
+                        if (e.classList.contains('actv'))
+                            element.sample.render(1, false)
+                        else
+                            element.sample.render(0, false)
+                    }
+                    // console.log(element.sample.rack.binaural.orientation);
+                    // console.log(element.sample.rack.binaural.orientation);
+                })
             })
-        })
+        }
+        )
     }
-)}
 
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
@@ -341,11 +348,11 @@ class MOBILE {
                         setTimeout(() => {
                             this.quickSample.aurorePoint[i].sample.playSample(0);
                             this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                            this.quickSample.aurorePoint[i].sample.render(1, true);
+                            this.quickSample.aurorePoint[i].sample.render(1, false);
                         }, 3000)
                         this.quickSample.guitarPoint[i].sample.playSample(0);
                         this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
-                        this.quickSample.guitarPoint[i].sample.render(1, true);
+                        this.quickSample.guitarPoint[i].sample.render(1, false);
 
 
                         // this.vocalPoint[i].sample.playSample(0);
