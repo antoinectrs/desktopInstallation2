@@ -21,7 +21,7 @@ class MOBILE {
         this.autorisePlay = false;
         // this.myConsole();
         // this.spaceRadius = 50;
-        this.spaceRadius = 40;
+        this.spaceRadius = 20;
         this.createMap = false;
         this.inPath = false;
         this.partition = {
@@ -48,6 +48,8 @@ class MOBILE {
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
+            this.autorisePlay = false;
+            setTimeout(() => { this.autorisePlay = true }, 2000);
         })
     }
     manager(pos) {
@@ -74,6 +76,7 @@ class MOBILE {
         this.verseAnimation();
     }
     inPathAction(catchCloserPoint) {
+        console.log("inside");
         this.inPath = true;
         myDebug("path", this.inPath);
         myDebug("range", catchCloserPoint.index);
@@ -91,6 +94,7 @@ class MOBILE {
         // hideBlur(this.mapDom, "remove");
     }
     outPathAction(catchCloserPoint) {
+
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
@@ -109,7 +113,7 @@ class MOBILE {
             lng: pos.coords.longitude
         }
         this.myMap.map.flyTo(convertPos, 21, {
-        // this.myMap.map.flyTo(convertPos, 18, {
+            // this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
             duration: 1.5
         });
@@ -133,20 +137,24 @@ class MOBILE {
     }
     renderPoint(boxIndex) {
         this.point.forEach((element, index) => {
-            if (element.sample.audio.state != "suspended") {
-                const find = this.findPreset(index, boxIndex);
-                this.asignPreset(element, find.presetVolume, find.presetSpeed);
-            };
+            // if (element.sample.audio.state != "suspended") {
+            // const find = this.findPreset(index, boxIndex);
+            // this.asignPreset(element, find.presetVolume, find.presetSpeed);
+            // };
         })
-        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0);
+        // const find = this.findPreset(0, boxIndex);
+        // this.asignPreset( this.point[0], find.presetVolume, find.presetSpeed);
+        // if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.render(0);
+        if (this.noPoint.sample.audio.state != "suspended") this.noPoint.sample.fadeOut();
     }
     releasePoint() {
-
-        this.noPoint.sample.render(DEFAULT_FREQUENCY);
-        this.point.forEach(element => {
-            element.sample.render(0)
-        })
-        // this.point[0].sample.render(0, 0)
+        console.log("outside");
+        // this.noPoint.sample.render(0.9);
+        this.noPoint.sample.fadeIn();
+        // this.point.forEach(element => {
+        //     element.sample.render(0)
+        // })
+        // this.point[0].sample.render(0)
     }
     findPreset(index, boxIndex) {
         const targetVolume = this.preset[index].volume;
@@ -162,7 +170,7 @@ class MOBILE {
     }
     asignPreset(element, presetVolume, presetSpeed) {
         // this.myDebug("range", scale);
-        console.log(presetVolume);
+        // console.log(presetVolume);
         element.sample.render(presetVolume);
         element.sample.initSpeed(presetSpeed)
     }
@@ -173,10 +181,10 @@ class MOBILE {
                 const deg = this.myCompass.compassLoad();
                 if (this.myCompass.compassLoad() != undefined) {
                     this.myMap.changeOrientation(deg);
-                    if  (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
-                    this.noPoint.sample.setOrientation(this.convert360Value(deg+200));
-                    
-                        // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
+                    if (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
+                        this.noPoint.sample.setOrientation(this.convert360Value(deg + 200));
+
+                    // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
                     // this.point.forEach(element => {
                     //     const node = element.sample.rack.volume.audioNode.gain.value;
                     //     if(node>0.1)
@@ -194,10 +202,10 @@ class MOBILE {
         }
         search();
     }
-    convert360Value(value){
-        if(value>360)
-        return value-360;
-        else return value; 
+    convert360Value(value) {
+        if (value > 360)
+            return value - 360;
+        else return value;
     }
     // inPathOrientation() { myRotate(this.partition.title.rotateDiv, 0) } // rest to 0 DOM
     outPathOrientation(hitBoxNear) {
@@ -223,7 +231,7 @@ class MOBILE {
                     longitude: wordData[1]
                 }
             };
-            this.manager(pos);
+            // this.manager(pos);
         })
     }
     setTitlePartition(indexZone) {
@@ -277,11 +285,12 @@ class MOBILE {
     secFrame() {
         if (this.autorisePlay) {
             const i = this.wordAnimation();
-            if (this.partition.verse.activeTop) {
-              
-                // console.log(this.quickSample.aurorePoint[i]);
+            if (this.catchCloserPoint != null) {
+                if (this.partition.verse.activeTop) {
 
-                if (this.catchCloserPoint != null) {
+                    // console.log(this.quickSample.aurorePoint[i]);
+
+
                     // console.log(this.catchCloserPoint);
                     if (this.catchCloserPoint.index <= 10) {
                         this.partition.verse.moveElement.classList.add("long-transition");
@@ -296,19 +305,20 @@ class MOBILE {
                         this.quickSample.guitarPoint[i].sample.playSample(0);
                         this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
                         this.quickSample.guitarPoint[i].sample.render(1, true);
-                    }
-                }
-                // this.vocalPoint[i].sample.playSample(0);
-                // this.vocalPoint[i].sample.initOrientation(myRot);
-                // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
-                this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
-            } else {
-                this.partition.verse.moveElement.classList.remove("long-transition");
-                this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
-                this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                    }
+                    // this.vocalPoint[i].sample.playSample(0);
+                    // this.vocalPoint[i].sample.initOrientation(myRot);
+                    // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
+                    this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
+
+                } else {
+                    // this.partition.verse.moveElement.classList.remove("long-transition");
+                    // this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
+                    // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                }
+                this.partition.verse.activeTop = !this.partition.verse.activeTop;
             }
-            this.partition.verse.activeTop = !this.partition.verse.activeTop;
         }
     }
     wordAnimation() {
