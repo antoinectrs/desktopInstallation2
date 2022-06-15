@@ -100,7 +100,7 @@ class APP {
                     "sample": new Sample({
                         path: e.content,
                         isLooping: false,
-                        folder: "track01"
+                        folder: "vocal"
                     })
                 }
             })

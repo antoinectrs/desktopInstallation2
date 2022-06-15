@@ -26,7 +26,7 @@ class Sample {
                 orientation: null
             },
             speed: {
-                actual: 5
+                actual: 1
             }
         }
         this.variationRoute;
@@ -85,12 +85,13 @@ class Sample {
     }
     initGain(audioNode) {
         audioNode = this.audio.createGain();
-        audioNode.gain.setValueAtTime(0.2, this.audio.currentTime);
+        audioNode.gain.setValueAtTime(0, this.audio.currentTime);
         return audioNode;
         // audioNode.gain.setValueAtTime(10, this.audio.currentTime);
     }
     initSpeed(speed) {
-        this.sourceNode.playbackRate.value = speed;
+        // this.sourceNode.playbackRate.value = speed;
+    //    console.log(this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + 15));
     }
     softValue(fxTarget, fxTemp, fxType, index = 0) {
         new Promise(resolve => {
@@ -125,10 +126,12 @@ class Sample {
         // http://alemangui.github.io/ramp-to-value
         const node = this.rack.volume.audioNode;
         eVolume = Math.max(0, Math.min(eVolume, 1))
+        console.log(this.audio.currentTime);
+
         if(transition)
-        node.gain.setValueAtTime(eVolume, this.audio.currentTime);
+        node.gain.linearRampToValueAtTime(eVolume, this.audio.currentTime + 15);
         else
-        node.gain.linearRampToValueAtTime(eVolume, this.audio.currentTime + 5);
+        node.gain.setValueAtTime(eVolume, this.audio.currentTime);
 
         // node.setValueAtTime(node.value + 0.0001, this.audio.currentTime + 10);
     }
