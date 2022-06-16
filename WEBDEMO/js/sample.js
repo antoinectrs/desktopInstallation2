@@ -23,7 +23,8 @@ class Sample {
                 actual: 0,
             },
             binaural: {
-                orientation: null
+                orientation: null,
+                default:null,
             },
             speed: {
                 actual: 1
@@ -41,6 +42,8 @@ class Sample {
     }
     initOrientation(value) {
         this.rack.binaural.orientation = value;
+        this.rack.binaural.default = value;
+        console.log("inside");
         this.binauralFIRNode.setPosition(this.rack.binaural.orientation, 10, 1);
     }
     setOrientation(value) {

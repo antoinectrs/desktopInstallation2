@@ -77,17 +77,27 @@ class MOBILE {
             e.addEventListener('click', () => {
                 e.classList.toggle("actv");
                 //   console.log(index*120);
-                const idx = index;
+                const idx = index * 120;
                 this.point.forEach(ele => {
-                  
-                    if (idx * 120 == ele.sample.rack.binaural.orientation && ele.sample.actv) {
-                        if (e.classList.contains('actv'))
-                            ele.sample.render(1, false)
-                        else
-                            ele.sample.render(0, false)
+                    // switch (idx) {
+                    //     case 0:
+                    //         break;
+                    //     case 120:
+                    //         break;
+                    //     case 240:
+                    //         break;
+                    // }
+                    // && ele.sample.actv
+                    if (idx == ele.sample.rack.binaural.default && ele.sample.actv) {
+                        // console.log(ele.sample.rack.binaural.default,);
+                        //     console.log(ele);
+                            if (e.classList.contains('actv')) {
+                                console.log("render");
+                                ele.sample.render(1, false)
+                            }
+                            else
+                                ele.sample.render(0, false)
                     }
-                    // console.log(element.sample.rack.binaural.orientation);
-                    // console.log(element.sample.rack.binaural.orientation);
                 })
             })
         }
@@ -186,8 +196,10 @@ class MOBILE {
             if (element.sample.audio.state != "suspended") {
                 const find = this.findPreset(index, boxIndex);
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
-                if (find.presetVolume > 0.9) element.sample.actv = true; //-------tag actif sample
-                else element.sample.actv = false
+                if (find.presetVolume > 0.9)
+                    element.sample.actv = true; //-------tag actif sample
+                else
+                    element.sample.actv = false
             };
         })
         this.noPoint.sample.render(0);
@@ -212,12 +224,13 @@ class MOBILE {
         return Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, boxes));
     }
     asignPreset(element, presetVolume, presetSpeed) {
-        // this.myDebug("range", scale);
-        // console.log(presetVolume);
-        element.sample.render(presetVolume);
-        element.sample.initSpeed(presetSpeed)
+        if (element.sample.actv) {
+            // this.myDebug("range", scale);
+            // console.log(presetVolume);
+            element.sample.render(presetVolume);
+            element.sample.initSpeed(presetSpeed)
+        }
     }
-
     listenMyCompass(hitBoxNear) {
         const search = () => {
             setTimeout(() => {
@@ -232,7 +245,7 @@ class MOBILE {
                     // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
                     this.point.forEach(element => {
                         if (element.sample.rack.volume.audioNode.gain.value > 0.1)
-                            element.sample.initOrientation(deg)
+                            element.sample.setOrientation(deg)
                         //         console.log(deg);
                     })
                     // console.log(this.inPath);
