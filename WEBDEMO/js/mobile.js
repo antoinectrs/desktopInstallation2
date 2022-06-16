@@ -1,5 +1,3 @@
-// ---------------- MOBILE -----------------    
-
 class MOBILE {
     constructor(myMap, point, noPoint) {
         this.myMap = myMap;
@@ -24,12 +22,9 @@ class MOBILE {
         this.spaceRadius = 20;
         this.createMap = false;
         this.inPath = false;
-        this.swtch = {
-            nw: false,
-            // old:false,
-        }
         this.dzm = {
             bt: searchHtmlArray(".arrow"),
+            wheel: searchHtml("#board"),
             psh: false,
             lst: null,
             zoom: 15,
@@ -97,7 +92,6 @@ class MOBILE {
         }
         )
     }
-
     myPosition() {
         navigator.geolocation.watchPosition(pos => {
             if (this.autorisePlay) this.manager(pos);
@@ -108,7 +102,6 @@ class MOBILE {
             this.initMap(pos);
             this.loading();
         }
-        // this.getAltittude(pos);
         if (this.dzm.psh) return;
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
@@ -129,7 +122,6 @@ class MOBILE {
         this.verseAnimation();
     }
     inPathAction(catchCloserPoint) {
-        console.log("inside");
         this.inPath = true;
         myDebug("path", this.inPath);
         myDebug("range", catchCloserPoint.index);
@@ -137,6 +129,9 @@ class MOBILE {
         const iScale = this.scale(catchCloserPoint.index, this.preset.length); //map for preset
         this.setTitlePartition(iScale);
         this.setVersePartition(iScale);
+
+        if (this.dzm.wheel.classList.contains("soft-transition"))
+            setTimeout(() => { this.dzm.wheel.classList.remove("soft-transition") }, 3000)
 
         this.partition.title.rotateDiv.classList.add("soft-transition");
         myRotate(this.partition.title.rotateDiv, 0);
@@ -150,16 +145,11 @@ class MOBILE {
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
+
+        this.dzm.wheel.classList.add("soft-transition");
+        this.dzm.wheel.style.transform = "rotate(0deg)";
         if (this.partition.title.rotateDiv.classList.contains("soft-transition"))
             setTimeout(() => { this.partition.title.rotateDiv.classList.remove("soft-transition") }, 3000)
-    }
-    getAltittude(pos) {
-        // console.log(pos.coords.accuracy);
-        const altitude = pos.coords.altitude
-        if (altitude) {
-            // this.myDebug("alt", altitude)
-            return altitude;
-        }
     }
     centerMap(pos) {
         const convertPos = {
@@ -238,14 +228,16 @@ class MOBILE {
                         this.noPoint.sample.setOrientation(this.convert360Value(deg + 200));
 
                     // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
-                    // this.point.forEach(element => {
-                    //     const node = element.sample.rack.volume.audioNode.gain.value;
-                    //     if(node>0.1)
-                    //     element.sample.initOrientation(deg)
-                    //         console.log(deg);
-                    // })
+                    this.point.forEach(element => {
+                        if (element.sample.rack.volume.audioNode.gain.value > 0.1)
+                            element.sample.initOrientation(deg)
+                        //         console.log(deg);
+                    })
                     // console.log(this.inPath);
+
                     if (this.inPath == false) this.outPathOrientation(hitBoxNear);
+                    else
+                        myRotate(this.dzm.wheel, deg);
                     // else
                     //     this.inPathOrientation();
                 };
