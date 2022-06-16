@@ -24,6 +24,10 @@ class MOBILE {
         this.spaceRadius = 20;
         this.createMap = false;
         this.inPath = false;
+        this.swtch = {
+            nw: false,
+            // old:false,
+        }
         this.dzm = {
             bt: searchHtmlArray(".arrow"),
             psh: false,
@@ -134,6 +138,7 @@ class MOBILE {
         this.setTitlePartition(iScale);
         this.setVersePartition(iScale);
 
+        this.partition.title.rotateDiv.classList.add("soft-transition");
         myRotate(this.partition.title.rotateDiv, 0);
         // searchHtml("#arrow").style.height = "0px";
         // this.myMove();
@@ -142,10 +147,11 @@ class MOBILE {
         // hideBlur(this.mapDom, "remove");
     }
     outPathAction(catchCloserPoint) {
-
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
+        if (this.partition.title.rotateDiv.classList.contains("soft-transition"))
+            setTimeout(() => {this.partition.title.rotateDiv.classList.remove("soft-transition")}, 3000)
     }
     getAltittude(pos) {
         // console.log(pos.coords.accuracy);
