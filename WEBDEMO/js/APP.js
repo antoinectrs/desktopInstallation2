@@ -11,7 +11,7 @@ class APP {
         this.point = [];
 
         // this.musicList = ["01", "02", "03", "04"];
-        this.musicList = ["00_lead", "01_low", "02_bass", "03_clap","04_galo","05_high","06_machine","07_japan","08_bass"];
+        this.musicList = ["00_lead", "01_low", "02_bass", "03_clap", "04_galo", "05_high", "06_machine", "07_japan", "08_bass"];
         // this.musicList = ["00_lead", "01_low", "02_bass", "03_clap"];
         // this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
         this.noise = "waitLoop";
@@ -41,7 +41,6 @@ class APP {
             this.startListening = true;
         });
     }
-
     // -------------------------- LOAD SOUND --------------------------------
     initPoint(musicList, preset) {
         this.point = musicList.map(function (music, preset) {
@@ -95,19 +94,21 @@ class APP {
     }
     initVocals() {
         setTimeout(() => {
-            this.vocalPoint = this.preset[0].voice.map(e => {
-                return {
-                    "sample": new Sample({
-                        path: e.content,
-                        isLooping: false,
-                        folder: "vocal"
-                    })
-                }
-            })
-            this.vocalPoint.forEach(element => {
-                element.sample.requestTrack()
-            });
-            this.demo.vocalPoint = this.vocalPoint;
+            if (this.preset != undefined) {
+                this.vocalPoint = this.preset[0].voice.map(e => {
+                    return {
+                        "sample": new Sample({
+                            path: e.content,
+                            isLooping: false,
+                            folder: "vocal"
+                        })
+                    }
+                })
+                this.vocalPoint.forEach(element => {
+                    element.sample.requestTrack()
+                });
+                this.demo.vocalPoint = this.vocalPoint;
+            }
         }, 500);
     }
     initMusic(presetPath, path) {
@@ -166,7 +167,6 @@ class APP {
             this.demo = new MOBILE(this.myMap, this.point, this.noPoint);
         } else {
             console.log(this.myMap);
-            console.log("inside");
             this.myMap.init();
             this.myMap.boxTest();
             this.demo = new DEMO(this.myMap, this.point, this.noPoint);

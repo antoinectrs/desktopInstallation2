@@ -30,6 +30,7 @@ class Sample {
             }
         }
         this.variationRoute;
+        this.actv= false;
 
         this.thresholdLerp = 0.004;
         this.renderStatut = false;

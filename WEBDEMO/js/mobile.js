@@ -78,12 +78,13 @@ class MOBILE {
                 e.classList.toggle("actv");
                 //   console.log(index*120);
                 const idx = index;
-                this.point.forEach(element => {
-                    if (idx * 120 == element.sample.rack.binaural.orientation) {
+                this.point.forEach(ele => {
+                  
+                    if (idx * 120 == ele.sample.rack.binaural.orientation && ele.sample.actv) {
                         if (e.classList.contains('actv'))
-                            element.sample.render(1, false)
+                            ele.sample.render(1, false)
                         else
-                            element.sample.render(0, false)
+                            ele.sample.render(0, false)
                     }
                     // console.log(element.sample.rack.binaural.orientation);
                     // console.log(element.sample.rack.binaural.orientation);
@@ -185,6 +186,8 @@ class MOBILE {
             if (element.sample.audio.state != "suspended") {
                 const find = this.findPreset(index, boxIndex);
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
+                if (find.presetVolume > 0.9) element.sample.actv = true; //-------tag actif sample
+                else element.sample.actv = false
             };
         })
         this.noPoint.sample.render(0);
@@ -195,7 +198,6 @@ class MOBILE {
         this.point.forEach(element => {
             element.sample.render(0)
         })
-        // this.point[0].sample.render(0)
     }
     findPreset(index, boxIndex) {
         const targetVolume = this.preset[index].volume;
@@ -234,7 +236,6 @@ class MOBILE {
                         //         console.log(deg);
                     })
                     // console.log(this.inPath);
-
                     if (this.inPath == false) this.outPathOrientation(hitBoxNear);
                     else
                         myRotate(this.dzm.wheel, deg);
