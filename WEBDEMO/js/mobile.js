@@ -151,7 +151,7 @@ class MOBILE {
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
         if (this.partition.title.rotateDiv.classList.contains("soft-transition"))
-            setTimeout(() => {this.partition.title.rotateDiv.classList.remove("soft-transition")}, 3000)
+            setTimeout(() => { this.partition.title.rotateDiv.classList.remove("soft-transition") }, 3000)
     }
     getAltittude(pos) {
         // console.log(pos.coords.accuracy);
