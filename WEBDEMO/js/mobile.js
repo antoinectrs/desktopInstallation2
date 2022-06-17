@@ -28,6 +28,7 @@ class MOBILE {
             psh: false,
             lst: null,
             zoom: 15,
+            loading: true,
         }
         this.dzmListener(this.dzm)
         this.sndBtn = {
@@ -57,6 +58,8 @@ class MOBILE {
         this.autorisePlay = true;
     }
     dzmListener(dzm) {
+
+
         dzm.bt.forEach((e) => {
             e.addEventListener('click', () => {
                 dzm.bt[0].classList.toggle("dzm");
@@ -91,12 +94,12 @@ class MOBILE {
                     if (idx == ele.sample.rack.binaural.default && ele.sample.actv) {
                         // console.log(ele.sample.rack.binaural.default,);
                         //     console.log(ele);
-                            if (e.classList.contains('actv')) {
-                                console.log("render");
-                                ele.sample.render(1, false)
-                            }
-                            else
-                                ele.sample.render(0, false)
+                        if (e.classList.contains('actv')) {
+                            console.log("render");
+                            ele.sample.render(1, false)
+                        }
+                        else
+                            ele.sample.render(0, false)
                     }
                 })
             })
@@ -342,6 +345,16 @@ class MOBILE {
         // }
     }
     secFrame() {
+        if (this.dzm.loading) {
+            this.dzm.wheel.classList.add("soft-transition")
+            myRotate(this.dzm.wheel, 360);
+            setTimeout(() => {
+                this.dzm.wheel.classList.remove("soft-transition");
+                myRotate(this.dzm.wheel, 0);
+            }, 3000)
+        }
+
+
         if (this.autorisePlay) {
             const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
@@ -391,9 +404,14 @@ class MOBILE {
     loading() {
         searchHtml("#playTrack").style.display = "none";
         console.log("loading");
+        this.dzm.wheel.classList.add("soft-transition");
+        // this.dzm.wheel.classList.add("rotatingDone");
+        this.dzm.wheel.classList.remove("rotating");
         // searchHtml(".description").style.display = "flex";
         setTimeout(() => {
+            this.dzm.wheel.classList.remove("soft-transition");
             this.partition.title.rotateDiv.classList.remove("soft-transition");
+
             this.mapDom.classList.remove("filterActive");
         }, 3000)
     }
