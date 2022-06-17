@@ -344,16 +344,16 @@ class MOBILE {
         //     console.log(activeTop);
         // }
     }
+    loadingAn() {
+        this.dzm.wheel.classList.add("linear-transition")
+        myRotate(this.dzm.wheel, 360);
+        setTimeout(() => {
+            myRotate(this.dzm.wheel, 0);
+            this.dzm.wheel.classList.remove("linear-transition");
+        }, 3400)
+    }
     secFrame() {
-        if (this.dzm.loading) {
-            this.dzm.wheel.classList.add("linear-transition")
-            myRotate(this.dzm.wheel, 360);
-            setTimeout(() => {
-                myRotate(this.dzm.wheel, 0);
-                this.dzm.wheel.classList.remove("linear-transition");
-            }, 3400)
-        }
-
+        if (this.dzm.loading) this.loadingAn()
 
         if (this.autorisePlay) {
             const i = this.wordAnimation();
@@ -411,9 +411,9 @@ class MOBILE {
         setTimeout(() => {
             this.dzm.wheel.classList.remove("soft-transition");
             this.partition.title.rotateDiv.classList.remove("soft-transition");
-
             this.mapDom.classList.remove("filterActive");
-        }, 3000)
+            this.dzm.loading = false;
+        }, 3000);
     }
 
 }
