@@ -295,6 +295,9 @@ input[type=range][orient=vertical] {
 .soft-transition {
     transition: 3s;
 }
+.linear-transition {
+    transition: 3.4s ;
+}
 
 /* canvas */
 

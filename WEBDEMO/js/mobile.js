@@ -346,12 +346,12 @@ class MOBILE {
     }
     secFrame() {
         if (this.dzm.loading) {
-            this.dzm.wheel.classList.add("soft-transition")
+            this.dzm.wheel.classList.add("linear-transition")
             myRotate(this.dzm.wheel, 360);
             setTimeout(() => {
-                this.dzm.wheel.classList.remove("soft-transition");
                 myRotate(this.dzm.wheel, 0);
-            }, 3000)
+                this.dzm.wheel.classList.remove("linear-transition");
+            }, 3400)
         }
 
 
