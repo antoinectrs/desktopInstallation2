@@ -1,7 +1,8 @@
 const MAIN_AUDIO = new (AudioContext || webkitAudioContext || mozAudioContext)()
 
 class Sample {
-    constructor({ path, isLooping, folder, orientation }) {
+    constructor({ path, isLooping, folder,delay=0.001, orientation }) {
+        this.delay = delay;
         this.audio = MAIN_AUDIO
         this.binauralFIRNode = null
         this.path = path;
@@ -43,7 +44,6 @@ class Sample {
     initOrientation(value) {
         this.rack.binaural.orientation = value;
         this.rack.binaural.default = value;
-        console.log("inside");
         this.binauralFIRNode.setPosition(this.rack.binaural.orientation, 10, 1);
     }
     setOrientation(value) {
@@ -99,11 +99,10 @@ class Sample {
         // if(renderStatut==false){
         // this.sourceNode.playbackRate.value = speed;
         if (this.speedStatut) return
-        console.log( this.sourceNode.playbackRate);
         // setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
-        this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + 8);
+        this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + this.delay);
         this.speedStatut = true;
-        setTimeout(() => {this.speedStatut=false;console.log("endSpeed"); }, 8000)
+        setTimeout(() => {this.speedStatut=false;console.log("endSpeed"); }, this.delay*1000)
         // }
     }
     softValue(fxTarget, fxTemp, fxType, index = 0) {
@@ -147,9 +146,9 @@ class Sample {
             // node.gain.setValueAtTime(node.gain.value, this.audio.currentTime); 
             // node.gain.setValueAtTime(node.gain.value, this.audio.currentTime); 
             node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
-            node.gain.exponentialRampToValueAtTime(eVolume + 0.001, this.audio.currentTime + 10);
+            node.gain.exponentialRampToValueAtTime(eVolume + 0.001, this.audio.currentTime + this.delay);
             this.renderStatut = true;
-            setTimeout(() => {this.renderStatut=false;console.log("endFade"); }, 10000)
+            setTimeout(() => {this.renderStatut=false;console.log("endFade"); },this.delay*1000)
         }
         else
             node.gain.setValueAtTime(eVolume, this.audio.currentTime);

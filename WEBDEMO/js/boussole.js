@@ -9,6 +9,8 @@ class myCompass {
         if (this.myCompass.permissionGranted)
             return this.myCompass.getBearingToNorth();
     }
+
+    
     // });
     // drawMyCompass(buffer){
     // if (buffer.position !== null && buffer.orientation !== null) {

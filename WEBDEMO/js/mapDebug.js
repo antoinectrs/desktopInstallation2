@@ -1,6 +1,6 @@
 class MapDebug {
-    constructor(myData, statu) {
-        this.statut;
+    constructor(myData, statut) {
+        this.statut = statut;
         this.myData = myData;
         this.map;
         this.zoom = 2;
@@ -18,6 +18,7 @@ class MapDebug {
         this.change = false;
         this.distance = 0.02;
         this.hotlineLayer;
+
         // 
     }
     convertToPointPath() {
@@ -33,6 +34,7 @@ class MapDebug {
         });
         this.variation = this.pointRoadBox;
         this.setColorVariation(this.variation);
+
         this.drawHitBox(this.pointRoadBox);
         // for (let index = 0; index <4; index++) {
         //   const data=  mapRange(index,20,0,0,900);
@@ -52,12 +54,33 @@ class MapDebug {
 
     }
     drawHitBox(array) {
-        var polyline = L.polyline(array);
-        const data = polyline.encodePath();
+        let polyline = L.polyline(array);
+        let data = polyline.encodePath();
         let route = new L.Polyline(array);
-        var boxes = L.RouteBoxer.box(route, this.distance / 10);
+        let boxes;
+        if (this.statut == "mobile") {
+            const latlngs = [
+                [46.537217821833764, 6.5907825160861],
+                [46.53729844663685, 6.5906735853334135],
+                [46.537563425801196, 6.590342402680614],
+                [46.53764880073016, 6.590118366605308],
+                [46.53763786329065, 6.589994677317259],
+                [46.537753406020364, 6.58992449120311],
+                [46.538069478750316, 6.589746406572084],
+                [46.53828895007725, 6.589490319150933],
+                [46.53815429898116, 6.58897455824847],
+            ];
+            let routeT = new L.Polyline(latlngs);
+            boxes = L.RouteBoxer.box(routeT, this.distance / 10);
+
+        } else
+            boxes = L.RouteBoxer.box(route, this.distance / 10);
+
+
+
         boxes.forEach(element => {
-            this.hitBox.push(L.rectangle(element, { stroke: false, fillOpacity: 0, weight: 1 }).addTo(this.map));
+            this.hitBox.push(L.rectangle(element, { weight: 1 }).addTo(this.map));
+            // this.hitBox.push(L.rectangle(element, { stroke: false, fillOpacity: 0, weight: 1 }).addTo(this.map));
             // this.hitBox.push(L.rectangle(element, {  fillOpacity: 0.1, weight: 1 }).addTo(this.map));
         });
         // let copyBox = this.hitBox;
@@ -77,7 +100,6 @@ class MapDebug {
             // console.log(centerBox);
             return [centerBox.lat, centerBox.lng, 0.9];
         })
-        console.log(coordsLine);
         //  var heatmap = L.heatLayer(coordsLine, {
         //     radius: 100,
         //     max: 2.0,
@@ -88,9 +110,9 @@ class MapDebug {
         //     },
         //     minOpacity: 0.7
         //   }).addTo(this.map);
-        var imageUrl = './img/path.png',
-        imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
-    L.imageOverlay(imageUrl, imageBounds, { className: "hello" }).addTo(this.map);
+        var imageUrl = './img/newPath.png',
+            imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
+        L.imageOverlay(imageUrl, imageBounds, { className: "hello" }).addTo(this.map);
 
         // // 1) Convert LatLng into container pixel position.
         // var originPoint = this.map.latLngToContainerPoint([46.53693422080351, 6.589272225762318]);
@@ -212,10 +234,10 @@ class MapDebug {
     changeOrientation(value) {
         this.map.setBearing(value);
     }
-    addGlobalMap(){
+    addGlobalMap() {
         var imageUrl = './img/globalMap.png',
-        imageBounds = [[46.49, 6.64], [46.566, 6.59]];
-    L.imageOverlay(imageUrl, imageBounds, { className: "globalMap" }).addTo(this.map);
+            imageBounds = [[46.49, 6.64], [46.566, 6.59]];
+        L.imageOverlay(imageUrl, imageBounds, { className: "globalMap" }).addTo(this.map);
     }
     // listenerArray(array=this.hitBox) {
 

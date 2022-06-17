@@ -43,12 +43,18 @@ class APP {
     }
     // -------------------------- LOAD SOUND --------------------------------
     initPoint(musicList, preset) {
+        let delay = 3;
+      
+        if (this.statut == "mobile")
+            delay = 8
+
         this.point = musicList.map(function (music, preset) {
             return {
                 "sample": new Sample({
                     folder: "track03",
                     path: music,
                     isLooping: true,
+                    delay:delay,
                 })
             }
         });
@@ -58,7 +64,8 @@ class APP {
             "sample": new Sample({
                 path: this.noise,
                 isLooping: true,
-                folder: "track01"
+                folder: "track01",
+                delay:delay,
             })
         };
         this.noPoint.sample.requestTrack();
@@ -139,6 +146,7 @@ class APP {
     }
     // -------------------------- LOAD DATA --------------------------------
     loadData() {
+        console.log(this.statut);
         fetch('./DATA/data.JSON')
             // fetch('./DATA/prelaz.JSON')
             // fetch('./DATA/lemont.JSON')
