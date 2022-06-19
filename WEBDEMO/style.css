@@ -18,6 +18,10 @@
     src: url(./font/AcuminVariableConcept.otf);
 }
 
+.simpleAcumin {
+    font-family: Acumin;
+}
+
 .AcuminBold {
     font-family: Acumin;
     font-size: 50px;
@@ -41,7 +45,6 @@
 .liteType {
     font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
     font-size: 12vw;
-    ;
 }
 
 .menu {
@@ -593,6 +596,11 @@ path.leaflet-interactive:last-child {
         opacity: 0.7;
     }
 
+    .contrastFont {
+        color: rgb(0, 0, 0);
+        opacity: 0.7;
+    }
+
     #lost {
         position: fixed;
         right: 3%;
@@ -722,4 +730,106 @@ path.leaflet-interactive:last-child {
           transform: rotate(360deg);
         }
       } */
+
+
+
+    /* INTRO */
+
+    .lite {
+        font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
+
+    }
+
+    .bigSize {
+        font-size: 8vw;
+    }
+
+    .myButton {
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: 0px 1px 1px #fffffffc;
+        color: #ffffff;
+        border: none;
+        /* filter: blur(1px); */
+        backdrop-filter: blur(65px);
+
+        padding: 42px 47px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 8vw;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 200px;
+        filter: blur(2px);
+        opacity: 0.7;
+    }
+    .starter{
+        margin-top: 40vh!important;
+        color: black;
+    }
+
+    .centerContainer {
+        color: white;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        /* flex-direction: column; */
+        text-align: center;
+    }
+
+
+
+    .logo {
+        transition: 1s;
+        filter: blur(4px);
+        letter-spacing: -10px;
+        margin-top: 8%;
+        font-size: 20vw;
+        opacity: 1 !important;
+        margin-bottom: -3%;
+    }
+
+    .centerContainer p {
+        filter: blur(2px);
+        letter-spacing: -5px;
+        opacity: 0;
+        transition: 2s;
+        /* transition-property: auto; */
+    }
+
+    .target p {}
+
+    .gradient {
+        /* animation-duration: 30s;
+        transition: 10s;
+        animation-name: myGradient; */
+        background: linear-gradient(90deg, rgba(76, 83, 164, 0) 0%, rgba(115, 76, 164, 0.767857) 21.65%, #4C53A4 49.31%, rgba(120, 76, 164, 0.767857) 74.51%, rgba(76, 83, 164, 0) 100%);
+        /* filter: blur(47px); */
+    }
+
+    .insideContainer {}
+
+    .stopScroll {
+        overflow: hidden;
+    }
+
+    /* @keyframes myGradient {
+        0% {
+            background: linear-gradient(90deg, rgba(76, 83, 164, 0) 0%, rgba(115, 76, 164, 0.767857) 21.65%, #4C53A4 49.31%, rgba(120, 76, 164, 0.767857) 74.51%, rgba(76, 83, 164, 0) 100%);
+        }
+
+        33% {
+            background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(32, 123, 231, 0.767857) 23.5%, #0014C8 49.31%, rgba(50, 140, 246, 0.767857) 74.51%, rgba(217, 217, 217, 0) 100%);
+        }
+
+        66% {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(30, 118, 0, 0.44) 24.11%, #01400B 43.78%, rgba(11, 86, 9, 0.9454) 57.3%, rgba(39, 149, 1, 0.79) 74.51%, rgba(217, 217, 217, 0) 100%);
+        }
+
+        100% {
+            background: linear-gradient(90deg, rgba(76, 83, 164, 0) 0%, rgba(115, 76, 164, 0.767857) 21.65%, #4C53A4 49.31%, rgba(120, 76, 164, 0.767857) 74.51%, rgba(76, 83, 164, 0) 100%);
+        }
+    } */
+
+
 }

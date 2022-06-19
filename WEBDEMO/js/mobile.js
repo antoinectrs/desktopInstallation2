@@ -70,7 +70,7 @@ class MOBILE {
                     this.releasePoint();
                 }
                 else
-                    this.myMap.map.flyTo(this.dzm.lst, 23, { animate: true, duration: 2.5 });
+                    this.myMap.map.flyTo(this.dzm.lst, 25, { animate: true, duration: 2.5 });
                 console.log(this.dzm.psh);
             })
         })
@@ -124,8 +124,6 @@ class MOBILE {
             this.inPathAction(this.catchCloserPoint)
         else
             this.outPathAction(this.catchCloserPoint)
-
-
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
@@ -147,6 +145,9 @@ class MOBILE {
         if (this.dzm.wheel.classList.contains("soft-transition"))
             setTimeout(() => { this.dzm.wheel.classList.remove("soft-transition") }, 3000)
 
+        this.partition.title.element.classList.add("whiteFont");
+        this.partition.title.element.classList.remove("contrastFont");
+        console.log(this.partition.title.element.classList);
         this.partition.title.rotateDiv.classList.add("soft-transition");
         myRotate(this.partition.title.rotateDiv, 0);
         // searchHtml("#arrow").style.height = "0px";
@@ -159,7 +160,9 @@ class MOBILE {
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
-
+        console.log(this.partition.title.element);
+        this.partition.title.element.classList.add("contrastFont");
+        this.partition.title.element.classList.remove("whiteFont");
         this.dzm.wheel.classList.add("soft-transition");
         this.dzm.wheel.style.transform = "rotate(0deg)";
         if (this.partition.title.rotateDiv.classList.contains("soft-transition"))
@@ -171,7 +174,7 @@ class MOBILE {
             lng: pos.coords.longitude
         }
         this.dzm.lst = convertPos;
-        this.myMap.map.flyTo(convertPos, 23, {
+        this.myMap.map.flyTo(convertPos, 25, {
             // this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
             duration: 1.5
@@ -346,14 +349,14 @@ class MOBILE {
     }
     loadingAn() {
         this.dzm.wheel.classList.add("linear-transition");
-        if(this.dzm.loading){
+        if (this.dzm.loading) {
             myRotate(this.dzm.wheel, 360);
             setTimeout(() => {
                 myRotate(this.dzm.wheel, 0);
                 this.dzm.wheel.classList.remove("linear-transition");
             }, 3400)
         }
-      
+
     }
     secFrame() {
         this.loadingAn()

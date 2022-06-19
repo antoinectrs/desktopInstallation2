@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="./js/domFunction.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="gradient stopScroll">
+    <!-- <section id="canvas">
+        <div style="top:0px; left:0px" class="circle"></div>
+    </section>
+ -->
+    <div class="centerContainer">
+        <div class="case lite div1">
+            <p class="starter simpleAcumin lite  logo">ballade</p>
+            <div id="target">
+                <p class="simpleAcumin lite bigSize ">welcome to this open performance</p>
+                <p class="simpleAcumin lite bigSize ">you are free to go wherever you want</p>
+                <p class="simpleAcumin lite bigSize ">but if you are sensitive to sounds why not`</p>
+            </div>
+            <a href="mobile.html"><button style="opacity: 0;" class="simpleAcumin lite myButton">discover this
+                    path</button></a>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = () => {
+        let say =
+            [`welcome, to this open performance`,
+                `you are free to go wherever you want`,
+                `but if you are sensitive to sound why not`];
+
+        // Hold, your phone up to your face,
+        // Turn off, silent mode and auto sleep.
+        // Plug in, a headset if you can.
+        // And, Have a good Ballade`;
+
+        let synth = window.speechSynthesis;
+        synth.onvoiceschanged = listVoices;
+        let voices = [];
+        let messages = [];
+
+        listVoices(); // load voices
+        let instruction = {
+            // start: [`welcome to this open performance`, `you are free to go wherever you want`, `you are free to go wherever you want`, `but`, `if you are sensitive to sounds why not`],
+            start: document.querySelectorAll("#target p"),
+            target: searchHtml("#target"),
+            pList: document.querySelectorAll("#target p"),
+            button: searchHtml(".myButton"),
+            idx: 0,
+            anime: false,
+        }
+        document.addEventListener("click", init);
+        function init() {
+            if (instruction.anime) return
+
+            searchHtml(".logo").classList.remove("starter");
+            // instruction.start.forEach(e => {
+            //     // console.log(addText(e));
+            //     instruction.pList.push(addText(e));
+            // });
+            // instruction.idx++;
+            // addText(instruction.idx)
+            const interval = setInterval(() => {
+
+                if (instruction.idx < instruction.start.length) {
+                    messages.push(say[instruction.idx])
+                    sayWord(say[instruction.idx]);
+                    console.log(instruction.pList[instruction.idx]);
+                    instruction.pList[instruction.idx].style.opacity = "1";
+                    instruction.idx++;
+
+                    // addText(instruction.idx)
+                } else {
+                    console.log(instruction.button.style.opacity);
+                    instruction.button.style.opacity = "1";
+                    messages.push("discover this path")
+                    sayWord("discover this path");
+                    clearInterval(interval)
+                }
+            }, 4000);
+            instruction.anime = true;
+        }
+        function addText(el) {
+            var tag = document.createElement("p"); // <p></p>
+            var text = document.createTextNode(el);
+            tag.appendChild(text); // <p>TEST TEXT</p>
+            tag.classList.add("simpleAcumin");
+            tag.classList.add("lite");
+            tag.classList.add("bigSize");
+            instruction.target.appendChild(tag, null);
+            // instruction.target.style.opacity = "0.1";
+
+            return tag;
+        }
+
+
+        function listVoices() { voices = synth.getVoices() }
+        function sayWord(say) {
+            let sayThis = new SpeechSynthesisUtterance(say);
+            sayThis.voice = voices[11];
+            sayThis.pitch = 0.9;
+            sayThis.rate = 0.7;
+            synth.speak(sayThis);
+        }
+    }
+</script>
+
+</html>

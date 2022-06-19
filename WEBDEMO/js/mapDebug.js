@@ -72,10 +72,8 @@ class MapDebug {
             ];
             let routeT = new L.Polyline(latlngs);
             boxes = L.RouteBoxer.box(routeT, this.distance / 10);
-
         } else
             boxes = L.RouteBoxer.box(route, this.distance / 10);
-
 
 
         boxes.forEach(element => {
@@ -110,8 +108,10 @@ class MapDebug {
         //     },
         //     minOpacity: 0.7
         //   }).addTo(this.map);
-        var imageUrl = './img/newPath.png',
-            imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
+        var imageUrl = './img/short.svg',
+            // var imageUrl = './img/newPath.png',
+            imageBounds = [[46.5359, 6.5884], [46.53884, 6.59096]];
+        // imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
         L.imageOverlay(imageUrl, imageBounds, { className: "hello" }).addTo(this.map);
 
         // // 1) Convert LatLng into container pixel position.
