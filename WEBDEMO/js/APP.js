@@ -76,13 +76,14 @@ class APP {
             // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
 
             // this.guitarPoint = this.initMusic(this.guitarList, "guitar");
+            console.log(this.guitarPoint);
         }
     }
     activeApp() {
         if (this.statut == "mobile") {
-            this.aurorePoint.forEach((element, index) => {
-                element.sample.playSample(0);
-            });
+            // this.aurorePoint.forEach((element, index) => {
+            //     element.sample.playSample(0);
+            // });
             this.guitarPoint.forEach((element, index) => {
                 element.sample.playSample(0);
             });
@@ -138,11 +139,11 @@ class APP {
         });
     }
     async loadSample() {
-        this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
+        // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
         this.guitarPoint = await this.initMusic(this.guitarList, "guitar");
 
         this.demo.quickSample.guitarPoint = this.guitarPoint;
-        this.demo.quickSample.aurorePoint = this.aurorePoint;
+        // this.demo.quickSample.aurorePoint = this.aurorePoint;
     }
     // -------------------------- LOAD DATA --------------------------------
     loadData() {
