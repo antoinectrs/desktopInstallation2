@@ -86,9 +86,9 @@ class APP {
             this.guitarPoint.forEach((element, index) => {
                 element.sample.playSample(0);
             });
-            this.vocalPoint.forEach((element, index) => {
-                element.sample.playSample(0);
-            });
+            // this.vocalPoint.forEach((element, index) => {
+            //     element.sample.playSample(0);
+            // });
         }
         this.point.forEach((element, index) => {
             element.sample.playSample(0);
