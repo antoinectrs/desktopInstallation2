@@ -17,7 +17,20 @@
     font-family: Acumin;
     src: url(./font/AcuminVariableConcept.otf);
 }
-
+.containerImage{
+    display: flex;
+    pointer-events: none;
+}
+.imgDemo{
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    /* height: 94vh; */
+    z-index: 20000;
+    top: -39px;
+    opacity: 0.5;
+    left: 20%;
+}
 .simpleAcumin {
     font-family: Acumin;
 }
@@ -327,7 +340,7 @@ path.leaflet-interactive {
     stroke-width: 12px;
     /* filter: blur(20px) contrast(9.8); */
     /* stroke-width:   332px; */
-    /* opacity: 0; */
+    opacity: 0.05;
 }
 
 path.leaflet-interactive:last-child {

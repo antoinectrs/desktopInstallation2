@@ -18,6 +18,9 @@ class MapDebug {
         this.change = false;
         this.distance = 0.02;
         this.hotlineLayer;
+
+      
+        
         // 
     }
     convertToPointPath() {
@@ -25,15 +28,22 @@ class MapDebug {
             this.pointPath.push(element.position);
         });
     }
+    // newControl(){
+    //     this.lausPath.forEach(element => {
+    //         const content = [element.lat, element.lng]
+    //         this.pointRoadBox.push(content);
+    //     });
+    //     this.drawHitBox(this.pointRoadBox);
+    // }
     convertToPointRoadBox(e) {
         var routing = e.route.coordinates;
-        console.log(routing);
+        // console.log(routing);
         routing.forEach(element => {
             const content = [element.lat, element.lng]
             this.pointRoadBox.push(content);
         });
-        this.variation = this.pointRoadBox;
-        this.setColorVariation(this.variation);
+        // this.variation = this.pointRoadBox;
+        // this.setColorVariation(this.variation);
 
         this.drawHitBox(this.pointRoadBox);
         // for (let index = 0; index <4; index++) {
@@ -94,7 +104,7 @@ class MapDebug {
             let routeT = new L.Polyline(latlngs);
             boxes = L.RouteBoxer.box(routeT, this.distance / 10);
         } else
-            boxes = L.RouteBoxer.box(route, this.distance / 10);
+            boxes = L.RouteBoxer.box(route, this.distance *  4);
 
 
         boxes.forEach(element => {
@@ -153,13 +163,12 @@ class MapDebug {
 
         // console.log(imageUrl, imageBounds);
     }
-    setColorVariation(array) {
-        array.map((e, index) => {
-            let value = mapRange(index, 0, array.length, 0, 0.4);
-            e.push(value);
-        })
-
-    }
+    // setColorVariation(array) {
+    //     array.map((e, index) => {
+    //         let value = mapRange(index, 0, array.length, 0, 0.4);
+    //         e.push(value);
+    //     })
+    // }
     init(lat = this.origine.lat, lng = this.origine.lng, zoom = 23) {
         const token = "pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNrMXVxemtrNzBjbTczaXBhb2I3amJ5YncifQ.EqRwzHSuwtW2sp615mvCAQ";
         this.map = L.map('map', {
@@ -194,6 +203,7 @@ class MapDebug {
         //     accessToken: 'pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNsMGprazdncDAxYzYzZWxhbzRlcWk2NDkifQ.JM4Xgke091LLntRvk9UbrA'
         // }).addTo(this.map);
         this.control();
+        // this.newControl()
     }
     createHotline(array, option) {
         const hotlineLayer = L.hotline(array, {
@@ -236,6 +246,7 @@ class MapDebug {
         //     this.convertToPointRoadBox(buffer)
         // });
     }
+  
     routeListener() {
         this.route.addEventListener('routeselected', (buffer) => { this.convertToPointRoadBox(buffer) });
     }
