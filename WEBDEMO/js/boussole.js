@@ -9,8 +9,14 @@ class myCompass {
         if (this.myCompass.permissionGranted)
             return this.myCompass.getBearingToNorth();
     }
+    pathDirection() {
+        if (this.myCompass.permissionGranted) {
+            const currentPosition = { lat: this.myCompass.position.coords.latitude, lng: this.myCompass.position.coords.longitude };
+            return this.myCompass.getBearingToDestination(currentPosition, { lat: 46.53723497048019, lng: 6.589882161967476})
+        }
+    }
 
-    
+
     // });
     // drawMyCompass(buffer){
     // if (buffer.position !== null && buffer.orientation !== null) {

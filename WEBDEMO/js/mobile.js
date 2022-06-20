@@ -243,23 +243,27 @@ class MOBILE {
         const search = () => {
             setTimeout(() => {
                 const deg = this.myCompass.compassLoad();
+                const srcPth = this.myCompass.pathDirection();
+                console.log(srcPth);
                 if (this.myCompass.compassLoad() != undefined) {
                     if (this.dzm.psh == false)
                         this.myMap.changeOrientation(deg);
 
-                    if (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
-                        this.noPoint.sample.setOrientation(this.convert360Value(deg + 200));
+
 
                     // this.noPoint.sample.initOrientation(this.convert360Value(deg+200))
-                    this.point.forEach(element => {
-                        if (element.sample.rack.volume.audioNode.gain.value > 0.1)
-                            element.sample.setOrientation(deg)
-                        //         console.log(deg);
-                    })
+
                     // console.log(this.inPath);
-                    if (this.inPath == false) this.outPathOrientation(hitBoxNear);
-                    else
+                    if (this.inPath == false) this.outPathOrientation(srcPth);
+                    else {
+                        this.point.forEach(element => {
+                            if (element.sample.rack.volume.audioNode.gain.value > 0.1)
+                                element.sample.setOrientation(deg)
+                            //         console.log(deg);
+                        })
                         myRotate(this.dzm.wheel, deg);
+                    }
+                
                     // else
                     //     this.inPathOrientation();
                 };
@@ -275,9 +279,11 @@ class MOBILE {
         else return value;
     }
     // inPathOrientation() { myRotate(this.partition.title.rotateDiv, 0) } // rest to 0 DOM
-    outPathOrientation(hitBoxNear) {
-        const targetAngle = this.rotValue(hitBoxNear);
-        myRotate(this.partition.title.rotateDiv, targetAngle); //DOM
+    outPathOrientation(srcPth) {
+        if (this.noPoint.sample.rack.volume.audioNode.gain.value > 0.1)
+            this.noPoint.sample.setOrientation(this.convert360Value(srcPth));
+        // const targetAngle = this.rotValue(hitBoxNear);
+        myRotate(this.partition.title.rotateDiv, srcPth); //DOM
         // this.noPoint.sample.setOrientation(targetAngle)
     }
     rotValue(hitBoxNear) {

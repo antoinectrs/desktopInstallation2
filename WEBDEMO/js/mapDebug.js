@@ -19,8 +19,8 @@ class MapDebug {
         this.distance = 0.02;
         this.hotlineLayer;
 
-      
-        
+
+
         // 
     }
     convertToPointPath() {
@@ -103,8 +103,14 @@ class MapDebug {
 
             let routeT = new L.Polyline(latlngs);
             boxes = L.RouteBoxer.box(routeT, this.distance / 10);
-        } else
-            boxes = L.RouteBoxer.box(route, this.distance *  4);
+        } else {
+            boxes = L.RouteBoxer.box(route, this.distance * 4);
+
+            this.map.flyTo({ lat: 46.535, lng: 6.629 }, 14.4, {
+                animate: false,
+                
+            });
+        }
 
 
         boxes.forEach(element => {
@@ -246,7 +252,7 @@ class MapDebug {
         //     this.convertToPointRoadBox(buffer)
         // });
     }
-  
+
     routeListener() {
         this.route.addEventListener('routeselected', (buffer) => { this.convertToPointRoadBox(buffer) });
     }

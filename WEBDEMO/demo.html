@@ -14,17 +14,17 @@
     <div class="parent">
         <div class="case div1">
         </div>
-        <div class="case div2">
-            <div  style="cursor: none" class="case carte" id="map">
+        <div class="case div2" id="present">
+            <div style="cursor: none" class="case carte" id="map">
                 <div class="menu">
-                        <button id="playTrack" type="button"> play</button>
-                        <div class="place">
-                            <!-- <button type="button"> ecal</button>
+                    <button id="playTrack" type="button"> play</button>
+                    <div class="place">
+                        <!-- <button type="button"> ecal</button>
                             <button type="button"> riponne</button>
                             <button type="button"> hermitage</button> -->
-                        </div>
+                    </div>
                 </div>
-           
+
             </div>
         </div>
         <div class="case div3">
@@ -75,7 +75,8 @@
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
 <script src="https://unpkg.com/mapbox-gl-leaflet/leaflet-mapbox-gl.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-polylinedecorator/0.7.3/leaflet.polylineDecorator.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-polylinedecorator/0.7.3/leaflet.polylineDecorator.js"></script>
 
 <script src="./lib/leaflet-routeboxer.js"></script>
 <script src="./lib/Polyline.encoded.js"></script>
@@ -97,5 +98,12 @@
 
 </html>
 <script>
-    window.onload = function () { new APP("demo"); }
+    window.onload = function () {
+        new APP("demo");
+        const targetPresent = document.querySelector("#present");
+        const playTrack = document.querySelector("#playTrack");
+        playTrack.addEventListener('click', () => {
+            targetPresent.classList.toggle("visible");
+        })
+    }
 </script>
