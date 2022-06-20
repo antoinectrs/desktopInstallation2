@@ -58,7 +58,7 @@ class MapDebug {
         let data = polyline.encodePath();
         let route = new L.Polyline(array);
         let boxes;
-        if (this.statut == "demo") {
+        if (this.statut == "mobile") {
             const latlngs = [
                 [46.53646, 6.58841],
                 [46.5366, 6.58896],
