@@ -12,7 +12,8 @@ class MOBILE {
             guitarPoint: null,
             // aurorePoint: null,
             nav: [[11, 19], [40, 45], [70, 72], [80, 84], [90, 100]],
-            dir: ["roadAbout", "turnLeft", "Take A Break", "Free path"],
+            dir: ["roadAbout", "turnLeft", "Take A Break", `you arrive at the platform.
+            In front of you, an open path, Can be explored.`],
             robot: {
                 synth: window.speechSynthesis,
                 voices: [],
@@ -358,7 +359,7 @@ class MOBILE {
         this.loadingAn()
 
         if (this.autorisePlay) {
-            const i = this.wordAnimation();
+            // const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
                 const option = { array: this.quickSample.nav, num: this.catchCloserPoint.index }
                 const presNav = arraySearching(option);
@@ -369,15 +370,15 @@ class MOBILE {
                     if (this.partition.verse.activeTop) {
                         this.partition.verse.moveElement.classList.add("long-transition");
                         this.partition.verse.moveElement.style.transform = "translateY(110vh)";
-                        const myRot = mapRange(i, 0, 4, 0, 360);
+                        // const myRot = mapRange(i, 0, 4, 0, 360);
                         setTimeout(() => {
                             this.sayWord(this.quickSample.dir[presNav]);
-                        //     this.quickSample.aurorePoint[i].sample.playSample(0);
-                        //     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                        //     this.quickSample.aurorePoint[i].sample.render(1, false);
+                            //     this.quickSample.aurorePoint[i].sample.playSample(0);
+                            //     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
+                            //     this.quickSample.aurorePoint[i].sample.render(1, false);
                         }, 3000)
                         this.quickSample.guitarPoint[i].sample.playSample(0);
-                        this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
+                        // this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
                         this.quickSample.guitarPoint[i].sample.render(1, false);
 
 
@@ -393,9 +394,9 @@ class MOBILE {
                     }
                     this.partition.verse.activeTop = !this.partition.verse.activeTop;
                 }
-                console.log( this.catchCloserPoint.index, presNav);
+                console.log(this.catchCloserPoint.index, presNav);
             }
-           
+
         }
     }
     wordAnimation() {
@@ -426,7 +427,7 @@ class MOBILE {
     sayWord(say) {
         let sayThis = new SpeechSynthesisUtterance(say);
         sayThis.voice = this.quickSample.robot.voices[17];
-        sayThis.pitch = 0.8;
+        sayThis.pitch = 1;
         sayThis.rate = 0.7;
         this.quickSample.robot.synth.speak(sayThis);
     }
