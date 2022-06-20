@@ -18,7 +18,6 @@ class MapDebug {
         this.change = false;
         this.distance = 0.02;
         this.hotlineLayer;
-
         // 
     }
     convertToPointPath() {
@@ -28,6 +27,7 @@ class MapDebug {
     }
     convertToPointRoadBox(e) {
         var routing = e.route.coordinates;
+        console.log(routing);
         routing.forEach(element => {
             const content = [element.lat, element.lng]
             this.pointRoadBox.push(content);
@@ -58,8 +58,27 @@ class MapDebug {
         let data = polyline.encodePath();
         let route = new L.Polyline(array);
         let boxes;
-        if (this.statut == "mobile") {
+        if (this.statut == "demo") {
             const latlngs = [
+                [46.53646, 6.58841],
+                [46.5366, 6.58896],
+                [46.53663, 6.58908],
+                [46.53661, 6.5891],
+                [46.5366, 6.58912],
+                [46.5366, 6.58915],
+                [46.5366, 6.58917],
+                [46.5366, 6.5892],
+                [46.53661, 6.58922],
+                [46.53663, 6.58924],
+                [46.53664, 6.58925],
+                [46.53666, 6.58925],
+                [46.53668, 6.58924],
+                [46.53671, 6.58934],
+                [46.53676, 6.58956],
+                [46.53686, 6.58993],
+                [46.53693, 6.59021],
+                [46.53705, 6.59068],
+                [46.53709, 6.59084],
                 [46.537217821833764, 6.5907825160861],
                 [46.53729844663685, 6.5906735853334135],
                 [46.537563425801196, 6.590342402680614],
@@ -67,9 +86,11 @@ class MapDebug {
                 [46.53763786329065, 6.589994677317259],
                 [46.537753406020364, 6.58992449120311],
                 [46.538069478750316, 6.589746406572084],
-                [46.53828895007725, 6.589490319150933],
-                [46.53815429898116, 6.58897455824847],
+                // [46.53828895007725, 6.589490319150933],
+                // [46.53815429898116, 6.58897455824847],
+                [46.53851169888246, 6.588243532567393],
             ];
+
             let routeT = new L.Polyline(latlngs);
             boxes = L.RouteBoxer.box(routeT, this.distance / 10);
         } else
@@ -81,6 +102,7 @@ class MapDebug {
             // this.hitBox.push(L.rectangle(element, { stroke: false, fillOpacity: 0, weight: 1 }).addTo(this.map));
             // this.hitBox.push(L.rectangle(element, {  fillOpacity: 0.1, weight: 1 }).addTo(this.map));
         });
+
         // let copyBox = this.hitBox;
         // let heightsPoint= this.hitBox.map(e => {
         //     const centerBox = e.getBounds().getCenter();
@@ -109,9 +131,9 @@ class MapDebug {
         //     minOpacity: 0.7
         //   }).addTo(this.map);
         var imageUrl = './img/short.svg',
-            // var imageUrl = './img/newPath.png',
             imageBounds = [[46.5359, 6.5884], [46.53884, 6.59096]];
         // imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
+
         L.imageOverlay(imageUrl, imageBounds, { className: "hello" }).addTo(this.map);
 
         // // 1) Convert LatLng into container pixel position.

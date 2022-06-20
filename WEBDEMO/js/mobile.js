@@ -11,8 +11,13 @@ class MOBILE {
         this.quickSample = {
             guitarPoint: null,
             // aurorePoint: null,
-            nav: [[0, 10], [30, 50]]
+            nav: [[11, 19], [40, 45], [70, 72], [80, 84], [90, 100]],
+            robot: {
+                synth: window.speechSynthesis,
+                voices: [],
+            }
         }
+        this.quickSample.robot.synth.onvoiceschanged = () => { this.listVoices() }
         this.preset;
         this.myCompass;
         this.myPosition();
@@ -72,7 +77,7 @@ class MOBILE {
                 }
                 else
                     this.myMap.map.flyTo(this.dzm.lst, 25, { animate: true, duration: 2.5 });
-                console.log(this.dzm.psh);
+                // console.log(this.dzm.psh);
             })
         })
     }
@@ -83,20 +88,12 @@ class MOBILE {
                 //   console.log(index*120);
                 const idx = index * 120;
                 this.point.forEach(ele => {
-                    // switch (idx) {
-                    //     case 0:
-                    //         break;
-                    //     case 120:
-                    //         break;
-                    //     case 240:
-                    //         break;
-                    // }
+
                     // && ele.sample.actv
                     if (idx == ele.sample.rack.binaural.default && ele.sample.actv) {
                         // console.log(ele.sample.rack.binaural.default,);
                         //     console.log(ele);
                         if (e.classList.contains('actv')) {
-                            console.log("render");
                             ele.sample.render(1, false)
                         }
                         else
@@ -148,7 +145,6 @@ class MOBILE {
 
         this.partition.title.element.classList.add("whiteFont");
         this.partition.title.element.classList.remove("contrastFont");
-        console.log(this.partition.title.element.classList);
         this.partition.title.rotateDiv.classList.add("soft-transition");
         myRotate(this.partition.title.rotateDiv, 0);
         // searchHtml("#arrow").style.height = "0px";
@@ -161,7 +157,6 @@ class MOBILE {
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
-        console.log(this.partition.title.element);
         this.partition.title.element.classList.add("contrastFont");
         this.partition.title.element.classList.remove("whiteFont");
         this.dzm.wheel.classList.add("soft-transition");
@@ -302,7 +297,6 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
-        console.log(changeDom);
         this.partition.title.element.innerHTML = changeDom;
     };
     checkContentText(e, index) {
@@ -366,16 +360,15 @@ class MOBILE {
             const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
                 const option = { array: this.quickSample.nav, num: this.catchCloserPoint.index }
+                const presNav = arraySearching(option);
 
-                console.log(arraySearching(option));
-
-                // isBeetwen(this.catchCloserPoint.index)
+                // if (presNav = !"notFind") {
                 if (this.catchCloserPoint.index <= 10) {
                     if (this.partition.verse.activeTop) {
                         this.partition.verse.moveElement.classList.add("long-transition");
                         this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                         const myRot = mapRange(i, 0, 4, 0, 360);
-                        console.log("inside aurore zone");
+                        this.sayWord("hello");
                         // setTimeout(() => {
                         //     this.quickSample.aurorePoint[i].sample.playSample(0);
                         //     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
@@ -409,7 +402,7 @@ class MOBILE {
     }
     loading() {
         searchHtml("#playTrack").style.display = "none";
-        console.log("loading");
+        // console.log("loading");
         this.dzm.wheel.classList.add("soft-transition");
         // this.dzm.wheel.classList.add("rotatingDone");
         this.dzm.wheel.classList.remove("rotating");
@@ -420,6 +413,18 @@ class MOBILE {
             this.mapDom.classList.remove("filterActive");
             this.dzm.loading = false;
         }, 3000);
+    }
+
+    // vox
+    listVoices() {
+        this.quickSample.robot.voices = this.quickSample.robot.synth.getVoices()
+    }
+    sayWord(say) {
+        let sayThis = new SpeechSynthesisUtterance(say);
+        sayThis.voice = this.quickSample.robot.voices[11];
+        sayThis.pitch = 0.8;
+        sayThis.rate = 0.7;
+        this.quickSample.robot.synth.speak(sayThis);
     }
 
 }

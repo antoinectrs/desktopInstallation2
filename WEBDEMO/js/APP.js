@@ -76,7 +76,6 @@ class APP {
             // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
 
             // this.guitarPoint = this.initMusic(this.guitarList, "guitar");
-            console.log(this.guitarPoint);
         }
     }
     activeApp() {
@@ -147,7 +146,6 @@ class APP {
     }
     // -------------------------- LOAD DATA --------------------------------
     loadData() {
-        console.log(this.statut);
         fetch('./DATA/data.JSON')
             // fetch('./DATA/prelaz.JSON')
             // fetch('./DATA/lemont.JSON')
@@ -175,7 +173,6 @@ class APP {
             // this.myMap.boxTest();
             this.demo = new MOBILE(this.myMap, this.point, this.noPoint);
         } else {
-            console.log(this.myMap);
             this.myMap.init();
             this.myMap.boxTest();
             this.demo = new DEMO(this.myMap, this.point, this.noPoint);

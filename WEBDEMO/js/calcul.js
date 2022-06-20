@@ -52,9 +52,8 @@ function smoothDamp(
   return { value, velocity }
 }
 function arraySearching(option) {
-  let result;
+  let result="notFind";
   option.array.forEach((element, index) => {
-    console.log(index);
     if (option.num >= element[0] && option.num <= element[1]) {
       result = index
       return result
