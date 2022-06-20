@@ -12,7 +12,11 @@ class MOBILE {
             guitarPoint: null,
             // aurorePoint: null,
             nav: [[11, 19], [40, 45], [70, 72], [80, 84], [90, 100]],
-            dir: ["roadAbout", "turnLeft", "Take A Break", `you arrive at the platform.
+            dir: [
+                `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
+                `Turn left, through the groves, to get to rumine.`,
+                `Under the trees, remove your helmet, and take a break to look around.`,
+                `you arrive at the platform.
             In front of you, an open path, Can be explored.`],
             robot: {
                 synth: window.speechSynthesis,
