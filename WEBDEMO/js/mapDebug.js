@@ -175,7 +175,7 @@ class MapDebug {
     //         e.push(value);
     //     })
     // }
-    init(lat = this.origine.lat, lng = this.origine.lng, zoom = 23) {
+    init(lat = this.origine.lat, lng = this.origine.lng, zoom = 21) {
         const token = "pk.eyJ1IjoiYW50b2luZTk4IiwiYSI6ImNrMXVxemtrNzBjbTczaXBhb2I3amJ5YncifQ.EqRwzHSuwtW2sp615mvCAQ";
         this.map = L.map('map', {
             rotate: true,

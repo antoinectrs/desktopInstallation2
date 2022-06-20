@@ -16,8 +16,8 @@ class APP {
         // this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
         this.noise = "waitLoop";
         // this.noise = "breakbeat";
-        this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
-        this.auroreList = ["continuer", "devant", "droite", "gauche", "suivre"];
+        // this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
+        this.auroreList = ["01_hermitage", "02_rumine", "03_pause", "04_plateforme"];
         this.guitarList = ["01", "02", "03"];
 
         this.noPoint;
@@ -44,7 +44,7 @@ class APP {
     // -------------------------- LOAD SOUND --------------------------------
     initPoint(musicList, preset) {
         let delay = 3;
-      
+
         if (this.statut == "mobile")
             delay = 8
 
@@ -54,7 +54,7 @@ class APP {
                     folder: "track03",
                     path: music,
                     isLooping: true,
-                    delay:delay,
+                    delay: delay,
                 })
             }
         });
@@ -65,13 +65,13 @@ class APP {
                 path: this.noise,
                 isLooping: true,
                 folder: "track01",
-                delay:delay,
+                delay: delay,
             })
         };
         this.noPoint.sample.requestTrack();
 
         if (this.statut == "mobile") {
-            this.initVocals();
+            // this.initVocals();
             this.loadSample();
             // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
 
@@ -138,11 +138,12 @@ class APP {
         });
     }
     async loadSample() {
-        // this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
+        this.aurorePoint = await this.initMusic(this.auroreList, "vocal");
         this.guitarPoint = await this.initMusic(this.guitarList, "guitar");
-
-        this.demo.quickSample.guitarPoint = this.guitarPoint;
-        // this.demo.quickSample.aurorePoint = this.aurorePoint;
+        setTimeout(() => {
+            this.demo.quickSample.guitarPoint = this.guitarPoint;
+            this.demo.quickSample.aurorePoint = this.aurorePoint;
+        }, 500);
     }
     // -------------------------- LOAD DATA --------------------------------
     loadData() {

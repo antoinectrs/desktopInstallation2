@@ -10,20 +10,20 @@ class MOBILE {
         this.vocalPoint;
         this.quickSample = {
             guitarPoint: null,
-            // aurorePoint: null,
+            aurorePoint: null,
             nav: [[11, 19], [40, 45], [70, 72], [80, 84], [90, 100]],
-            dir: [
-                `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
-                `Turn left, through the groves, to get to rumine.`,
-                `Under the trees, remove your helmet, and take a break to look around.`,
-                `you arrive at the platform.
-            In front of you, an open path, Can be explored.`],
-            robot: {
-                synth: window.speechSynthesis,
-                voices: [],
-            }
+            // dir: [
+            //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
+            //     `Turn left, through the groves, to get to rumine.`,
+            //     `Under the trees, remove your helmet, and take a break to look around.`,
+            //     `you arrive at the platform.
+            // In front of you, an open path, Can be explored.`],
+            // robot: {
+            //     synth: window.speechSynthesis,
+            //     voices: [],
+            // }
         }
-        this.quickSample.robot.synth.onvoiceschanged = () => { this.listVoices() }
+        // this.quickSample.robot.synth.onvoiceschanged = () => { this.listVoices() }
         this.preset;
         this.myCompass;
         this.myPosition();
@@ -31,7 +31,7 @@ class MOBILE {
         this.autorisePlay = false;
         // this.myConsole();
         // this.spaceRadius = 50;
-        this.spaceRadius = 20;
+        this.spaceRadius = 30;
         this.createMap = false;
         this.inPath = false;
         this.dzm = {
@@ -82,7 +82,7 @@ class MOBILE {
                     this.releasePoint();
                 }
                 else
-                    this.myMap.map.flyTo(this.dzm.lst, 25, { animate: true, duration: 2.5 });
+                    this.myMap.map.flyTo(this.dzm.lst, 20, { animate: true, duration: 2.5 });
                 // console.log(this.dzm.psh);
             })
         })
@@ -176,7 +176,7 @@ class MOBILE {
             lng: pos.coords.longitude
         }
         this.dzm.lst = convertPos;
-        this.myMap.map.flyTo(convertPos, 25, {
+        this.myMap.map.flyTo(convertPos, 20, {
             // this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
             duration: 1.5
@@ -244,7 +244,6 @@ class MOBILE {
             setTimeout(() => {
                 const deg = this.myCompass.compassLoad();
                 const srcPth = this.myCompass.pathDirection();
-                console.log(srcPth);
                 if (this.myCompass.compassLoad() != undefined) {
                     if (this.dzm.psh == false)
                         this.myMap.changeOrientation(deg);
@@ -367,25 +366,27 @@ class MOBILE {
     }
     secFrame() {
         this.loadingAn()
-
         if (this.autorisePlay) {
             // const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
                 const option = { array: this.quickSample.nav, num: this.catchCloserPoint.index }
                 const presNav = arraySearching(option);
-
+                // console.log(this.quickSample.nav, this.catchCloserPoint.index);
                 if (presNav != "notFind") {
-                    console.log(this.quickSample.dir[presNav]);
+                   
+                    console.log(presNav, this.quickSample.dir);
                     // if (this.catchCloserPoint.index <= 10) {
                     if (this.partition.verse.activeTop) {
                         this.partition.verse.moveElement.classList.add("long-transition");
                         this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                         // const myRot = mapRange(i, 0, 4, 0, 360);
                         setTimeout(() => {
-                            this.sayWord(this.quickSample.dir[presNav]);
-                            //     this.quickSample.aurorePoint[i].sample.playSample(0);
-                            //     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
-                            //     this.quickSample.aurorePoint[i].sample.render(1, false);
+                            // console.log(this.quickSample.dir[presNav]);
+                            // this.sayWord(this.quickSample.dir[presNav]);
+                          
+                                this.quickSample.aurorePoint[presNav].sample.playSample(0);
+                                this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
+                                this.quickSample.aurorePoint[presNav].sample.render(1, false);
                         }, 3000)
                         this.quickSample.guitarPoint[0].sample.playSample(0);
                         // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
@@ -431,17 +432,18 @@ class MOBILE {
             this.dzm.loading = false;
         }, 3000);
     }
-
     // vox
-    listVoices() {
-        this.quickSample.robot.voices = this.quickSample.robot.synth.getVoices()
-    }
-    sayWord(say) {
-        let sayThis = new SpeechSynthesisUtterance(say);
-        sayThis.voice = this.quickSample.robot.voices[17];
-        sayThis.pitch = 1;
-        sayThis.rate = 0.7;
-        this.quickSample.robot.synth.speak(sayThis);
-    }
+    // listVoices() {
+    //     this.quickSample.robot.voices = this.quickSample.robot.synth.getVoices()
+    // }
+    // sayWord(say) {
+     
+    //     let sayThis = new SpeechSynthesisUtterance(say);
+    //     sayThis.voice = this.quickSample.robot.voices[17];
+    //     sayThis.pitch = 1;
+    //     sayThis.rate = 0.7;
+    //     this.quickSample.robot.synth.speak(sayThis);
+    //     console.log(sayThis);
+    // }
 
 }
