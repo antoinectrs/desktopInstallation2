@@ -56,7 +56,7 @@ class MOBILE {
                 moveElement: searchHtml("#content"),
                 contentElement: searchHtml("#target p"),
                 activeTop: false,
-                interval: setInterval(this.secFrame.bind(this), 3500),
+                interval: setInterval(this.secFrame.bind(this), 12000),
             },
         }
         this.iteration = 0;
@@ -377,15 +377,17 @@ class MOBILE {
                             //     this.quickSample.aurorePoint[i].sample.initOrientation(myRot);
                             //     this.quickSample.aurorePoint[i].sample.render(1, false);
                         }, 3000)
-                        this.quickSample.guitarPoint[i].sample.playSample(0);
-                        // this.quickSample.guitarPoint[i].sample.initOrientation(myRot);
-                        this.quickSample.guitarPoint[i].sample.render(1, false);
+                        this.quickSample.guitarPoint[0].sample.playSample(0);
+                        // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
+                        this.quickSample.guitarPoint[0].sample.initOrientation(0);
+                        this.quickSample.guitarPoint[0].sample.render(1, false);
 
 
                         // this.vocalPoint[i].sample.playSample(0);
                         // this.vocalPoint[i].sample.initOrientation(myRot);
                         // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
-                        this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
+
+                        // this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
                     } else {
                         // this.partition.verse.moveElement.classList.remove("long-transition");
