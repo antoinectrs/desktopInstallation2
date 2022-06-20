@@ -11,7 +11,8 @@ class MOBILE {
         this.quickSample = {
             guitarPoint: null,
             aurorePoint: null,
-            nav: [[11, 19], [40, 45], [70, 72], [80, 84], [90, 100]],
+            nav: [[9, 21], [38, 48], [70, 80], [80, 84], [90, 100]],
+            run:false,
             // dir: [
             //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
             //     `Turn left, through the groves, to get to rumine.`,
@@ -60,7 +61,7 @@ class MOBILE {
                 moveElement: searchHtml("#content"),
                 contentElement: searchHtml("#target p"),
                 activeTop: false,
-                interval: setInterval(this.secFrame.bind(this), 12000),
+                interval: setInterval(this.secFrame.bind(this), 1000),
             },
         }
         this.iteration = 0;
@@ -262,7 +263,7 @@ class MOBILE {
                         })
                         myRotate(this.dzm.wheel, deg);
                     }
-                
+
                     // else
                     //     this.inPathOrientation();
                 };
@@ -366,48 +367,43 @@ class MOBILE {
     }
     secFrame() {
         this.loadingAn()
-        if (this.autorisePlay) {
+        if (this.autorisePlay && this.quickSample.run == false) {
             // const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
                 const option = { array: this.quickSample.nav, num: this.catchCloserPoint.index }
                 const presNav = arraySearching(option);
                 // console.log(this.quickSample.nav, this.catchCloserPoint.index);
                 if (presNav != "notFind") {
-                   
-                    console.log(presNav, this.quickSample.dir);
-                    // if (this.catchCloserPoint.index <= 10) {
-                    if (this.partition.verse.activeTop) {
-                        this.partition.verse.moveElement.classList.add("long-transition");
-                        this.partition.verse.moveElement.style.transform = "translateY(110vh)";
+                    this.quickSample.run=true
+                    // if (this.partition.verse.activeTop) {
+                        // this.partition.verse.moveElement.classList.add("long-transition");
+                        // this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                         // const myRot = mapRange(i, 0, 4, 0, 360);
                         setTimeout(() => {
-                            // console.log(this.quickSample.dir[presNav]);
-                            // this.sayWord(this.quickSample.dir[presNav]);
-                          
-                                this.quickSample.aurorePoint[presNav].sample.playSample(0);
-                                this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
-                                this.quickSample.aurorePoint[presNav].sample.render(1, false);
+                            this.quickSample.aurorePoint[presNav].sample.playSample(0);
+                            this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
+                            this.quickSample.aurorePoint[presNav].sample.render(1, false);
                         }, 3000)
+                        setTimeout(() => {
+                            this.quickSample.run=false;
+                        }, 8000)
                         this.quickSample.guitarPoint[0].sample.playSample(0);
                         // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
                         this.quickSample.guitarPoint[0].sample.initOrientation(0);
                         this.quickSample.guitarPoint[0].sample.render(1, false);
-
-
                         // this.vocalPoint[i].sample.playSample(0);
                         // this.vocalPoint[i].sample.initOrientation(myRot);
                         // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
 
                         // this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
-                    } else {
+                    // } else {
                         // this.partition.verse.moveElement.classList.remove("long-transition");
                         // this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
                         // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
                     }
-                    this.partition.verse.activeTop = !this.partition.verse.activeTop;
-                }
-                console.log(this.catchCloserPoint.index, presNav);
+                    // this.partition.verse.activeTop = !this.partition.verse.activeTop;
+                // }
             }
 
         }
@@ -437,7 +433,7 @@ class MOBILE {
     //     this.quickSample.robot.voices = this.quickSample.robot.synth.getVoices()
     // }
     // sayWord(say) {
-     
+
     //     let sayThis = new SpeechSynthesisUtterance(say);
     //     sayThis.voice = this.quickSample.robot.voices[17];
     //     sayThis.pitch = 1;
