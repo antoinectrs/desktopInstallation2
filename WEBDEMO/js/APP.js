@@ -17,7 +17,7 @@ class APP {
         this.noise = "waitLoop";
         // this.noise = "breakbeat";
         // this.vocalList = ["lechemin", "quidescend", "enface", "quimonte"];
-        this.auroreList = ["01_hermitage", "02_rumine", "03_pause", "04_plateforme"];
+        this.auroreList = ["01_hermitage", "02_rumine", "03_plateforme"];
         this.guitarList = ["01", "02", "03"];
 
         this.noPoint;

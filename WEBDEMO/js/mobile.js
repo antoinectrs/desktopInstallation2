@@ -11,7 +11,7 @@ class MOBILE {
         this.quickSample = {
             guitarPoint: null,
             aurorePoint: null,
-            nav: [[9, 15], [41, 44], [70, 80], [84, 89]],
+            nav: [[9, 15], [41, 44], [84, 89]],
             run: false,
             // dir: [
             //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
@@ -411,7 +411,7 @@ class MOBILE {
                     }, 3000);
                     setTimeout(() => {
                         this.quickSample.run = false;
-                    }, 60 * 1000);
+                    }, 300 * 1000);
                     this.quickSample.guitarPoint[0].sample.playSample(0);
                     // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
                     this.quickSample.guitarPoint[0].sample.initOrientation(0);
