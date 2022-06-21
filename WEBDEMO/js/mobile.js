@@ -12,7 +12,7 @@ class MOBILE {
             guitarPoint: null,
             aurorePoint: null,
             nav: [[9, 15], [41, 44], [70, 80], [84, 89]],
-            run:false,
+            run: false,
             // dir: [
             //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
             //     `Turn left, through the groves, to get to rumine.`,
@@ -62,6 +62,7 @@ class MOBILE {
                 contentElement: searchHtml("#target p"),
                 activeTop: false,
                 interval: setInterval(this.secFrame.bind(this), 1000),
+                loading: setInterval(this.loadingAn.bind(this), 3500)
             },
         }
         this.iteration = 0;
@@ -205,7 +206,7 @@ class MOBILE {
         this.point.forEach((element, index) => {
             if (element.sample.audio.state != "suspended") {
                 const find = this.findPreset(index, boxIndex);
-   
+
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
                 if (find.presetVolume > 0.9)
                     element.sample.actv = true; //-------tag actif sample
@@ -367,11 +368,12 @@ class MOBILE {
                 myRotate(this.dzm.wheel, 0);
                 this.dzm.wheel.classList.remove("linear-transition");
             }, 3400)
-        }
-
+        } else
+            clearInterval(this.partition.verse.loading);
+        console.log("inside");
     }
     secFrame() {
-        this.loadingAn()
+        // this.loadingAn()
         if (this.autorisePlay && this.quickSample.run == false) {
             // const i = this.wordAnimation();
             if (this.catchCloserPoint != null) {
@@ -379,39 +381,42 @@ class MOBILE {
                 const presNav = arraySearching(option);
                 // console.log(this.quickSample.nav, this.catchCloserPoint.index);
                 if (presNav != "notFind") {
-                    this.quickSample.run=true
+                    this.quickSample.run = true
                     // if (this.partition.verse.activeTop) {
-                        // this.partition.verse.moveElement.classList.add("long-transition");
-                        // this.partition.verse.moveElement.style.transform = "translateY(110vh)";
-                        // const myRot = mapRange(i, 0, 4, 0, 360);
-                        setTimeout(() => {
-                            this.quickSample.aurorePoint[presNav].sample.playSample(0);
-                            this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
-                            this.quickSample.aurorePoint[presNav].sample.render(0.6, false);
-                        }, 3000);
-                        setTimeout(() => {
-                            this.quickSample.run=false;
-                        }, 60*1000);
-                        this.quickSample.guitarPoint[0].sample.playSample(0);
-                        // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
-                        this.quickSample.guitarPoint[0].sample.initOrientation(0);
-                        this.quickSample.guitarPoint[0].sample.render(1, false);
-                        // this.vocalPoint[i].sample.playSample(0);
-                        // this.vocalPoint[i].sample.initOrientation(myRot);
-                        // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
+                    // this.partition.verse.moveElement.classList.add("long-transition");
+                    // this.partition.verse.moveElement.style.transform = "translateY(110vh)";
+                    // const myRot = mapRange(i, 0, 4, 0, 360);
+                    setTimeout(() => {
+                        this.quickSample.aurorePoint[presNav].sample.playSample(0);
+                        this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
+                        this.quickSample.aurorePoint[presNav].sample.render(0.6, false);
+                    }, 3000);
+                    setTimeout(() => {
+                        this.quickSample.run = false;
+                    }, 60 * 1000);
+                    this.quickSample.guitarPoint[0].sample.playSample(0);
+                    // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
+                    this.quickSample.guitarPoint[0].sample.initOrientation(0);
+                    this.quickSample.guitarPoint[0].sample.render(1, false);
+                    // this.vocalPoint[i].sample.playSample(0);
+                    // this.vocalPoint[i].sample.initOrientation(myRot);
+                    // this.vocalPoint[i].sample.render(DEFAULT_FREQUENCY, 1);
 
-                        // this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
+                    // this.partition.verse.contentElement.textContent = this.preset[0].voice[i].content
 
                     // } else {
-                        // this.partition.verse.moveElement.classList.remove("long-transition");
-                        // this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
-                        // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
-                    }
-                    // this.partition.verse.activeTop = !this.partition.verse.activeTop;
+                    // this.partition.verse.moveElement.classList.remove("long-transition");
+                    // this.partition.verse.moveElement.style.transform = "translateY(-30vh)";
+                    // this.partition.verse.moveElement.style.justifyContent = this.preset[0].voice[i].position;
+                }
+                // this.partition.verse.activeTop = !this.partition.verse.activeTop;
                 // }
             }
 
         }
+    }
+    animationLoading() {
+
     }
     wordAnimation() {
         if (this.iteration < this.vocalPoint.length - 1)
