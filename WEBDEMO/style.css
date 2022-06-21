@@ -500,7 +500,7 @@ path.leaflet-interactive:last-child {
 
     }
 
-    #rotateDiv div {
+    #rotateDiv #insideCercle {
         align-items: center;
 
 
@@ -663,7 +663,19 @@ path.leaflet-interactive:last-child {
         height: 100%;
         pointer-events: none;
     }
-
+    #partition{
+        height: 100vh;
+        position: absolute;
+        /* transform: translateY(42%);
+        transform: translateY(84%);
+        transform: translateY(126%); */
+        display: flex;
+        transition: 1s;
+        flex-direction: column;
+        justify-content: space-between;
+        /* background: red; */
+        bottom: 130%;
+    }
     #tierUp {
         transform: rotate(120deg);
     }

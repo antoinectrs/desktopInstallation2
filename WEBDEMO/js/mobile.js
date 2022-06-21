@@ -51,7 +51,9 @@ class MOBILE {
         this.sndBtnListener(this.sndBtn)
         this.partition = {
             title: {
-                element: searchHtml("#title"),
+                scrollPart: searchHtmlArray(".scrollPart"),
+                scrollContain: searchHtml("#partition"),
+                // element: searchHtml("#title"),
                 rotateDiv: searchHtml("#rotateDiv"),
                 content: null,
             },
@@ -146,15 +148,16 @@ class MOBILE {
         myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
         const iScale = this.scale(catchCloserPoint.index, this.preset.length); //map for preset
-        // this.setTitlePartition(iScale);
+        this.setTitlePartition(iScale);
         // this.setVersePartition(iScale);
 
         if (this.dzm.wheel.classList.contains("soft-transition"))
             setTimeout(() => { this.dzm.wheel.classList.remove("soft-transition") }, 3000)
 
-        this.partition.title.element.classList.add("whiteFont");
-        this.partition.title.element.classList.remove("contrastFont");
+        // this.partition.title.element.classList.add("whiteFont");      reglage contrat out path a remetre
+        // this.partition.title.element.classList.remove("contrastFont");
         this.partition.title.rotateDiv.classList.add("soft-transition");
+
         myRotate(this.partition.title.rotateDiv, 0);
         // searchHtml("#arrow").style.height = "0px";
         // this.myMove();
@@ -166,8 +169,8 @@ class MOBILE {
         this.inPath = false;
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
-        this.partition.title.element.classList.add("contrastFont");
-        this.partition.title.element.classList.remove("whiteFont");
+        // this.partition.title.element.classList.add("contrastFont");   reglage contrat out path a remetre
+        // this.partition.title.element.classList.remove("whiteFont");
         this.dzm.wheel.classList.add("soft-transition");
         this.dzm.wheel.style.transform = "rotate(0deg)";
         if (this.partition.title.rotateDiv.classList.contains("soft-transition"))
@@ -315,7 +318,25 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
-        this.partition.title.element.innerHTML = changeDom;
+        // this.partition.title.scrollContain.style.transform = " translateY(42%)";
+        if (changeDom == "hermitage")
+            this.partition.title.scrollContain.style.transform = " translateY(42%)";
+        else if (changeDom == "rumine")
+            this.partition.title.scrollContain.style.transform = " translateY(84%)";
+        else if (changeDom == "plateforme")
+            this.partition.title.scrollContain.style.transform = " translateY(126%)";
+       
+            this.partition.title.scrollPart.forEach(element => {
+            console.log(element.id, changeDom);
+
+
+            if (element.classList.contains("scrollActive") && element.id != changeDom)
+                element.classList.remove("scrollActive")
+            else if (element.id == changeDom)
+                element.classList.add("scrollActive")
+        });
+
+        // this.partition.title.element.innerHTML = changeDom;
     };
     checkContentText(e, index) {
         const myString = String(e.verse);
