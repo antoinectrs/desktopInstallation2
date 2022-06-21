@@ -245,7 +245,7 @@ class MOBILE {
         if (element.sample.actv) {
             // this.myDebug("range", scale);
             // console.log(presetVolume);
-            element.sample.render(presetVolume);
+            element.sample.render(presetVolume+3); //push le volume
             element.sample.initSpeed(presetSpeed)
         }
     }
@@ -318,7 +318,7 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
-        // this.partition.title.scrollContain.style.transform = " translateY(42%)";
+        
         if (changeDom == "hermitage")
             this.partition.title.scrollContain.style.transform = " translateY(42%)";
         else if (changeDom == "rumine")
@@ -327,8 +327,6 @@ class MOBILE {
             this.partition.title.scrollContain.style.transform = " translateY(126%)";
        
             this.partition.title.scrollPart.forEach(element => {
-            console.log(element.id, changeDom);
-
 
             if (element.classList.contains("scrollActive") && element.id != changeDom)
                 element.classList.remove("scrollActive")
@@ -409,7 +407,7 @@ class MOBILE {
                     setTimeout(() => {
                         this.quickSample.aurorePoint[presNav].sample.playSample(0);
                         this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
-                        this.quickSample.aurorePoint[presNav].sample.render(0.6, false);
+                        this.quickSample.aurorePoint[presNav].sample.render(0.7, false);
                     }, 3000);
                     setTimeout(() => {
                         this.quickSample.run = false;
