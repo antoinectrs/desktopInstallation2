@@ -569,10 +569,11 @@ path.leaflet-interactive:last-child {
     }
 
     path.leaflet-interactive {
-        /* stroke: #ffffff00 !important; */
-        stroke: #ff000000 !important;
-        /* stroke-width: 77%;  */
-        /* stroke-width: 17%; */
+        stroke: blue !important;
+        /* stroke: #ff000000 !important; */
+    }
+    img.leaflet-image-layer.leaflet-zoom-animated.hello {
+        opacity: 0.1;
     }
 
     .arrow {

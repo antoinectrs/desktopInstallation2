@@ -125,6 +125,7 @@ class MOBILE {
         this.centerMap(pos);
         const myLatlng = L.latLng(pos.coords.latitude, pos.coords.longitude);
         this.catchCloserPoint = this.closerPoint(myLatlng, this.spaceRadius); // / console.log(this.myMap.distance*4000);
+        // console.log(this.catchCloserPoint.index);
         if (this.catchCloserPoint != "tofar")
             this.inPathAction(this.catchCloserPoint)
         else
@@ -144,8 +145,8 @@ class MOBILE {
         myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
         const iScale = this.scale(catchCloserPoint.index, this.preset.length); //map for preset
-        this.setTitlePartition(iScale);
-        this.setVersePartition(iScale);
+        // this.setTitlePartition(iScale);
+        // this.setVersePartition(iScale);
 
         if (this.dzm.wheel.classList.contains("soft-transition"))
             setTimeout(() => { this.dzm.wheel.classList.remove("soft-transition") }, 3000)
@@ -204,6 +205,7 @@ class MOBILE {
         this.point.forEach((element, index) => {
             if (element.sample.audio.state != "suspended") {
                 const find = this.findPreset(index, boxIndex);
+   
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
                 if (find.presetVolume > 0.9)
                     element.sample.actv = true; //-------tag actif sample
@@ -223,10 +225,12 @@ class MOBILE {
     findPreset(index, boxIndex) {
         const targetVolume = this.preset[index].volume;
         const scale = Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, targetVolume.length));
-        const i = this.scale(boxIndex, targetVolume.length);
-        const presetVolume = targetVolume[i];
+        const iV = this.scale(boxIndex, targetVolume.length);
+        const presetVolume = targetVolume[iV];
         const targetSpeed = this.preset[index].mySpeed;
-        const presetSpeed = targetSpeed[i];
+        const iP = this.scale(boxIndex, targetSpeed.length);
+        const presetSpeed = targetSpeed[iP];
+        console.log(iV, iP);
         return { presetVolume, presetSpeed }
     }
     scale(boxIndex, boxes) {
