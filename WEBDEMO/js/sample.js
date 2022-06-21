@@ -138,7 +138,6 @@ class Sample {
         const node = this.rack.volume.audioNode;
         // eVolume = Math.max(1, Math.min(eVolume, 0.1))
         if (transition) {
-            console.log(eVolume);
             if (this.renderStatut) return
             console.log("transition");
             // node.gain.linearRampToValueAtTime(eVolume, this.audio.currentTime + 15);
