@@ -459,9 +459,9 @@ path.leaflet-interactive:last-child {
     }
 
     #shadow {
-        width: 100%;
-        top: 0;
-        height: 95vw;
+        width: 91%;
+        top:7%;
+        height: 91%;
         margin: 0;
         position: absolute;
     }
@@ -652,7 +652,7 @@ path.leaflet-interactive:last-child {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 95vw;
+        height: 97vw;
         position: absolute;
     }
 
@@ -679,7 +679,7 @@ path.leaflet-interactive:last-child {
     .actv {
         background: none !important;
         opacity: 0.7;
-        border: 43px solid #34318ccc !important;
+        border: 28px solid #34318ccc !important;
     }
 
     .soundButton {
@@ -688,15 +688,13 @@ path.leaflet-interactive:last-child {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
 
-        border: 43px solid #FFFFFFCC;
+        /* border: 28px solid #ffffff00; */
+        border: 28px solid #FFFFFFCC;
         background: #FFFFFF63;
         pointer-events: initial;
         border-radius: 114px;
-
-        padding: 54px;
-        width: 54px;
-        height: 54px;
-        top: 0;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* turn off greybox */
+        padding: 41px;
     }
 
     .leaflet-tile {

@@ -370,7 +370,6 @@ class MOBILE {
             }, 3400)
         } else
             clearInterval(this.partition.verse.loading);
-        console.log("inside");
     }
     secFrame() {
         // this.loadingAn()
