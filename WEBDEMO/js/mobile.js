@@ -11,7 +11,7 @@ class MOBILE {
         this.quickSample = {
             guitarPoint: null,
             aurorePoint: null,
-            nav: [[9, 21], [38, 48], [70, 80], [80, 84], [90, 100]],
+            nav: [[9, 15], [41, 44], [70, 80], [84, 89]],
             run:false,
             // dir: [
             //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
@@ -83,7 +83,7 @@ class MOBILE {
                     this.releasePoint();
                 }
                 else
-                    this.myMap.map.flyTo(this.dzm.lst, 20, { animate: true, duration: 2.5 });
+                    this.myMap.map.flyTo(this.dzm.lst, 21, { animate: true, duration: 2.5 });
                 // console.log(this.dzm.psh);
             })
         })
@@ -178,7 +178,7 @@ class MOBILE {
             lng: pos.coords.longitude
         }
         this.dzm.lst = convertPos;
-        this.myMap.map.flyTo(convertPos, 20, {
+        this.myMap.map.flyTo(convertPos, 21, {
             // this.myMap.map.flyTo(convertPos, 18, {
             animate: true,
             duration: 1.5
@@ -223,6 +223,7 @@ class MOBILE {
         })
     }
     findPreset(index, boxIndex) {
+        console.log(boxIndex);
         const targetVolume = this.preset[index].volume;
         const scale = Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, targetVolume.length));
         const iV = this.scale(boxIndex, targetVolume.length);
@@ -387,10 +388,10 @@ class MOBILE {
                             this.quickSample.aurorePoint[presNav].sample.playSample(0);
                             this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
                             this.quickSample.aurorePoint[presNav].sample.render(0.6, false);
-                        }, 3000)
+                        }, 3000);
                         setTimeout(() => {
                             this.quickSample.run=false;
-                        }, 25000)
+                        }, 60*1000);
                         this.quickSample.guitarPoint[0].sample.playSample(0);
                         // this.quickSample.guitarPoint[0].sample.initOrientation(myRot);
                         this.quickSample.guitarPoint[0].sample.initOrientation(0);

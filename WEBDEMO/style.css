@@ -573,7 +573,7 @@ path.leaflet-interactive:last-child {
         /* stroke: #ff000000 !important; */
     }
     img.leaflet-image-layer.leaflet-zoom-animated.hello {
-        opacity: 0.1;
+        opacity: 0.8;
     }
 
     .arrow {
