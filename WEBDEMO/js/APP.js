@@ -10,8 +10,8 @@ class APP {
         this.myMap;
         this.point = [];
 
-        // this.musicList = ["01", "02", "03", "04"];
-        this.musicList = ["00_lead", "01_low", "02_bass", "03_clap", "04_galo", "05_high", "06_machine", "07_japan", "08_bass"];
+        this.musicList = ["00_synth", "01_perc", "02_fx", "03_drum", "04_longSynth", "05_high", "06_machine", "07_japan", "08_bass"];
+        // this.musicList = ["00_lead", "01_low", "02_bass", "03_clap", "04_galo", "05_high", "06_machine", "07_japan", "08_bass"];
         // this.musicList = ["00_lead", "01_low", "02_bass", "03_clap"];
         // this.musicList = ["01_lead", "02_low", "03_bass", "04_clap"];
         this.noise = "waitLoop";
