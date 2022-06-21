@@ -384,9 +384,9 @@ class MOBILE {
                         // this.partition.verse.moveElement.style.transform = "translateY(110vh)";
                         // const myRot = mapRange(i, 0, 4, 0, 360);
                         setTimeout(() => {
-                            // this.quickSample.aurorePoint[presNav].sample.playSample(0);
-                            // this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
-                            // this.quickSample.aurorePoint[presNav].sample.render(1, false);
+                            this.quickSample.aurorePoint[presNav].sample.playSample(0);
+                            this.quickSample.aurorePoint[presNav].sample.initOrientation(0);
+                            this.quickSample.aurorePoint[presNav].sample.render(0.6, false);
                         }, 3000)
                         setTimeout(() => {
                             this.quickSample.run=false;
