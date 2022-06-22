@@ -246,11 +246,11 @@ class MOBILE {
     }
     asignPreset(element, presetVolume, presetSpeed) {
         // if (element.sample.actv) {
-            // this.myDebug("range", scale);
-            // console.log(presetVolume);
-            element.sample.render(presetVolume); //push le volume
-            // element.sample.render(presetVolume+3); //push le volume
-            element.sample.initSpeed(presetSpeed)
+        // this.myDebug("range", scale);
+        // console.log(presetVolume);
+        element.sample.render(presetVolume); //push le volume
+        // element.sample.render(presetVolume+3); //push le volume
+        element.sample.initSpeed(presetSpeed)
         // }
     }
     listenMyCompass(hitBoxNear) {
@@ -323,13 +323,21 @@ class MOBILE {
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
 
-        if (changeDom == "hermitage")
+        if (changeDom == "hermitage") {
+            this.sndBtn.bt.forEach(e => {e.classList.remove("purple"); e.classList.remove("green") });
+            this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
             this.partition.title.scrollContain.style.transform = " translateY(42%)";
-        else if (changeDom == "rumine")
+        }
+        else if (changeDom == "rumine") {
+            this.sndBtn.bt.forEach(e => { e.classList.remove("purple");e.classList.remove("blue") });
+            this.sndBtn.bt.forEach(e => { e.classList.add("green") });
             this.partition.title.scrollContain.style.transform = " translateY(84%)";
-        else if (changeDom == "plateforme")
+        }
+        else if (changeDom == "plateforme") {
+            this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue")  });
+            this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
             this.partition.title.scrollContain.style.transform = " translateY(126%)";
-
+        }
         this.partition.title.scrollPart.forEach(element => {
 
             if (element.classList.contains("scrollActive") && element.id != changeDom)

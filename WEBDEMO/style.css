@@ -275,7 +275,7 @@ input[type=range][orient=vertical] {
 
 /* DEV */
 
-#reverb.on .color {
+/* #reverb.on .color {
     background: #070071
 }
 
@@ -301,7 +301,7 @@ input[type=range][orient=vertical] {
 
 #lead.on .color {
     background: #0051ff
-}
+} */
 
 .on p {
     color: white;
@@ -691,7 +691,17 @@ path.leaflet-interactive:last-child {
     .actv {
         background: none !important;
         opacity: 0.7;
-        border: 28px solid #34318ccc !important;
+        transition: 1s;
+        transition-property: border;
+    }
+    .blue{
+        border: 28px solid #000e68ad !important;
+    }
+    .green{
+        border: 28px solid #003903d4 !important;
+    }
+    .purple{
+        border: 28px solid #b405d3cc !important;
     }
 
     .soundButton {
