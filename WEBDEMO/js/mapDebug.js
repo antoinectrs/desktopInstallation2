@@ -106,7 +106,7 @@ class MapDebug {
         } else {
             boxes = L.RouteBoxer.box(route, this.distance * 4);
 
-            this.map.flyTo({ lat: 46.535, lng: 6.629 }, 14.4, {
+            this.map.flyTo({ lat: 46.535, lng: 6.629 }, 14, {
                 animate: false,
                 
             });

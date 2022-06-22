@@ -101,6 +101,7 @@ class Sample {
         // this.sourceNode.playbackRate.value = speed;
         if (this.speedStatut) return
         // setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
+        console.log(speed);
         this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + this.delay);
         this.speedStatut = true;
         setTimeout(() => { this.speedStatut = false; }, this.delay * 1000)

@@ -77,6 +77,8 @@
 
 #playTrack {
     position: absolute;
+    font-family: Acumin;
+    font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
 }
 
 .menu .place {
@@ -703,7 +705,9 @@ path.leaflet-interactive:last-child {
         transition: 1s;
         transition-property: border;
     }
-
+    .blue {
+        border: 28px solid #abacb4ad !important;
+    }
     .blue {
         border: 28px solid #000e68ad !important;
     }
@@ -713,7 +717,7 @@ path.leaflet-interactive:last-child {
     }
 
     .purple {
-        border: 28px solid #b405d3cc !important;
+        border: 28px solid #4d005ba3 !important;
     }
 
     .soundButton {

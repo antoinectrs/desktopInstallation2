@@ -11,7 +11,7 @@ class MOBILE {
         this.quickSample = {
             guitarPoint: null,
             aurorePoint: null,
-            nav: [[9, 15], [41, 44], [84, 89]],
+            nav: [[9, 15], [40, 44], [84, 89]],
             run: false,
             // dir: [
             //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
@@ -252,7 +252,7 @@ class MOBILE {
     asignPreset(element, presetVolume, presetSpeed) {
         // if (element.sample.actv) {
         // this.myDebug("range", scale);
-        // console.log(presetVolume);
+        console.log(presetVolume);
         element.sample.render(presetVolume); //push le volume
         // element.sample.render(presetVolume+3); //push le volume
         element.sample.initSpeed(presetSpeed)
