@@ -206,9 +206,12 @@ class MOBILE {
         return myPos.distanceTo(centerL);
     }
     renderPoint(boxIndex) {
+        console.log(this.point[8].sample.rack.volume.audioNode.gain.value);
         this.point.forEach((element, index) => {
             if (element.sample.audio.state != "suspended") {
                 const find = this.findPreset(index, boxIndex);
+                if (index == 8)
+                    console.log(find);
 
                 this.asignPreset(element, find.presetVolume, find.presetSpeed);
                 if (find.presetVolume > 0.9)
@@ -227,7 +230,7 @@ class MOBILE {
         })
     }
     findPreset(index, boxIndex) {
-        console.log(boxIndex);
+        // console.log(boxIndex);
         const targetVolume = this.preset[index].volume;
         const scale = Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, targetVolume.length));
         const iV = this.scale(boxIndex, targetVolume.length);
@@ -242,12 +245,13 @@ class MOBILE {
         return Math.round(mapRange(boxIndex, 0, this.myMap.hitBox.length, 0, boxes));
     }
     asignPreset(element, presetVolume, presetSpeed) {
-        if (element.sample.actv) {
+        // if (element.sample.actv) {
             // this.myDebug("range", scale);
             // console.log(presetVolume);
-            element.sample.render(presetVolume+3); //push le volume
+            element.sample.render(presetVolume); //push le volume
+            // element.sample.render(presetVolume+3); //push le volume
             element.sample.initSpeed(presetSpeed)
-        }
+        // }
     }
     listenMyCompass(hitBoxNear) {
         const search = () => {
@@ -318,15 +322,15 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
-        
+
         if (changeDom == "hermitage")
             this.partition.title.scrollContain.style.transform = " translateY(42%)";
         else if (changeDom == "rumine")
             this.partition.title.scrollContain.style.transform = " translateY(84%)";
         else if (changeDom == "plateforme")
             this.partition.title.scrollContain.style.transform = " translateY(126%)";
-       
-            this.partition.title.scrollPart.forEach(element => {
+
+        this.partition.title.scrollPart.forEach(element => {
 
             if (element.classList.contains("scrollActive") && element.id != changeDom)
                 element.classList.remove("scrollActive")

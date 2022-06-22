@@ -102,7 +102,7 @@ class Sample {
         // setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
         this.sourceNode.playbackRate.linearRampToValueAtTime(speed, this.audio.currentTime + this.delay);
         this.speedStatut = true;
-        setTimeout(() => { this.speedStatut = false; console.log("endSpeed"); }, this.delay * 1000)
+        setTimeout(() => { this.speedStatut = false; }, this.delay * 1000)
         // }
     }
     softValue(fxTarget, fxTemp, fxType, index = 0) {
@@ -148,7 +148,7 @@ class Sample {
             node.gain.setValueAtTime(this.rack.volume.audioNode.gain.value, this.audio.currentTime);
             node.gain.exponentialRampToValueAtTime(eVolume + 0.001, this.audio.currentTime + this.delay);
             this.renderStatut = true;
-            setTimeout(() => { this.renderStatut = false; console.log("endFade"); }, this.delay * 1000)
+            setTimeout(() => { this.renderStatut = false;  }, this.delay * 1000)
         }
         else { node.gain.setValueAtTime(eVolume, this.audio.currentTime); }
 
