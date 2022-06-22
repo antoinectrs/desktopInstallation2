@@ -152,11 +152,7 @@ class MOBILE {
         // this.setVersePartition(iScale);
 
         if (this.dzm.wheel.classList.contains("linear-transition"))
-            {setTimeout(() => { 
-                this.dzm.wheel.classList.remove("linear-transition")
-            console.log( this.dzm.wheel);
-            }, 3000)
-}
+            setTimeout(() => { this.dzm.wheel.classList.remove("linear-transition") }, 3000)
 
         // this.partition.title.element.classList.add("whiteFont");      reglage contrat out path a remetre
         // this.partition.title.element.classList.remove("contrastFont");
@@ -328,17 +324,17 @@ class MOBILE {
         const changeDom = this.preset[indexZone].title;
 
         if (changeDom == "hermitage") {
-            this.sndBtn.bt.forEach(e => {e.classList.remove("purple"); e.classList.remove("green") });
+            this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("green") });
             this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
             this.partition.title.scrollContain.style.transform = " translateY(42%)";
         }
         else if (changeDom == "rumine") {
-            this.sndBtn.bt.forEach(e => { e.classList.remove("purple");e.classList.remove("blue") });
+            this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("green") });
             this.partition.title.scrollContain.style.transform = " translateY(84%)";
         }
         else if (changeDom == "plateforme") {
-            this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue")  });
+            this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
             this.partition.title.scrollContain.style.transform = " translateY(126%)";
         }
