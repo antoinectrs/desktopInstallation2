@@ -53,6 +53,7 @@
 }
 
 .boldType {
+    letter-spacing: -4px;
     font-variation-settings: 'wght'600, 'slnt'0, 'wdth'100;
     font-size: 12vw;
     ;

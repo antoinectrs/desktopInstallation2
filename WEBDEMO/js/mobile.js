@@ -64,7 +64,7 @@ class MOBILE {
                 contentElement: searchHtml("#target p"),
                 activeTop: false,
                 interval: setInterval(this.secFrame.bind(this), 1000),
-                loading: setInterval(this.loadingAn.bind(this), 3500)
+                // loading: setInterval(this.loadingAn.bind(this), 3500)
             },
         }
         this.iteration = 0;
@@ -144,15 +144,19 @@ class MOBILE {
     }
     inPathAction(catchCloserPoint) {
         this.inPath = true;
-        myDebug("path", this.inPath);
-        myDebug("range", catchCloserPoint.index);
+        // myDebug("path", this.inPath);
+        // myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
         const iScale = this.scale(catchCloserPoint.index, this.preset.length); //map for preset
         this.setTitlePartition(iScale);
         // this.setVersePartition(iScale);
 
-        if (this.dzm.wheel.classList.contains("soft-transition"))
-            setTimeout(() => { this.dzm.wheel.classList.remove("soft-transition") }, 3000)
+        if (this.dzm.wheel.classList.contains("linear-transition"))
+            {setTimeout(() => { 
+                this.dzm.wheel.classList.remove("linear-transition")
+            console.log( this.dzm.wheel);
+            }, 3000)
+}
 
         // this.partition.title.element.classList.add("whiteFont");      reglage contrat out path a remetre
         // this.partition.title.element.classList.remove("contrastFont");
