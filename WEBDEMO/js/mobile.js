@@ -392,8 +392,8 @@ class MOBILE {
         // }
     }
     loadingAn() {
-        this.dzm.wheel.classList.add("linear-transition");
         if (this.dzm.loading) {
+            this.dzm.wheel.classList.add("linear-transition");
             myRotate(this.dzm.wheel, 360);
             setTimeout(() => {
                 myRotate(this.dzm.wheel, 0);
