@@ -493,7 +493,7 @@ path.leaflet-interactive:last-child {
         width: 100%;
         height: 95vw;
         border-radius: 1000px;
-        -webkit-backdrop-filter: blur(32px);
+        /* -webkit-backdrop-filter: blur(32px); */
         backdrop-filter: blur(32px);
         border-radius: 1100px;
     }
@@ -753,13 +753,26 @@ path.leaflet-interactive:last-child {
     }
 
     .scrollPart {
-        transition: 1s;
+        transition: 2s;
         transition-property: font-variation-settings, translateY;
         font-variation-settings: 'wght'600, 'slnt'0, 'wdth'100;
         font-size: 12vw;
     }
     .scrollActive{
         font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
+    }
+    .outpath {
+    bottom: 28%!important;
+    }
+
+    .outpath #hermitage{
+        font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
+    }
+    .outpath #plateforme{
+        opacity: 0;
+    }
+    .outpath #rumine{
+        opacity: 0;
     }
     /* .rotating {
         -webkit-animation: rotating 2s linear infinite;

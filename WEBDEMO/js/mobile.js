@@ -54,7 +54,7 @@ class MOBILE {
                 scrollPart: searchHtmlArray(".scrollPart"),
                 scrollContain: searchHtml("#partition"),
                 // element: searchHtml("#title"),
-                rotateDiv: searchHtml("#rotateDiv"),
+                rotateDiv: searchHtml(".rotateZone"),
                 content: null,
             },
             verse: {
@@ -64,7 +64,7 @@ class MOBILE {
                 contentElement: searchHtml("#target p"),
                 activeTop: false,
                 interval: setInterval(this.secFrame.bind(this), 1000),
-                // loading: setInterval(this.loadingAn.bind(this), 3500)
+                loading: setInterval(this.loadingAn.bind(this), 3500)
             },
         }
         this.iteration = 0;
@@ -144,6 +144,7 @@ class MOBILE {
     }
     inPathAction(catchCloserPoint) {
         this.inPath = true;
+        this.partition.title.scrollContain.classList.remove("outpath");
         // myDebug("path", this.inPath);
         // myDebug("range", catchCloserPoint.index);
         this.renderPoint(catchCloserPoint.index);
@@ -167,6 +168,7 @@ class MOBILE {
     }
     outPathAction(catchCloserPoint) {
         this.inPath = false;
+        this.partition.title.scrollContain.classList.add("outpath")
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
         // this.partition.title.element.classList.add("contrastFont");   reglage contrat out path a remetre
