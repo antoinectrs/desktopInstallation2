@@ -327,10 +327,11 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
+        console.log(changeDom);
         if (changeDom == "plateforme") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
-            this.partition.title.scrollContain.style.transform = " translateY(83.5vh)";
+            this.partition.title.scrollContain.style.transform = "translateY(125.5vh)";
             this.partition.title.scrollPart[0].classList.add("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");
@@ -339,7 +340,9 @@ class MOBILE {
         else if (changeDom == "rumine") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("green") });
-            this.partition.title.scrollContain.style.transform = " translateY(40.5vh)";
+            this.partition.title.scrollContain.style.transform = " translateY(83.5vh)";
+         
+    
             this.partition.title.scrollPart[1].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");
@@ -347,7 +350,7 @@ class MOBILE {
         else if (changeDom == "hermitage") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("green") });
             this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
-            this.partition.title.scrollContain.style.transform = "translateY(-3vh)";
+            this.partition.title.scrollContain.style.transform = " translateY(40.5vh)";
             this.partition.title.scrollPart[2].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
