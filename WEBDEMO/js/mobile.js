@@ -322,29 +322,40 @@ class MOBILE {
     }
     setTitlePartition(indexZone) {
         const changeDom = this.preset[indexZone].title;
-
-        if (changeDom == "hermitage") {
-            this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("green") });
-            this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
-            this.partition.title.scrollContain.style.transform = " translateY(42%)";
+        if (changeDom == "plateforme") {
+            this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
+            this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
+            this.partition.title.scrollContain.style.transform = " translateY(126%)";
+            this.partition.title.scrollPart[0].classList.add("scrollActive");
+            this.partition.title.scrollPart[1].classList.remove("scrollActive");
+            this.partition.title.scrollPart[2].classList.remove("scrollActive");
+         
         }
         else if (changeDom == "rumine") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("green") });
             this.partition.title.scrollContain.style.transform = " translateY(84%)";
+            this.partition.title.scrollPart[1].classList.add("scrollActive");
+            this.partition.title.scrollPart[0].classList.remove("scrollActive");
+            this.partition.title.scrollPart[2].classList.remove("scrollActive");
         }
-        else if (changeDom == "plateforme") {
-            this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
-            this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
-            this.partition.title.scrollContain.style.transform = " translateY(126%)";
+        else if (changeDom == "hermitage") {
+            this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("green") });
+            this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
+            this.partition.title.scrollContain.style.transform = " translateY(42%)";
+            this.partition.title.scrollPart[2].classList.add("scrollActive");
+            this.partition.title.scrollPart[0].classList.remove("scrollActive");
+            this.partition.title.scrollPart[1].classList.remove("scrollActive");
         }
-        this.partition.title.scrollPart.forEach(element => {
+       
+        
+        // this.partition.title.scrollPart.forEach(element => {
 
-            if (element.classList.contains("scrollActive") && element.id != changeDom)
-                element.classList.remove("scrollActive")
-            else if (element.id == changeDom)
-                element.classList.add("scrollActive")
-        });
+        //     if (element.classList.contains("scrollActive") && element.id != changeDom)
+        //         element.classList.remove("scrollActive")
+        //     else if (element.id == changeDom)
+        //         element.classList.add("scrollActive")
+        // });
 
         // this.partition.title.element.innerHTML = changeDom;
     };

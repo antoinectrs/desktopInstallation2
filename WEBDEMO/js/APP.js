@@ -47,7 +47,6 @@ class APP {
 
         if (this.statut == "mobile")
             delay = 8
-        console.log(preset);
         this.point = musicList.map(function (music, preset) {
             return {
                 "sample": new Sample({
