@@ -55,6 +55,7 @@ class MOBILE {
                 scrollContain: searchHtml("#partition"),
                 // element: searchHtml("#title"),
                 rotateDiv: searchHtml(".rotateZone"),
+                ballade: searchHtml("#hermitage"),
                 content: null,
             },
             verse: {
@@ -144,6 +145,7 @@ class MOBILE {
     }
     inPathAction(catchCloserPoint) {
         this.inPath = true;
+        this.partition.title.ballade.innerHTML = "hermitage";
         this.partition.title.scrollContain.classList.remove("outpath");
         // myDebug("path", this.inPath);
         // myDebug("range", catchCloserPoint.index);
@@ -168,7 +170,8 @@ class MOBILE {
     }
     outPathAction(catchCloserPoint) {
         this.inPath = false;
-        this.partition.title.scrollContain.classList.add("outpath")
+        this.partition.title.scrollContain.classList.add("outpath");
+        this.partition.title.ballade.innerHTML = "ballade";
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
         // this.partition.title.element.classList.add("contrastFont");   reglage contrat out path a remetre
@@ -327,7 +330,7 @@ class MOBILE {
         if (changeDom == "plateforme") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
-            this.partition.title.scrollContain.style.transform = " translateY(126%)";
+            this.partition.title.scrollContain.style.transform = " translateY(83.5vh)";
             this.partition.title.scrollPart[0].classList.add("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");
@@ -336,7 +339,7 @@ class MOBILE {
         else if (changeDom == "rumine") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("blue") });
             this.sndBtn.bt.forEach(e => { e.classList.add("green") });
-            this.partition.title.scrollContain.style.transform = " translateY(84%)";
+            this.partition.title.scrollContain.style.transform = " translateY(40.5vh)";
             this.partition.title.scrollPart[1].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");
@@ -344,7 +347,7 @@ class MOBILE {
         else if (changeDom == "hermitage") {
             this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("green") });
             this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
-            this.partition.title.scrollContain.style.transform = " translateY(42%)";
+            this.partition.title.scrollContain.style.transform = "translateY(-3vh)";
             this.partition.title.scrollPart[2].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
