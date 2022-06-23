@@ -138,7 +138,7 @@ class MOBILE {
     }
     initMap(pos) {
         this.myMap.init(pos.coords.latitude, pos.coords.longitude, 10);
-        this.myMap.addGlobalMap(); //ajouter la carte dezoom
+        // this.myMap.addGlobalMap(); //ajouter la carte dezoom
         this.myMap.boxTest();
         this.listenMyCompass(pos);
         this.createMap = true;
@@ -162,10 +162,10 @@ class MOBILE {
 
         if (this.dzm.wheel.classList.contains("linear-transition"))
             setTimeout(() => { this.dzm.wheel.classList.remove("linear-transition") }, 3000)
-
-        // this.partition.title.element.classList.add("whiteFont");      reglage contrat out path a remetre
-        // this.partition.title.element.classList.remove("contrastFont");
-        this.partition.title.rotateDiv.classList.add("soft-transition");
+          
+        this.partition.title.rotateDiv.classList.add("whiteFont");    
+        this.partition.title.rotateDiv.classList.remove("contrastFont");
+        // this.partition.title.rotateDiv.classList.add("soft-transition");
 
         myRotate(this.partition.title.rotateDiv, 0);
         // searchHtml("#arrow").style.height = "0px";
@@ -180,8 +180,8 @@ class MOBILE {
         this.partition.title.ballade.innerHTML = "ballade";
         this.releasePoint();
         // hideBlur(this.mapDom, "add")
-        // this.partition.title.element.classList.add("contrastFont");   reglage contrat out path a remetre
-        // this.partition.title.element.classList.remove("whiteFont");
+        this.partition.title.rotateDiv.classList.add("contrastFont"); //  reglage contrat out path a remetre
+        this.partition.title.rotateDiv.classList.remove("whiteFont");
         this.dzm.wheel.classList.add("soft-transition");
         this.dzm.wheel.style.transform = "rotate(0deg)";
         if (this.partition.title.rotateDiv.classList.contains("soft-transition"))
@@ -337,8 +337,8 @@ class MOBILE {
         if (changeDom == "plateforme") {
             // console.log(this.partition.title.linkImage[0]);
             this.partition.title.gradient.src = this.partition.title.linkImage[0];
-            this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
-            this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
+            // this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
+            // this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
             this.partition.title.scrollContain.style.transform = "translateY(125.5vh)";
             this.partition.title.scrollPart[0].classList.add("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
@@ -350,8 +350,6 @@ class MOBILE {
             // this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("blue") });
             // this.sndBtn.bt.forEach(e => { e.classList.add("green") });
             this.partition.title.scrollContain.style.transform = " translateY(83.5vh)";
-
-
             this.partition.title.scrollPart[1].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");

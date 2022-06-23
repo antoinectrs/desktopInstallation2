@@ -701,12 +701,15 @@ path.leaflet-interactive:last-child {
     }
 
     .actv {
-        background: #c9c9c9;
+        /* background: #c9c9c9; */
+        border: 11px solid #ffffff4f;
+        background: #ffffffb5;
         opacity: 0.7;
         transition: 1s;
         transition-property: border;
-        /* border: 28px solid #ffffffad !important; */
-        border: none !important;
+        /* filter: drop-shadow(2px 4px 6px white); */
+        border: 16px solid #ffffffad !important
+        /* border: none !important; */
     }
 
     /* .blue {
@@ -722,18 +725,18 @@ path.leaflet-interactive:last-child {
     } */
 
     .soundButton {
-        filter: drop-shadow(2px 4px 6px black);
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        /* border: 28px solid #ffffff00; */
-        border: 11px solid #FFFFFFCC;
-        /* background: #FFFFFF63; */
-        pointer-events: initial;
-        border-radius: 114px;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        padding-left: 187px;
-        padding-top: 28px;
+            /* filter: drop-shadow(2px 4px 6px white); */
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border: 28px solid #ffffff00;
+            /* border: 11px solid #ffffff4f; */
+            background: #ffffff45;
+            pointer-events: initial;
+            border-radius: 114px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            padding-left: 187px;
+            padding-top: 28px;
     }
 
     .leaflet-tile {
@@ -770,6 +773,9 @@ path.leaflet-interactive:last-child {
 
     .scrollActive {
         font-variation-settings: 'wght'139, 'slnt'0, 'wdth'115;
+        opacity: 1!important;
+        mix-blend-mode: initial!important;
+        filter: blur(0)!important;
     }
 
     .outpath {
@@ -893,7 +899,7 @@ path.leaflet-interactive:last-child {
         /* animation-duration: 30s;
         transition: 10s
         animation-name: myGradient; */
-        background: linear-gradient(90deg, rgba(76, 83, 164, 0) 0%, rgba(115, 76, 164, 0.767857) 21.65%, #4C53A4 49.31%, rgba(120, 76, 164, 0.767857) 74.51%, rgba(76, 83, 164, 0) 100%);
+        /* background: linear-gradient(90deg, rgba(76, 83, 164, 0) 0%, rgba(115, 76, 164, 0.767857) 21.65%, #4C53A4 49.31%, rgba(120, 76, 164, 0.767857) 74.51%, rgba(76, 83, 164, 0) 100%); */
         /* filter: blur(47px); */
     }
 
