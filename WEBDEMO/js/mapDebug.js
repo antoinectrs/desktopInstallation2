@@ -147,13 +147,14 @@ class MapDebug {
         //     minOpacity: 0.7
         //   }).addTo(this.map);
         // var imageUrl = './img/short2.svg',
-        var imageUrl = './img/newGradient.jpg',
-            // imageBounds = [[46.5359, 6.5884], [46.53884, 6.59096]];
-            // imageBounds = [[46.5361, 6.5882], [46.5389, 6.59098]]; //SVG
+        // imageBounds = [[46.5359, 6.5884], [46.53884, 6.59096]];
+        // imageBounds = [[46.5361, 6.5882], [46.5389, 6.59098]]; //SVG
+        // var imageUrl = './img/newGradient.jpg',
+        // imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
+        var imageUrl = './img/blue.png',
         imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
 
-        L.imageOverlay(imageUrl, imageBounds, { className: "hello" }).addTo(this.map);
-
+       let tex =  L.imageOverlay(imageUrl, imageBounds, { className: "gradient" }).addTo(this.map);
         // // 1) Convert LatLng into container pixel position.
         // var originPoint = this.map.latLngToContainerPoint([46.53693422080351, 6.589272225762318]);
         // // 2) Add the image pixel dimensions.
