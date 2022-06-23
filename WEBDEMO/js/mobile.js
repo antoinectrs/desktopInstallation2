@@ -11,7 +11,7 @@ class MOBILE {
         this.quickSample = {
             guitarPoint: null,
             aurorePoint: null,
-            nav: [[9, 15], [40, 44], [84, 89]],
+            nav: [[9, 15], [39, 45], [84, 89]],
             run: false,
             // dir: [
             //     `Hermitage in front of you. To continue the music, follow the path on the other side of the roundabout.`,
@@ -60,6 +60,7 @@ class MOBILE {
                 gradient: null,
                 // beforelink: "https://10.189.8.90:8080/img/",
                 linkImage: [["https://10.189.8.90:8080/img/blue.png"], ["https://10.189.8.90:8080/img/green.png"], ["https://10.189.8.90:8080/img/purple.png"]]
+                // linkImage: [["https://ballade.ecal-mid.ch/WEBDEMO/img/blueShort.png"], ["https://ballade.ecal-mid.ch/WEBDEMO/img/greenShort.png"], ["https://ballade.ecal-mid.ch/WEBDEMO/img/purpleShort.png"]]
             },
             verse: {
                 element: searchHtmlArray(".dynamic p"),

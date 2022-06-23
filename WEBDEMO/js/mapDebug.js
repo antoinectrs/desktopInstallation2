@@ -101,7 +101,36 @@ class MapDebug {
                 // [46.53851169888246, 6.588243532567393],
             ];
 
-            let routeT = new L.Polyline(latlngs);
+            const latlngsCorriger = [
+                [46.53646, 6.58841],
+                [46.5366, 6.58896],
+                [46.53663, 6.58908],
+                [46.53661, 6.5891],
+                [46.5366, 6.58912],
+                [46.5366, 6.58915],
+                [46.5366, 6.58917],
+                [46.5366, 6.5892],
+                [46.53661, 6.58922],
+                [46.53663, 6.58924],
+                [46.53664, 6.58925],
+                [46.53666, 6.58925],
+                [46.53668, 6.58924],
+                [46.53671, 6.58934],
+                [46.53676, 6.58956],
+                [46.53695, 6.58994],
+                [46.53703, 6.59021],
+                [46.53713, 6.59068],
+                [46.53716, 6.59074],
+                [46.5371, 6.59078],
+                [46.53714,6.59082],
+                [46.53720,6.59077],
+                [46.53729,6.59069],
+                [46.53767,6.59009],
+                [46.53794,6.58983],
+                [46.53827,6.58953],
+                [46.53828,6.58953],
+            ];
+            let routeT = new L.Polyline(latlngsCorriger);
             boxes = L.RouteBoxer.box(routeT, this.distance / 10);
         } else {
             boxes = L.RouteBoxer.box(route, this.distance * 4);
@@ -151,8 +180,8 @@ class MapDebug {
         // imageBounds = [[46.5361, 6.5882], [46.5389, 6.59098]]; //SVG
         // var imageUrl = './img/newGradient.jpg',
         // imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
-        var imageUrl = './img/blue.png',
-        imageBounds = [[46.53424, 6.5880], [46.54111, 6.5952]];
+        var imageUrl = './img/blueShort.png',
+        imageBounds = [[46.53426, 6.5878], [46.5412, 6.5944]];
 
        let tex =  L.imageOverlay(imageUrl, imageBounds, { className: "gradient" }).addTo(this.map);
         // // 1) Convert LatLng into container pixel position.
