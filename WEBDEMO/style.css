@@ -364,7 +364,7 @@ path.leaflet-interactive:last-child {
 
 #map {
     /* cursor: none; */
-    /* filter: blur(95px) contrast(1.2)saturate(0.5); */
+    filter: blur(35px) contrast(1.2)saturate(0.5);
 
     height: 100vh;
     width: 100vw;
@@ -898,7 +898,7 @@ path.leaflet-interactive:last-child {
     .target p {}
 
     .gradient {
-        opacity: 0.2;
+        /* opacity: 0.2; */
         /* animation-duration: 30s;
         transition: 10s
         animation-name: myGradient; */

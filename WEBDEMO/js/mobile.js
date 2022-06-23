@@ -59,8 +59,8 @@ class MOBILE {
                 content: null,
                 gradient: null,
                 // beforelink: "https://10.189.8.90:8080/img/",
-                linkImage: [["https://10.189.8.90:8080/img/blue.png"], ["https://10.189.8.90:8080/img/green.png"], ["https://10.189.8.90:8080/img/purple.png"]]
-                // linkImage: [["https://ballade.ecal-mid.ch/WEBDEMO/img/blueShort.png"], ["https://ballade.ecal-mid.ch/WEBDEMO/img/greenShort.png"], ["https://ballade.ecal-mid.ch/WEBDEMO/img/purpleShort.png"]]
+                // linkImage: [["https://10.189.8.90:8080/img/blue.png"], ["https://10.189.8.90:8080/img/green.png"], ["https://10.189.8.90:8080/img/purple.png"]]
+                linkImage: [["https://ballade.ecal-mid.ch/WEBDEMO/img/blueShort.png"], ["https://ballade.ecal-mid.ch/WEBDEMO/img/greenShort.png"], ["https://ballade.ecal-mid.ch/WEBDEMO/img/purpleShort.png"]]
             },
             verse: {
                 element: searchHtmlArray(".dynamic p"),
@@ -337,26 +337,26 @@ class MOBILE {
         console.log(changeDom);
         if (changeDom == "plateforme") {
             // console.log(this.partition.title.linkImage[0]);
-            this.partition.title.gradient.src = this.partition.title.linkImage[0];
+            // this.partition.title.gradient.src = this.partition.title.linkImage[0];
             // this.sndBtn.bt.forEach(e => { e.classList.remove("green"); e.classList.remove("blue") });
             // this.sndBtn.bt.forEach(e => { e.classList.add("purple") });
-            this.partition.title.scrollContain.style.transform = "translateY(125.5vh)";
+            this.partition.title.scrollContain.style.transform = "translateY(127.7vh)";
             this.partition.title.scrollPart[0].classList.add("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");
 
         }
         else if (changeDom == "rumine") {
-            this.partition.title.gradient.src = this.partition.title.linkImage[1];
+            // this.partition.title.gradient.src = this.partition.title.linkImage[1];
             // this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("blue") });
             // this.sndBtn.bt.forEach(e => { e.classList.add("green") });
-            this.partition.title.scrollContain.style.transform = " translateY(83.5vh)";
+            this.partition.title.scrollContain.style.transform = " translateY(85.5vh)";
             this.partition.title.scrollPart[1].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[2].classList.remove("scrollActive");
         }
         else if (changeDom == "hermitage") {
-            this.partition.title.gradient.src = this.partition.title.linkImage[2];
+            // this.partition.title.gradient.src = this.partition.title.linkImage[2];
             // const obj = JSON.parse(this.partition.title.gradient.src);
             // obj.forEach(element => {
             //     console.log(element);
@@ -364,7 +364,7 @@ class MOBILE {
             console.log();
             // this.sndBtn.bt.forEach(e => { e.classList.remove("purple"); e.classList.remove("green") });
             // this.sndBtn.bt.forEach(e => { e.classList.add("blue") });
-            this.partition.title.scrollContain.style.transform = " translateY(40.5vh)";
+            this.partition.title.scrollContain.style.transform = "translateY(44.5vh)";
             this.partition.title.scrollPart[2].classList.add("scrollActive");
             this.partition.title.scrollPart[0].classList.remove("scrollActive");
             this.partition.title.scrollPart[1].classList.remove("scrollActive");
